@@ -19,10 +19,10 @@ torch.__version__
 
 tensor_a = torch.ones(2,2) # aqui imprimimos tensores de dimension 2x2 así como se 
 # coloca
-tensor_a
+print("tensor_a: ",tensor_a)
 
 tensor_b = torch.Tensor(2,2)
-tensor_b
+print("tensor_b: ",tensor_b)
 
 """el tensor (tensor_b = torch.Tensor(2,2))
 Me devuelve valores aleatorios
