@@ -39,8 +39,10 @@ model = nn.Linear(1,1)
 loss_function = nn.MSELoss()
 
 # Stochastic gradient descent or SGD
-# envio cuales sonlos parametros, los pesos a partir del modelo
-# y debo especificar cual es el learning rate,son los pasos que doy
+# envio cuales sonlos parametros, los pesos a 
+# partir del modelo
+# y debo especificar cual es el learning rate,
+# son los pasos que doy
 # para minimizar el lost
 optimizer = optim.SGD(model.parameters(), lr=0.015)
 losses = []
@@ -52,13 +54,16 @@ interations = 2000
 for i in range(interations):
   pred = model(prices)
 
-  # la prediccion del primer paso cuanto estoy adivinando y cuando es en realidad
+  # la prediccion del primer paso cuanto estoy 
+  # adivinando y cuando es en realidad
   loss = loss_function(pred, units)
   losses.append(loss.data)
 
 
-  # backward pass como pytorch acumula, no encontraré el valor que 
-  # deseo porque los gradiente se siguen acumulando
+  # backward pass como pytorch acumula, 
+  # no encontraré el valor que 
+  # deseo porque los gradiente se siguen 
+  # acumulando
   optimizer.zero_grad()
   loss.backward()
   optimizer.step()
@@ -72,3 +77,30 @@ plt.plot(range(interations), losses)
 x = torch.tensor([[14.0]])
 p = model(x)
 p
+
+"""**Regresión logística**"""
+
+n = 100 
+h = n//2
+dimen = 2
+
+data = np.random.randn(n,dimen)*3
+data
+
+plt.scatter(data[:,0], data[:,1])
+
+data[:h, :] = data[:h,:] - 3*np.ones((h, dimen))
+
+data[:h, :] = data[:h,:] + 3*np.ones((h, dimen))
+
+colors = ['blue', 'red']
+color = np.array([colors[0]]*h + [colors[1]]*h).reshape(n)
+
+plt.scatter(data[:,0], data[:,1], c=color, s=75, alpha=0.6)
+
+target = np.array([0]*h + [1]*h).reshape(n,1)
+x = torch.from_numpy(data).float().requires_grad_(True)
+
+y = torch.from_numpy(target).float()
+
+x.shape, y.shape
