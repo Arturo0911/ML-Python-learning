@@ -49,6 +49,7 @@ tensor_result
 """
 
 # con esto podemos dibujar la forma y el tamaño del tensor
+tensor_result = tensor_b -tensor_c
 tensor_result.shape
 
 reshaped = tensor_result.view(1,4)
@@ -142,6 +143,51 @@ data, data.shape
 target = players[:, 0]
 target, target.shape
 
+# aqui estoy definiendo el dataset para verificar que solo tome del primer valor [:, 0]
+print(players[:,0])
+# aqui muestra la segunda columna. 
+print(players[:,1])
+print(players)
+
 # el promedio 
 mean = torch.mean(data, dim=0)
 mean
+
+# la desviacion estándar
+std = torch.std(data, dim=0)
+std
+
+#normalizar
+
+norm = (data-mean)/torch.sqrt(std)
+norm
+
+# vamos a dividir a los jugadores mejores
+# usamos la funcion ge (greater or equal)
+# como segundo argumento los que tienen más de 85
+# en average colocamos dos funciones torch que
+# serian  lt (letter than)
+good = data[torch.ge(target, 85)]
+average = data[torch.gt(target, 70) & torch.lt(target, 80)]
+not_so_good = data[torch.lt(target, 70)]
+
+good_mean = torch.mean(good, dim=0)
+average_mean = torch.mean(average, dim=0)
+not_good_mean = torch.mean(not_so_good, dim=0)
+
+good_mean, average_mean, not_good_mean
+
+# con esta funcion for, vamos a agruparlos de mejor manera
+print(target)
+print(data)
+
+for i, args in enumerate(zip(columns, good_mean, average_mean, not_good_mean)):
+  print('{:25} {:6.2f} {:6.2f} {:6.2f}'.format(*args))
+
+target
+
+data
+
+players
+
+columns
