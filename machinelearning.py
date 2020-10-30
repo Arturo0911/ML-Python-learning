@@ -9,6 +9,7 @@ Original file is located at
 
 import torch
 import numpy as np
+import pandas as pd
 
 """```
 # This is formatted as code
@@ -87,4 +88,60 @@ torch.unsqueeze(tensor_x, 1)
 """Representar datos en nuestros sensores"""
 
 numpyArray = np.random.randn(2,2)
-torch.from_numpy(numpyArray)
+from_numpy = torch.from_numpy(numpyArray)
+from_numpy
+
+"""Tensores clase 6"""
+
+# vamos a sacar la media
+print("la matriz original: ",from_numpy)
+torch.mean(from_numpy)
+print("quiero imprimir la dimension 0: ", torch.mean(from_numpy, dim=0))
+print("quiero imprimir la dimension 1: ", torch.mean(from_numpy, dim=1))
+
+# para desviación estándar es std
+
+torch.std(from_numpy, dim= 1)
+
+torch.save(from_numpy, 'tensor.t')
+
+load = torch.load('tensor.t')
+load
+
+# use dataframes
+url = "https://raw.githubusercontent.com/amanthedorkknight/fifa18-all-player-statistics/master/2019/data.csv"
+dataframe = pd.read_csv(url)
+dataframe
+
+
+
+# nombre de columnas
+dataframe.columns
+
+"""
+subset = dataframe[['Overall','Age','International Reputation', 'Weak Foot',
+       'Skill Moves']] este es el original, pero se modificó porque 
+
+       cuando sacábamos el promedio 'mean' lanzaba valores nan 
+       y esto porque de las columnas que agarré había algunas que 
+       no tenían reputación internacional
+"""
+subset = dataframe[['Overall','Age','International Reputation', 'Weak Foot',
+       'Skill Moves']].dropna(axis=0, how ='any')
+subset
+
+columns = subset.columns[1:]
+players = torch.tensor(subset.values).float()
+players.shape, players.type()
+
+# la columna de overall no la quiero por eso 1: colocamos
+data = players[:, 1:]
+data, data.shape
+
+# solo la primera columna es decir el overall
+target = players[:, 0]
+target, target.shape
+
+# el promedio 
+mean = torch.mean(data, dim=0)
+mean
