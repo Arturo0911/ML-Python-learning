@@ -8,6 +8,7 @@ Original file is located at
 """
 
 import torch
+import numpy as np
 
 """```
 # This is formatted as code
@@ -19,10 +20,10 @@ torch.__version__
 
 tensor_a = torch.ones(2,2) # aqui imprimimos tensores de dimension 2x2 así como se 
 # coloca
-print("tensor_a: ",tensor_a)
+tensor_a
 
 tensor_b = torch.Tensor(2,2)
-print("tensor_b: ",tensor_b)
+tensor_b
 
 """el tensor (tensor_b = torch.Tensor(2,2))
 Me devuelve valores aleatorios
@@ -34,3 +35,56 @@ tensor_b.uniform_(0,1)
 estos me devuelven valores aleatorios entre esos números
 """
 
+tensor_c = torch.rand(2,2)
+tensor_c
+
+"""#ahora sumaremos tensores
+'''
+tensor([[0.3242, 0.2531],
+        [1.0777, 0.1175]])
+'''
+tensor_result = tensor_b + tensor_c
+tensor_result
+"""
+
+# con esto podemos dibujar la forma y el tamaño del tensor
+tensor_result.shape
+
+reshaped = tensor_result.view(1,4)
+# Ahora pasamos de tenere una matriz de 2x2 como se mostraba ahí a tener un solo arrgeglo de 1x4 (una fila, 4 elementos)
+# tensor([[0.3242, 0.2531, 1.0777, 0.1175]])
+reshaped
+
+# ahora especificaremos el valor del tensor
+points = torch.tensor([[1.0,2.0],[7.0,25.0]])
+points
+
+# SI QUIERO cambiar el direccionamiento de algun valor 
+# cambiamos como si fuera una matriz
+
+print(points[0][1])
+points[0][1] = 3.27
+points
+
+# para verificar como se está almacenado
+# usamos el método storage()
+points.storage()
+
+# para saber como puede pasar de un elemento a otro
+# usamos el método stride()
+
+points.stride()
+
+p_t = points.t()
+p_t
+
+# agregar dimensiones
+
+tensor_x  = torch.tensor([1,2,3,4])
+print(tensor_x)
+torch.unsqueeze(tensor_x, 1)
+
+"""Representar datos en nuestros sensores"""
+
+numpyArray = np.random.randn(2,2)
+torch.from_numpy(numpyArray)
