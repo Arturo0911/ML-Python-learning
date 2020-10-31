@@ -24,13 +24,12 @@ inception = models.inception_v3(pretrained=True)
 url = 'https://demascotas.info/wp-content/uploads/2018/02/dog-1192029_1280-1024x739.jpg'
 image = request.urlretrieve(url, 'test.jpg')
 img = Image.open(image[0])
-img
 
 # utilizamos un tamaño más pequepo
 # CenterCrop para que quede centrado
 preprocess = transforms.Compose([
-        transforms.Resize(128),
-        transforms.CenterCrop(128),
+        transforms.Resize(170),
+        transforms.CenterCrop(120),
         transforms.ToTensor(),
         transforms.Normalize(
             mean=[0.485, 0.456,0.406],
@@ -57,3 +56,41 @@ _, index = torch.max(out, 1)
 
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 labels[index[0]], percentage[index[0]].item()
+
+_, indices = torch.sort(out, descending=True)
+
+top_five = indices[0][:5]
+for i in top_five:
+  print(labels[i], percentage[i].item())
+
+"""Trabajando con un dataset"""
+
+data_path = 'data/'
+dataset = datasets.CIFAR10(data_path, train= True, download=True)
+validation_set = datasets.CIFAR10(data_path, train= False, download=True)
+
+classes = ['plane','car','bird','cat','deer','dog','frog','horse','ship','truck']
+len(dataset)
+
+img, label = dataset[50]
+img, label , classes[label]
+
+plt.imshow(img)
+
+tensor_transform = transforms.ToTensor()
+
+img_tensor = tensor_transform(img)
+img, img_tensor, img_tensor.shape
+
+dataset = datasets.CIFAR10(data_path, train= True, download=True, transform=transforms.ToTensor())
+
+img, label = dataset[50]
+img
+
+img.max(), img.min()
+
+plt.imshow(img.permute(1,2,0))
+
+imgs  = torch.stack([img_tensor for img_tensor, _ in dataset], dim=3)
+
+imgs.shape
