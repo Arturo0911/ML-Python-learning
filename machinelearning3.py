@@ -16,3 +16,24 @@ from torchvision import transforms
 from PIL import Image
 import urllib.request as request
 from matplotlib import pyplot as plt
+
+"""MODELOS PRE-ENTRENADOS"""
+
+inception = models.inception_v3(pretrained=True)
+
+url = 'https://demascotas.info/wp-content/uploads/2018/02/dog-1192029_1280-1024x739.jpg'
+image = request.urlretrieve(url, 'test.jpg')
+img = Image.open(image[0])
+img
+
+# utilizamos un tamaño más pequepo
+# CenterCrop para que quede centrado
+preprocess = transforms.Compose([
+        transforms.Resize(128),
+        transforms.CenterCrop(96),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            mean=[0.485, 0.456,0.406],
+            std = [0.229,0.224,0.225]
+        )
+])
