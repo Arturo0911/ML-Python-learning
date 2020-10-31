@@ -37,3 +37,11 @@ preprocess = transforms.Compose([
             std = [0.229,0.224,0.225]
         )
 ])
+
+img_t = preprocess(img)
+batch = torch.unsqueeze(img_t, 0)
+plt.imshow(img_t.permute(1,2,0))
+
+inception.eval()
+
+out = inception(batch)
