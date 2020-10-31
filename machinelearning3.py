@@ -30,7 +30,7 @@ img
 # CenterCrop para que quede centrado
 preprocess = transforms.Compose([
         transforms.Resize(128),
-        transforms.CenterCrop(96),
+        transforms.CenterCrop(128),
         transforms.ToTensor(),
         transforms.Normalize(
             mean=[0.485, 0.456,0.406],
@@ -45,3 +45,15 @@ plt.imshow(img_t.permute(1,2,0))
 inception.eval()
 
 out = inception(batch)
+out
+
+request.urlretrieve('https://gist.githubusercontent.com/ykro/acb00a36f737c12013f6e0f8a0d2cb61/raw/a2bb113b83e274048992f6550050a437fa4db76d/imagenet_classes.txt', 'labels.txt')
+with open('labels.txt') as f:
+    labels = [line.strip() for line in f.readlines()]
+
+out
+
+_, index = torch.max(out, 1)
+
+percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
+labels[index[0]], percentage[index[0]].item()
