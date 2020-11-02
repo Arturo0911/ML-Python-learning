@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 
-# predecir como un profesor aplicará las calificaciones. 
-
-
 import random
 import time
 import csv
 import json
+import os
+import sys
+
 
 
 global data
@@ -22,15 +22,20 @@ global nota1
 global nota2 
 
 
+# REFACTORING
 class Machine_learning:
     
     def __init__(self):
+        
         pass
 
-    def _save_into_json_file(self):
+    def save_into_json_file(self):
         pass
 
-    def _feed_back(self):
+    def feed_back(self):
+        pass
+
+    def read_from_storage(self):
         pass
 
 
