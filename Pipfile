@@ -10,6 +10,8 @@ torch = "*"
 torchvision = "*"
 matplotlib = "*"
 pandas = "*"
+tensorflow = "*"
+keras = "*"
 
 [requires]
 python_version = "3.8"
