@@ -5,9 +5,16 @@
 
 import random
 import time
+import csv
+import json
 
 
-dataset = [] # aquí van los valores que no deben ser incluídos como parte del análisis.
+global data
+
+
+data = {}
+data['feedback'] = [] # aquí van los valores que no deben ser incluídos como parte del análisis.
+
 
 
 
@@ -42,6 +49,23 @@ def final_test():
 
 
 
+# Método para crear un archivo .json y con este poder guardar los datos para que me sirva como parte del feedback
+
+def created_json_file(value_1, value_2):
+    
+
+    data['feedback'].append({'peso_1': value_1, "peso_2": value_2})
+    with open('data.json', 'w') as file:
+        json.dump(data, file, indent=4)
+
+    
+
+def feed_back():
+    pass
+
+
+
+
 
 
 
@@ -68,7 +92,8 @@ if __name__ == '__main__':
         elif(final_test() <= 7.0):
             
 
-            
+            #dataset.append([peso1, peso2])
+            created_json_file(peso1, peso2)
             #nota1 = random.randint(7,10)
             #nota2 = random.randint(7,10)
             counter += 1
@@ -76,3 +101,4 @@ if __name__ == '__main__':
     print("la calificación final: ",final_test())
     print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
     print("Las veces que se realizó un recorrido son: ", counter)
+    print("Los valores descartados son: ", data)
