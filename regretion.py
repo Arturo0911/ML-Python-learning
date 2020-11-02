@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+
+
 import random
 import time
 import csv
@@ -25,14 +27,21 @@ global nota2
 # REFACTORING
 class Machine_learning:
     
+
+    # private variables
+    _store = {}
+    _store['nuronal'] = []
+
     def __init__(self):
         
-        pass
+        with open () as file:
+            return 
+        
 
     def save_into_json_file(self):
         pass
 
-    def feed_back(self):
+    def feed_back(self, value_1, value_2):
         pass
 
     def read_from_storage(self):
@@ -132,4 +141,14 @@ if __name__ == '__main__':
     print("la calificación final: ",final_test())
     print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
     print("Las veces que se realizó un recorrido son: ", counter)
-    print("Los valores descartados son: ", data)
+    #print("Los valores descartados son: ", data)
+
+
+with open('data.json') as file:
+    reader = json.load(file)
+    for x in reader['feedback']:
+
+        if (x['peso_1'] < 0.37 and x['peso_2'] < 0.37):
+            print("peso menor a 0.37")
+            print("peso 1: ", x['peso_1'])
+            print("peso 2: ", x['peso_2'])
