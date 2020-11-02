@@ -25,17 +25,14 @@ global nota2
 
 
 # REFACTORING
-class Machine_learning:
-    
+class Neuronal_networks:
 
     # private variables
     _store = {}
     _store['nuronal'] = []
 
     def __init__(self):
-        
-        with open () as file:
-            return 
+        print('[*] Starting the training...')
         
 
     def save_into_json_file(self):
@@ -50,30 +47,43 @@ class Machine_learning:
 
 
 
+
+# =======================================================================================================================================
+
+def test_1():
+    return 7
+
+
+def get_weight_1():
+    
+    weight_1 = random.uniform(0.1,0.9)
+    return weight_1
+
+
+def test_2():
+    return 7
+
+def get_weight_2():
+
+    weight_2 = random.uniform(0.1,0.9)
+    return weight_2
+
+# =======================================================================================================================================
+
+
 def first_test():
 
-    
-    global peso1
-
     nota1 = 7
-    peso1 = random.uniform(0.1,0.9)
-
-    return (nota1 * peso1)
+    return (nota1 * get_weight_1())
 
 def second_test():
 
-    
-    global peso2
-
     nota2 = 7
-    peso2 = random.uniform(0.1,0.9)
-
-    return (nota2 * peso2)
+    return (nota2 * get_weight_2())
 
 def final_test():
     
-    nota_final  = float((first_test() + second_test())/(peso1 + peso2))
-
+    nota_final  = float((first_test() + second_test())/(get_weight_1() + get_weight_2()))
     return nota_final
 
 
@@ -117,11 +127,6 @@ if __name__ == '__main__':
         #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
         time.sleep(1)
 
-        """
-        nota_final = (first_test() + second_test())
-        print(nota_final)
-        break
-        """
         if (final_test() > 7.0):
             #print("la calificación final: ",nota_final)
             #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
@@ -130,7 +135,7 @@ if __name__ == '__main__':
             
 
             #dataset.append([peso1, peso2])
-            store_(peso1, peso2)
+            #store_(peso1, peso2)
             #created_json_file(peso1, peso2)
             #nota1 = random.randint(7,10)
             #nota2 = random.randint(7,10)
@@ -139,7 +144,7 @@ if __name__ == '__main__':
 
     created_json_file(data)
     print("la calificación final: ",final_test())
-    print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
+    #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
     print("Las veces que se realizó un recorrido son: ", counter)
     #print("Los valores descartados son: ", data)
 
