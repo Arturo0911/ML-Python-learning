@@ -7,18 +7,18 @@ import os
 import sys
 
 
-
+#test_1, test_2, weigth_1, weigth_2
 
 class Neuronal_networks:   
 
-    def __init__(self, test_1, test_2, weigth_1, weigth_2):
+    def __init__(self):
 
         print('[*] Starting the training...')
         
-        self.test_1 = test_1
-        self.test_2 = test_2
-        self.weigth_1 = weigth_1
-        self.weigth_2 = weigth_2
+        #self.test_1 = test_1
+        #self.test_2 = test_2
+        #self.weigth_1 = weigth_1
+        #self.weigth_2 = weigth_2
 
         self._store = {}
         self._store['neuronal'] = []
@@ -51,7 +51,7 @@ class Neuronal_networks:
 
                 for x in reader['neuronal']:
 
-                    if ((x['peso_1'] >= value_1) and x['peso_2' >= value_2]):
+                    if ((value_1 >= x['peso_1'] ) and ( value_2 >= x['peso_2'])):
                         self._store['neuronal'].append({'peso_1': value_1, 'peso_2': value_2})
             else:
                 pass
@@ -81,4 +81,5 @@ class Neuronal_networks:
         self._store['neuronal'].append({'peso_1': parameter_1, 'peso_2': parameter_2})
 
 
-                
+    def _compare(self):
+        pass

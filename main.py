@@ -6,15 +6,17 @@ from network.Test import Test as ts
 if __name__ == '__main__':
     counter = 0
 
-    """
-    neuronal = nn(7,7,0.5,0.5)
+    # Llamamos a las clases para las pruebas
+
+    test = ts()
+    neuronal = nn()
     neuronal.read_from_storage()
-    neuronal._storage(0.12,0.95)
-    print(neuronal._store)
+    
+    #print(neuronal._store)
     neuronal.store_into_json_file(neuronal._store)
     #print(neuronal.feed_back(0.8,0.9))
-    """
-    test = ts()
+    
+    
     while True:
         
         # aqui empezamos a generar pesos aleatorios
@@ -26,9 +28,13 @@ if __name__ == '__main__':
             counter += 1
             print("Los pesos 1 y 2 son %s y %s "%(test.weigth_1, test.weigth_2))
             
+            neuronal.feed_back(test.weigth_1, test.weigth_2)
+            #neuronal._storage(test.weigth_1, test.weigth_2)
+            neuronal.store_into_json_file(neuronal._store)
             print(test._calculate())
             break
         else:
             counter += 1
 
-    print("las vueltas: ", counter)
+    
+    print("Número de loops: ", counter)
