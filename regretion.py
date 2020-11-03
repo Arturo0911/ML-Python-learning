@@ -47,7 +47,6 @@ class Neuronal_networks:
 
 
 
-
 # =======================================================================================================================================
 
 def test_1():
@@ -81,9 +80,9 @@ def second_test():
     nota2 = 7
     return (nota2 * get_weight_2())
 
-def final_test():
+def final_test(weight1, weight2):
     
-    nota_final  = float((first_test() + second_test())/(get_weight_1() + get_weight_2()))
+    nota_final  = float((first_test() + second_test())/(weight1 + weight2))
     return nota_final
 
 
@@ -122,16 +121,17 @@ if __name__ == '__main__':
 
 
     while True:
-        final_test()
+        value_final  = final_test(get_weight_1(),get_weight_2())
+        print("valor final:  %s y los valores de los pesos 1 y 2 son %s <=> %s  "%(value_final, get_weight_1(),get_weight_2()))
         #print("la calificación final: ",nota_final)
         #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
         time.sleep(1)
 
-        if (final_test() > 7.0):
+        if (value_final > 7.0):
             #print("la calificación final: ",nota_final)
             #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
             break
-        elif(final_test() <= 7.0):
+        elif(value_final <= 7.0):
             
 
             #dataset.append([peso1, peso2])
@@ -143,12 +143,12 @@ if __name__ == '__main__':
 
 
     created_json_file(data)
-    print("la calificación final: ",final_test())
+    print("la calificación final: ",value_final)
     #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
     print("Las veces que se realizó un recorrido son: ", counter)
     #print("Los valores descartados son: ", data)
 
-
+"""
 with open('data.json') as file:
     reader = json.load(file)
     for x in reader['feedback']:
@@ -157,3 +157,4 @@ with open('data.json') as file:
             print("peso menor a 0.37")
             print("peso 1: ", x['peso_1'])
             print("peso 2: ", x['peso_2'])
+"""
