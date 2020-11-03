@@ -1,7 +1,7 @@
 
 
 from network.neuronal import Neuronal_networks as nn
-
+from network.Test import Test as ts
 
 if __name__ == '__main__':
 
