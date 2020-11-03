@@ -127,7 +127,7 @@ def created_json_file(data_to_storage):
     with open('data.json', 'w') as file:
         json.dump(data_to_storage, file, indent=4)
 
-    
+
 
 # read file again and after that storage again the data
 def feed_back():
@@ -137,9 +137,24 @@ def feed_back():
 
         for x in reader['feedback']:
             data['feedback'].append({'peso_1':x['peso_1'], 'peso_2':x['peso_2']})
-feed_back()
+
 def store_(value_1, value_2):
     data['feedback'].append({'peso_1': value_1, 'peso_2': value_2})
+
+
+def check_data(value_1, value_2):
+
+    with open('data.json') as file:
+        reader = json.load(file)
+
+        for x in reader:
+
+            if (value_1 <= x['peso_1'] and value_2 <= x['peso_2']):
+                pass
+            else:
+
+                data['feedback'].append({'peso_1': value_1, 'peso_2': value_2})
+    
 
 
 #print(data['feedback'])
@@ -158,7 +173,14 @@ if __name__ == '__main__':
         #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
         time.sleep(1)
 
+        if (len(data['feedback']) == 0):
+            created_json_file(data)
+
+            
+
         if (value_final > 7.0):
+            feed_back()
+            store_(get_weight_1(),get_weight_2())
             #print("la calificación final: ",nota_final)
             #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
             break
@@ -173,7 +195,7 @@ if __name__ == '__main__':
             counter += 1
 
 
-    created_json_file(data)
+    
     print("la calificación final: ",value_final)
     #print("El peso de la nota 1: ",peso1, " el peso de la nota 2:", peso2 )
     print("Las veces que se realizó un recorrido son: ", counter)
