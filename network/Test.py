@@ -14,7 +14,7 @@ class Test:
         self.weigth_2 = 0.5
 
         self.note_1 = 7
-        self.note_2 = 7
+        self.note_2 = 6
 
         self.final_test = 0
         
@@ -31,7 +31,7 @@ class Test:
     # this one return final qualification
     def _calculate(self):
 
-        self.final_test = float( float / float(self.weigth_1 + self.weigth_2) )
+        self.final_test = float((float(self.note_1 * self.weigth_1) + float(self.note_2 * self.weigth_2)) /(self.weigth_1 + self.weigth_2) )
 
         return self.final_test
 
