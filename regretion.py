@@ -28,21 +28,52 @@ global nota2
 class Neuronal_networks:
 
     # private variables
-    _store = {}
-    _store['nuronal'] = []
+    
 
-    def __init__(self):
+    def __init__(self, test_1, test_2, weigth_1, weigth_2):
+
         print('[*] Starting the training...')
         
+        self.test_1 = test_1
+        self.test_2 = test_2
+        self.weigth_1 = weigth_1
+        self.weigth_2 = weigth_2
 
-    def save_into_json_file(self):
-        pass
+        self._store = {}
+        self._store['neuronal'] = []
+
+        time.sleep(2)
+
+        print('[*] Initialize neuronal networks...')
+        
+        
+
+    def store_into_json_file(self, data_to_storage):
+        
+        with open('network/neuronal.json') as file:
+
+            json.dump(data_to_storage, file, indent=4)
+
 
     def feed_back(self, value_1, value_2):
-        pass
+
+        with open('network/neuronal.json') as read_file:
+            reader = json.load(read_file)
+
+            for x in reader['feedback']:
+
+                if (x['peso_1'] <= value_1):
+                    self._store['neuronal'].append({'peso_1': value_1, 'peso_2': value_2})
+                    
 
     def read_from_storage(self):
-        pass
+
+        with open('network/neuronal.json') as file_to_read:
+            reader = json.load(file_to_read)
+
+            for i in reader:
+
+                print(i['peso_1'], i['peso_2'])
 
 
 
