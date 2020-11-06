@@ -25,7 +25,7 @@ print(players.type())
 
 """
 
-
+"""
 
 # ===========================================================
 url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
@@ -48,6 +48,58 @@ print(data_frame[country_subset == "Ecuador"])
 
 new_cases = data_frame[country_subset == "Ecuador"][[' New_cases']]
 print(new_cases)
+
+
+
+#obtener la desviación, y la media.
+
+target = torch.tensor(new_cases.values).float()
+
+
+std = torch.std(target, dim=0)
+mean = torch.mean(target, dim=0)
+print("El promedio: ",mean)
+print("La desviación: ", std)
+"""
+
+
+
+class Analysis:
+    def __init__(self):
+
+        self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
+        self.dataframe = pd.read_csv(self.url_name)
+        self.country_subset = self.dataframe[[' New_cases']]
+
+        self.new_cases = ""
+
+
+
+    def load(self):
+        
+        return self.dataframe
+
+    def get_country_stats(self, country):
+        
+        return self.dataframe[self.country_subset == "Ecuador"]
+        
+
+    def get_mean(self, country):
+        """
+        docstring
+        """
+        pass
+
+
+
+if __name__ == "__main__":
+    
+    analisis = Analysis()
+    #print(analisis.load())
+    #print(analisis.new_cases)
+
+    print(analisis.get_country_stats("Ecuador"))
+
 
 
 
