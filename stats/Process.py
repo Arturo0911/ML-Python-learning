@@ -65,6 +65,7 @@ print("La desviación: ", std)
 
 
 class Analysis:
+    
     def __init__(self):
 
         self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
@@ -81,7 +82,7 @@ class Analysis:
 
     def get_country_stats(self, country):
 
-        return self.dataframe[self.country_subset == "Ecuador"]
+        return self.dataframe[self.country_subset == country]
         
         
         
@@ -97,6 +98,7 @@ class Analysis:
 if __name__ == "__main__":
     
     analisis = Analysis()
+    print(analisis.dataframe)
     print(analisis.get_country_stats("Ecuador"))
     #print(analisis.load())
     #print(analisis.new_cases)
