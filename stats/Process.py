@@ -42,15 +42,34 @@ data_frame =  pd.read_csv(url_name)
 #countries_afected = torch.tensor(subset.values).float()
 
 
-country_subset = data_frame[[' Country']]
+country_subset = data_frame[' Country']
+
+print(data_frame[country_subset == "Ecuador"])
+
+new_cases = data_frame[country_subset == "Ecuador"][[' New_cases']]
+print(new_cases)
 
 
-print(type(country_subset))
+
+#print(type(data_frame[country_subset == "Ecuador"]))
+#print(len(data_frame[country_subset == "Ecuador"]))
+
+
+
+
+#print(data_frame[country_subset == "Ecuador"][2,3])
+
+#print(country_subset)
+#print(type(country_subset))
 #print(len(country_subset))
 
 #print("for in country_subset")
-#for x in country_subset:
-#    print(x)
+
+
+#print(data_frame[data_frame[' Country']])
+
+
+
 
 
 """
