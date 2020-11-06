@@ -166,7 +166,7 @@ norm
 # usamos la funcion ge (greater or equal)
 # como segundo argumento los que tienen más de 85
 # en average colocamos dos funciones torch que
-# serian  lt (letter than)
+# serian  lt (lesser than)
 good = data[torch.ge(target, 85)]
 average = data[torch.gt(target, 70) & torch.lt(target, 80)]
 not_so_good = data[torch.lt(target, 70)]
