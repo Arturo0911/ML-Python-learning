@@ -12,6 +12,7 @@ matplotlib = "*"
 pandas = "*"
 tensorflow = "*"
 keras = "*"
+mysql-connector-python = "*"
 
 [requires]
 python_version = "3.8"
