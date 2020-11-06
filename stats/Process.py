@@ -69,10 +69,10 @@ class Analysis:
 
         self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
         self.dataframe = pd.read_csv(self.url_name)
-        self.country_subset = self.dataframe[[' New_cases']]
+        self.country_subset = self.dataframe[' Country']
 
         self.new_cases = ""
-
+        
 
 
     def load(self):
@@ -80,8 +80,10 @@ class Analysis:
         return self.dataframe
 
     def get_country_stats(self, country):
-        
+
         return self.dataframe[self.country_subset == "Ecuador"]
+        
+        
         
 
     def get_mean(self, country):
@@ -95,10 +97,11 @@ class Analysis:
 if __name__ == "__main__":
     
     analisis = Analysis()
+    print(analisis.get_country_stats("Ecuador"))
     #print(analisis.load())
     #print(analisis.new_cases)
 
-    print(analisis.get_country_stats("Ecuador"))
+    #print()
 
 
 
