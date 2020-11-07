@@ -4,12 +4,6 @@ import pandas as pd
 
 from Scrapper import Scrapper as sc
 
-global url_name
-global csv_file_name
-
-global country_list
-
-
 
 """
 # fifa players csv dataframe
@@ -72,9 +66,7 @@ class Analysis:
         self.dataframe = pd.read_csv(self.url_name)
         self.country_subset = self.dataframe[' Country']
 
-        self.new_cases = ""
-        
-
+        self.country_data = ""
 
     def load(self):
         
@@ -82,24 +74,33 @@ class Analysis:
 
     def get_country_stats(self, country):
 
-        return self.dataframe[self.country_subset == country]
-        
-        
+        self.country_data =  self.dataframe[self.country_subset == country]
         
 
-    def get_mean(self, country):
-        """
-        docstring
-        """
+
+    def get_new_cases(self):
+
+        return [self.country_subset]
+
+    def get_mean_(self):
+        
+
+        return self.country_subset[[' New_cases']]
+
+    def get_std_(self, country):
         pass
+
 
 
 
 if __name__ == "__main__":
     
     analisis = Analysis()
-    print(analisis.dataframe)
+    #print(analisis.dataframe)
     print(analisis.get_country_stats("Ecuador"))
+    print("country_data: ", analisis.country_data)
+    print(analisis.get_mean_())
+    #print(analisis.coutry_data)
     #print(analisis.load())
     #print(analisis.new_cases)
 
