@@ -4,7 +4,9 @@ import pandas as pd
 
 from Scrapper import Scrapper as sc
 
-
+"""
+LINELA REGRETION MODEL: Y= β0 + β1X   
+"""
 
 
 class Analysis:
