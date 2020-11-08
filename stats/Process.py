@@ -6,7 +6,7 @@ from Scrapper import Scrapper as sc
 
 
 
-
+"""
 class Analysis:
     
     def __init__(self):
@@ -19,9 +19,7 @@ class Analysis:
         self.country_data = ""
         self.target = ""
 
-        # variables of prediction
-        self.mean_ = 0
-        self.std_ = 0
+        
 
     def load(self):
         
@@ -41,10 +39,10 @@ class Analysis:
 
         self.target = torch.tensor( self.country_data[[' New_cases']].values).float()
         
-        mean_data = ""
-        std_data = ""
+        mean_data = torch.mean(self.target, dim= 0)
+        std_data = torch.std(self.target, dim= 0)
 
-        return self.country_data[[' New_cases']]
+        return mean_data, std_data #self.country_data[[' New_cases']]
 
     def get_std_(self, country):
         pass
@@ -62,13 +60,18 @@ if __name__ == "__main__":
     #print(analisis.dataframe)
     print(analisis.get_country_stats("Ecuador"))
     print("country_data: ", analisis.country_data)
-    print(analisis.get_mean_())
+
+
+    mean_value, std_value = analisis.get_mean_()
+    print("MEAN: ",mean_value)
+    print("STD: ", std_value)
     #print(analisis.coutry_data)
     #print(analisis.load())
     #print(analisis.new_cases)
 
     #print()
 
+"""
 """
 # fifa players csv dataframe
 another_url_name = "https://raw.githubusercontent.com/amanthedorkknight/fifa18-all-player-statistics/master/2019/data.csv"
@@ -81,7 +84,7 @@ subset = fifaplayers[['Overall','Age','International Reputation', 'Weak Foot',
 players = torch.tensor(subset.values).float()
 print(players.type())
 
-"""
+
 
 """
 
@@ -118,7 +121,7 @@ std = torch.std(target, dim=0)
 mean = torch.mean(target, dim=0)
 print("El promedio: ",mean)
 print("La desviación: ", std)
-"""
+
 
 
 
