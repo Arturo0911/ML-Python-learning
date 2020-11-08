@@ -82,7 +82,7 @@ class Analysis:
 
         return [self.country_subset]
 
-    def get_mean_(self):
+    def get_mean_(self, country):
         
 
         return self.country_subset[[' New_cases']]
