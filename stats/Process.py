@@ -5,6 +5,70 @@ import pandas as pd
 from Scrapper import Scrapper as sc
 
 
+
+
+class Analysis:
+    
+    def __init__(self):
+
+        self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
+        self.dataframe = pd.read_csv(self.url_name)
+        self.country_subset = self.dataframe[' Country']
+        
+        # variables to be called after the class is instantiated 
+        self.country_data = ""
+        self.target = ""
+
+        # variables of prediction
+        self.mean_ = 0
+        self.std_ = 0
+
+    def load(self):
+        
+        return self.dataframe
+
+    def get_country_stats(self, country):
+
+        self.country_data =  self.dataframe[self.country_subset == country]
+        
+
+
+    def get_new_cases(self):
+
+        return [self.country_subset]
+
+    def get_mean_(self):
+
+        self.target = torch.tensor( self.country_data[[' New_cases']].values).float()
+        
+        mean_data = ""
+        std_data = ""
+
+        return self.country_data[[' New_cases']]
+
+    def get_std_(self, country):
+        pass
+
+
+
+
+if __name__ == "__main__":
+    
+
+    # country to test
+    country = "Ecuador"
+    # First instance
+    analisis = Analysis()
+    #print(analisis.dataframe)
+    print(analisis.get_country_stats("Ecuador"))
+    print("country_data: ", analisis.country_data)
+    print(analisis.get_mean_())
+    #print(analisis.coutry_data)
+    #print(analisis.load())
+    #print(analisis.new_cases)
+
+    #print()
+
 """
 # fifa players csv dataframe
 another_url_name = "https://raw.githubusercontent.com/amanthedorkknight/fifa18-all-player-statistics/master/2019/data.csv"
@@ -57,54 +121,6 @@ print("La desviación: ", std)
 """
 
 
-
-class Analysis:
-    
-    def __init__(self):
-
-        self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
-        self.dataframe = pd.read_csv(self.url_name)
-        self.country_subset = self.dataframe[' Country']
-
-        self.country_data = ""
-
-    def load(self):
-        
-        return self.dataframe
-
-    def get_country_stats(self, country):
-
-        self.country_data =  self.dataframe[self.country_subset == country]
-        
-
-
-    def get_new_cases(self):
-
-        return [self.country_subset]
-
-    def get_mean_(self, country):
-        
-
-        return self.country_subset[[' New_cases']]
-
-    def get_std_(self, country):
-        pass
-
-
-
-
-if __name__ == "__main__":
-    
-    analisis = Analysis()
-    #print(analisis.dataframe)
-    print(analisis.get_country_stats("Ecuador"))
-    print("country_data: ", analisis.country_data)
-    print(analisis.get_mean_())
-    #print(analisis.coutry_data)
-    #print(analisis.load())
-    #print(analisis.new_cases)
-
-    #print()
 
 
 
