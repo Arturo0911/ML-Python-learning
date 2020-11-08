@@ -6,7 +6,7 @@ from Scrapper import Scrapper as sc
 
 
 
-"""
+
 class Analysis:
     
     def __init__(self):
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     #print()
 
 """
-"""
+
 # fifa players csv dataframe
 another_url_name = "https://raw.githubusercontent.com/amanthedorkknight/fifa18-all-player-statistics/master/2019/data.csv"
 fifaplayers = pd.read_csv(another_url_name)
@@ -86,7 +86,7 @@ print(players.type())
 
 
 
-"""
+
 
 # ===========================================================
 url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
@@ -146,10 +146,6 @@ print("La desviación: ", std)
 #print(data_frame[data_frame[' Country']])
 
 
-
-
-
-"""
 print("Subset")
 print(subset)
 
