@@ -33,7 +33,7 @@ class Analysis:
 
     def get_new_cases(self):
 
-        return [self.country_subset]
+        return [self.country_subset] 
 
     def get_mean_(self):
 
