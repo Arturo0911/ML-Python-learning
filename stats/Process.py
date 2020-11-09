@@ -67,7 +67,8 @@ if __name__ == "__main__":
 
     mean_value, std_value = analisis.get_mean_()
     print("MEAN: ",mean_value)
-    print("STD: ", std_value)
+    print("", mean_value[0])
+    #print("STD: ", std_value)
     #print(analisis.coutry_data)
     #print(analisis.load())
     #print(analisis.new_cases)
