@@ -56,12 +56,13 @@ if __name__ == "__main__":
     
 
     # country to test
-    country = "Ecuador"
+    # country = "Ecuador"
     # First instance
     analisis = Analysis()
+    analisis.get_country_stats("Ecuador")
     #print(analisis.dataframe)
-    print(analisis.get_country_stats("Ecuador"))
-    print("country_data: ", analisis.country_data)
+    #print(analisis.get_country_stats("Ecuador"))
+    #print("country_data: ", analisis.country_data)
 
 
     mean_value, std_value = analisis.get_mean_()
