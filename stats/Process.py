@@ -95,5 +95,3 @@ if __name__ == "__main__":
     """)
 
     print("=> ", ((int(deaths_mean.item())/int(mean_value.item())))*100, " %" )
-
-    # type(mean_value)
