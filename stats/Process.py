@@ -21,6 +21,7 @@ class Analysis:
         # variables to be called after the class is instantiated 
         self.country_data = ""
         self.target = ""
+        self.new_deaths_data = ""
 
         
 
@@ -42,13 +43,19 @@ class Analysis:
 
         self.target = torch.tensor( self.country_data[[' New_cases']].values).float()
         
+        
         mean_data = torch.mean(self.target, dim= 0)
         std_data = torch.std(self.target, dim= 0)
 
         return mean_data, std_data #self.country_data[[' New_cases']]
 
-    def get_std_(self, country):
-        pass
+    def get_new_deaths(self):
+        
+        self.new_deaths_data = torch.tensor(self.country_data[[' New_deaths']].values).float()
+        mean_deaths = torch.mean(self.new_deaths_data, dim = 0)
+        std_deaths = torch.std(self.new_deaths_data, dim = 0)
+
+        return mean_deaths, std_deaths
 
 if __name__ == "__main__":
     
@@ -64,25 +71,29 @@ if __name__ == "__main__":
 
 
     mean_value, std_value = analisis.get_mean_()
-    #print("MEAN: ",mean_value)
+    new_columns = [' New_cases']
+
+    mean_value.type()
+    print("El promedio de los casos acumulados en Ecuador es: ",int(mean_value.item()))
+    print("La desviación estándar es: ", int(std_value.item()))
+
+
+    print("========================================================================\n")
     
+    deaths_mean, deaths_std = analisis.get_new_deaths()
+    print("el promedio de las muertes o sea F en el chat: ",int(deaths_mean.item()))
+    print("la desviación de las muertes en Ecuador: ", int(deaths_std.item()))
 
 
 
+    print("""
+    
+            La taza de mortalidad en el país está dada por: Muertes
+                                                            -------
+                                                            Casos totales
+    
+    """)
 
+    print("=> ", ((int(deaths_mean.item())/int(mean_value.item())))*100, " %" )
 
-    #print("STD: ", std_value)
-    #print(analisis.coutry_data)
-    #print(analisis.load())
-    #print(analisis.new_cases)
-
-    #print()
-    mean_value[0]
-    print(analisis.country_data.columns)
-
-mean_value
-new_columns = [' New_cases']
-
-mean_value.type()
-mean_value.item()
-# type(mean_value)
+    # type(mean_value)

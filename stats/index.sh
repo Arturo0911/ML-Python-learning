@@ -1,3 +1,6 @@
 #!/usr/bin/bash
 
-python3 Scrapper.py
+# python3 Scrapper.py
+
+read data
+
