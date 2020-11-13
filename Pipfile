@@ -13,6 +13,7 @@ pandas = "*"
 tensorflow = "*"
 keras = "*"
 mysql-connector-python = "*"
+django = "*"
 
 [requires]
 python_version = "3.8"
