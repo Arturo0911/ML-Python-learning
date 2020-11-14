@@ -16,7 +16,7 @@ class Analysis:
 
         self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
         self.dataframe = pd.read_csv(self.url_name)
-        self.country_subset = self.dataframe['Country']
+        self.country_subset = self.dataframe[' Country']
         
         # variables to be called after the class is instantiated 
         self.country_data = ""
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     #print(analisis.dataframe)
     #print(analisis.get_country_stats("Ecuador"))
     #print("country_data: ", analisis.country_data)
-
+    print(analisis.country_subset)
 
     mean_value, std_value = analisis.get_mean_()
     new_columns = ['New_cases']
