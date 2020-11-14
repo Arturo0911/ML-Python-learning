@@ -16,7 +16,7 @@ class Analysis:
 
         self.url_name = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
         self.dataframe = pd.read_csv(self.url_name)
-        self.country_subset = self.dataframe[' Country']
+        self.country_subset = self.dataframe['Country']
         
         # variables to be called after the class is instantiated 
         self.country_data = ""
@@ -41,7 +41,7 @@ class Analysis:
 
     def get_mean_(self):
 
-        self.target = torch.tensor( self.country_data[[' New_cases']].values).float()
+        self.target = torch.tensor( self.country_data[['New_cases']].values).float()
         
         
         mean_data = torch.mean(self.target, dim= 0)
@@ -51,7 +51,7 @@ class Analysis:
 
     def get_new_deaths(self):
         
-        self.new_deaths_data = torch.tensor(self.country_data[[' New_deaths']].values).float()
+        self.new_deaths_data = torch.tensor(self.country_data[['New_deaths']].values).float()
         mean_deaths = torch.mean(self.new_deaths_data, dim = 0)
         std_deaths = torch.std(self.new_deaths_data, dim = 0)
 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
 
     mean_value, std_value = analisis.get_mean_()
-    new_columns = [' New_cases']
+    new_columns = ['New_cases']
 
     mean_value.type()
     print("El promedio de los casos acumulados en Ecuador es: ",int(mean_value.item()))
