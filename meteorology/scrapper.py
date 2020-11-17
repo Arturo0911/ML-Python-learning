@@ -7,3 +7,13 @@ Original file is located at
     https://colab.research.google.com/drive/1pfW0VFS9H7G0ha_U5EhtWGwXCbmt8Q2d
 """
 
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+"""installing BeautifulSoup
+# pip3 install beautifulsoup4
+"""
+
+page = 'http://pythonscraping.com/pages/page1.html'
+html = urlopen(page)
+html.read()
