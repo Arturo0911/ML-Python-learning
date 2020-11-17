@@ -14,6 +14,23 @@ from bs4 import BeautifulSoup
 # pip3 install beautifulsoup4
 """
 
-page = 'http://pythonscraping.com/pages/page1.html'
-html = urlopen(page)
-html.read()
+page_1 = 'http://pythonscraping.com/pages/page1.html'
+page_2 = "http://www.pythonscraping.com/exercises/exercise1.html"
+#html = urlopen(page_2)
+
+#bs_obj = BeautifulSoup(html.read())
+#bs_obj
+html = urlopen("http://www.pythonscraping.com/exercises/exercise1.html")
+#print(html.read())
+
+try:
+  html = urlopen("http://www.pythonscraping.com/exercises/exercise1.html")
+  
+except HTTPError as e:
+  print("Error by: ", str(e))
+else:
+  if html is None:
+    print("url is not founded")
+  else:
+    print(html.read())
+  # program must to be continued without problems
