@@ -32,5 +32,9 @@ else:
   if html is None:
     print("url is not founded")
   else:
-    print(html.read())
+    bs_obj = BeautifulSoup(html.read())
+    print(bs_obj.h1)
+    #print(html.read())
   # program must to be continued without problems
+
+print(bs_obj.nonExistenTag.h1)
