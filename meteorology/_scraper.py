@@ -106,3 +106,22 @@ find(tag, attributes, recursive, text, keywords)
 #bs_obj
 
 #bs_obj.findAll(class_ = "green")
+
+# http://www.pythonscraping.com/pages/page3.html
+
+url_to_open = 'http://www.pythonscraping.com/pages/page3.html'
+
+html = urlopen(url_to_open)
+
+bs_obj = BeautifulSoup(html)
+
+# created a loop to access to any children descendants from 
+# the tags
+
+"""
+for child in bs_obj.find("table",{"id":"giftList"}).children:
+  print(child)
+"""
+
+for child in bs_obj.find("table",{"id":"giftList"}).children:
+  print(child)
