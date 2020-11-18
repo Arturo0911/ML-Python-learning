@@ -98,3 +98,11 @@ print(name_list)"""
 findAll(tag, attributes, recursive, text, limit, keywords)
 find(tag, attributes, recursive, text, keywords)
 """
+
+#all_text =  bs_obj.findAll(id = "text")
+#print(all_text[0].get_text())
+
+#bs_obj.findAll('', {'id':'text'})
+#bs_obj
+
+#bs_obj.findAll(class_ = "green")
