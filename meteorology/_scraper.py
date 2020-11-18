@@ -92,3 +92,9 @@ Pavlovna
 """name_list = bs_obj.findAll(text='the prince')
 print(len(name_list))
 print(name_list)"""
+
+
+""" 
+findAll(tag, attributes, recursive, text, limit, keywords)
+find(tag, attributes, recursive, text, keywords)
+"""
