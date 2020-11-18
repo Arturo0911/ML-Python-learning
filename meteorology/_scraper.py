@@ -11,3 +11,77 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 
+url = 'http://www.pythonscraping.com/pages/warandpeace.html'
+html = urlopen(url)
+
+bs_obj = BeautifulSoup(html)
+#bs_obj
+
+# this one is for search any atribute from the css class like
+# span and class btn btn-success if you use Bootstrap
+name_list = bs_obj.findAll('span', {'class':'green'})
+
+for name in name_list:
+  print(name.get_text())
+
+
+"""
+This is the output if you run this process =>
+
+for name in name_list:
+  print(name, ": ", name.get_text())
+
+<span class="green">Anna
+Pavlovna Scherer</span> :  Anna
+Pavlovna Scherer
+<span class="green">Empress Marya
+Fedorovna</span> :  Empress Marya
+Fedorovna
+<span class="green">Prince Vasili Kuragin</span> :  Prince Vasili Kuragin
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+<span class="green">St. Petersburg</span> :  St. Petersburg
+<span class="green">the prince</span> :  the prince
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+<span class="green">the prince</span> :  the prince
+<span class="green">the prince</span> :  the prince
+<span class="green">the prince</span> :  the prince
+<span class="green">Prince Vasili</span> :  Prince Vasili
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+<span class="green">the prince</span> :  the prince
+<span class="green">Wintzingerode</span> :  Wintzingerode
+<span class="green">King of Prussia</span> :  King of Prussia
+<span class="green">le Vicomte de Mortemart</span> :  le Vicomte de Mortemart
+<span class="green">Montmorencys</span> :  Montmorencys
+<span class="green">Rohans</span> :  Rohans
+<span class="green">Abbe Morio</span> :  Abbe Morio
+<span class="green">the Emperor</span> :  the Emperor
+<span class="green">the prince</span> :  the prince
+<span class="green">Prince Vasili</span> :  Prince Vasili
+<span class="green">Dowager Empress Marya Fedorovna</span> :  Dowager Empress Marya Fedorovna
+<span class="green">the baron</span> :  the baron
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+<span class="green">the Empress</span> :  the Empress
+<span class="green">the Empress</span> :  the Empress
+<span class="green">Anna Pavlovna's</span> :  Anna Pavlovna's
+<span class="green">Her Majesty</span> :  Her Majesty
+<span class="green">Baron
+Funke</span> :  Baron
+Funke
+<span class="green">The prince</span> :  The prince
+<span class="green">Anna
+Pavlovna</span> :  Anna
+Pavlovna
+<span class="green">the Empress</span> :  the Empress
+<span class="green">The prince</span> :  The prince
+<span class="green">Anatole</span> :  Anatole
+<span class="green">the prince</span> :  the prince
+<span class="green">The prince</span> :  The prince
+<span class="green">Anna
+Pavlovna</span> :  Anna
+Pavlovna
+<span class="green">Anna Pavlovna</span> :  Anna Pavlovna
+
+
+"""
