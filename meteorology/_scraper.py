@@ -17,6 +17,9 @@ html = urlopen(url)
 bs_obj = BeautifulSoup(html)
 #bs_obj
 
+
+
+
 # this one is for search any atribute from the css class like
 # span and class btn btn-success if you use Bootstrap
 name_list = bs_obj.findAll('span', {'class':'green'})
@@ -85,3 +88,7 @@ Pavlovna
 
 
 """
+
+"""name_list = bs_obj.findAll(text='the prince')
+print(len(name_list))
+print(name_list)"""
