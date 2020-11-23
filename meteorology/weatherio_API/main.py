@@ -8,6 +8,7 @@ from pprint import pprint
 import requests
 from calendar import monthrange
 from datetime import date, timedelta
+import json
 
 # the arrays with the dates to be storage
 
@@ -40,66 +41,74 @@ time_end = '2016-10-22'
 
 url_parameters = 'https://api.weatherbit.io/v2.0/history/hourly?lat={}&lon={}&start_date={}&end_date={}&tz=local&key={}'.format(latitude,longitude,time_start,time_end,weatherbi_key)
 response = requests.get(url_parameters).json()
-pprint(response)
+#pprint(response)
 #pprint(response['data'])   
-
-
-
-# the arrays with the dates to be storage
-
-list_years_2017 = list()
-list_years_2018 = list()
-list_years_2019 = list()
-
-
-object_years = {}
-# 2016 - 2017 period
-october_2016 = date(2016, 10, 1)
-january_2017 = date(2017,1, 31)
-
-delta_2017 = january_2017 - october_2016
-
-# period 2017 - 2018
-october_2017 = date(2017,10,1)
-january_2018 = date(2018,1,31)
-
-delta_2018 = january_2018 - october_2017
-
-# period 2018 - 2019
-october_2018 = date(2018,10,1)
-january_2019 = date(2019,1,31)
-
-delta_2019 = january_2019 - october_2018
-
-
-for x in range(delta_2017.days + 1):
-  days = october_2016 + timedelta(days=x)
-  list_years_2017.append(str(days))
-
-object_years[2017] = list_years_2017
-
-for x in range(delta_2018.days + 1):
-  days = october_2017 + timedelta(days=x)
-  list_years_2018.append(str(days))
-object_years[2018] = list_years_2018
-
-
-
-for x in range(delta_2019.days +1):
-  days = october_2018 + timedelta(days= x)
-  list_years_2019.append(str(days))
-object_years[2019] = list_years_2019
-
-
-print(object_years)
-print(len(object_years))
-
 
 
 
 class Create_days:
 
-    def __init__(self) -> None:
+    def __init__(self):
+        
+
+        self.year_2017 = list()
+        self.year_2018 = list()
+        self.year_2019 = list()
+
+        self.october_2016 = date(2016, 10, 1)
+        self.january_2017 = date(2017, 1, 31)
+
+        self.october_2017 = date(2017,10,1)
+        self.january_2018 = date(2018,1,31)
+
+        self.october_2018 = date(2018,10,1)
+        self.january_2019 = date(2019,1,31)
+
+
+        self.objects = {}
+
+    def generate_appends(self):
+        
+        delta_2017 = self.january_2017 - self.october_2016
+        delta_2018 = self.january_2018 - self.october_2017
+        delta_2019 = self.january_2019 - self.october_2018
+
+
+        for x in range(delta_2017.days + 1):
+            days = self.october_2016 + timedelta(days=x)
+            self.year_2017.append(str(days))
+
+        self.objects[2017] = self.year_2017
+
+        for x in range(delta_2018.days + 1):
+            days = self.october_2017 + timedelta(days=x)
+            self.year_2018.append(str(days))
+        self.objects[2018] = self.year_2018
+
+
+        for x in range(delta_2019.days +1):
+            days = self.october_2018 + timedelta(days= x)
+            self.year_2019.append(str(days))
+        self.objects[2019] = self.year_2019
+
+
+    def json_generate(self):
+        
+        with open('neuronal.json', 'w') as f:
+            json.dump(self.objects,f,indent=4)
+
         pass
+    
 
 
+    def get_objects(self):
+        
+        return self.objects
+
+
+if __name__ == "__main__":
+    
+    days = Create_days()
+    days.generate_appends()
+    days.json_generate()
+    #print(days.get_objects())
