@@ -48,20 +48,42 @@ pprint(response)
 # the arrays with the dates to be storage
 
 list_years = list()
-
+# 2016 - 2017 period
 october_2016 = date(2016, 10, 1)
-december_2016 = date(2017,1, 31)
+january_2017 = date(2017,1, 31)
 
-delta = december_2016 - october_2016
+delta_2017 = january_2017 - october_2016
 
-for x in range(delta.days + 1):
+# period 2017 - 2018
+october_2017 = date(2017,10,1)
+january_2018 = date(2018,1,31)
+
+delta_2018 = january_2018 - october_2017
+
+# period 2018 - 2019
+october_2018 = date(2018,10,1)
+january_2019 = date(2019,1,31)
+
+delta_2019 = january_2019 - october_2018
+
+
+for x in range(delta_2017.days + 1):
   days = october_2016 + timedelta(days=x)
   list_years.append(str(days))
-  #print(str(days))
-  #print(type(days))
+
+
+for x in range(delta_2018.days + 1):
+  days = october_2017 + timedelta(days=x)
+  list_years.append(str(days))
+
+for x in range(delta_2019.days +1):
+  days = october_2018 + timedelta(days= x)
+  list_years.append(str(days))
+
 
 print(list_years)
 print(len(list_years))
+
 
 
 
