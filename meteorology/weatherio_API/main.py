@@ -47,7 +47,12 @@ pprint(response)
 
 # the arrays with the dates to be storage
 
-list_years = list()
+list_years_2017 = list()
+list_years_2018 = list()
+list_years_2019 = list()
+
+
+object_years = {}
 # 2016 - 2017 period
 october_2016 = date(2016, 10, 1)
 january_2017 = date(2017,1, 31)
@@ -69,20 +74,25 @@ delta_2019 = january_2019 - october_2018
 
 for x in range(delta_2017.days + 1):
   days = october_2016 + timedelta(days=x)
-  list_years.append(str(days))
+  list_years_2017.append(str(days))
 
+object_years[2017] = list_years_2017
 
 for x in range(delta_2018.days + 1):
   days = october_2017 + timedelta(days=x)
-  list_years.append(str(days))
+  list_years_2018.append(str(days))
+object_years[2018] = list_years_2018
+
+
 
 for x in range(delta_2019.days +1):
   days = october_2018 + timedelta(days= x)
-  list_years.append(str(days))
+  list_years_2019.append(str(days))
+object_years[2019] = list_years_2019
 
 
-print(list_years)
-print(len(list_years))
+print(object_years)
+print(len(object_years))
 
 
 
