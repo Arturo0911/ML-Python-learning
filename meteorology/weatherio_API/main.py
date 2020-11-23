@@ -7,7 +7,9 @@ from urllib.error import HTTPError
 from pprint import pprint
 import requests
 from calendar import monthrange
+from datetime import date, timedelta
 
+# the arrays with the dates to be storage
 
 
 class Meteorology:
@@ -40,3 +42,32 @@ url_parameters = 'https://api.weatherbit.io/v2.0/history/hourly?lat={}&lon={}&st
 response = requests.get(url_parameters).json()
 pprint(response)
 #pprint(response['data'])   
+
+
+
+# the arrays with the dates to be storage
+
+list_years = list()
+
+october_2016 = date(2016, 10, 1)
+december_2016 = date(2017,1, 31)
+
+delta = december_2016 - october_2016
+
+for x in range(delta.days + 1):
+  days = october_2016 + timedelta(days=x)
+  list_years.append(str(days))
+  #print(str(days))
+  #print(type(days))
+
+print(list_years)
+print(len(list_years))
+
+
+
+class Create_days:
+
+    def __init__(self) -> None:
+        pass
+
+
