@@ -6,6 +6,8 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from pprint import pprint
 import requests
+from calendar import monthrange
+
 
 
 class Meteorology:
@@ -37,4 +39,4 @@ time_end = '2016-10-22'
 url_parameters = 'https://api.weatherbit.io/v2.0/history/hourly?lat={}&lon={}&start_date={}&end_date={}&tz=local&key={}'.format(latitude,longitude,time_start,time_end,weatherbi_key)
 response = requests.get(url_parameters).json()
 pprint(response)
-#pprint(response['data'])
+#pprint(response['data'])   
