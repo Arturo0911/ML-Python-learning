@@ -1,0 +1,33 @@
+Metodologías de ataques de virus.
+
+Como hemos visto anteriormente, los virus tienen diferente categorización y métodos de empleo.
+Muchos de los comportamientos de los mismos, vienen dados con una finalidad; dañar el/los equipos destinatarios.
+
+Los objetivos son:
+
+    - Robar información.
+    - Dañar equipos electrónicos.
+    - Invadir la propiedad privada.
+
+En algunas ocasiones no se puede percibir la presencia de un programa malicioso, los rasgos más comunes que podemos encontrar
+al momento de percibir un software malicioso es la lentitud en nuestros ordenadores; archivos con tamaños fuera de lo normal;
+lentitud en la latencia y/o velocidad de conexión a internet.
+
+La manera más común de infectar un router es cuando le introducen un firmware, previamente modificado para que al momento de actualizar 
+el router, este cargue al microprocesador código que permite el desvio de tráfico de datos, los cuales podrán ser interceptados.
+
+
+Métodos para prevenir la infección de virus a nivel de redes.
+
+    - Siempre tener el router con la versión de firmware actualizada y descargada de la página oficial.
+    - Evitar que personas de dudosa procedencia conecten usb o pendrives al router (básicamente lo hacen con el fin de cargar el firmaware malicioso)
+    - No acceder a enlaces extraños que nos envien, o correos que contengan archivos dudosos.
+
+Malwares.
+
+Como mencioné son software maliciosos, con el finalidad de crear grandes daños a niveles de infraestructura, desde la época de la pandemia.
+muchos de estos programas maliciosos han vulnerados muchos protocolos, los cuales han provocado que muchas empresas hayan perdido sus datos a causa de estos
+
+Como ejemplo tenemos a los ransonwares que se encargan de encriptar la información y a cambio de una suma de dinero dejarán todos los archivos encriptados e inutilizables.
+Los protocolos de encriptación son tan avanzados que es difícil poder desencriptarlos sin la llave.
+
