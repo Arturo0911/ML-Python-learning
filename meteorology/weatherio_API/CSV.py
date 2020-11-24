@@ -19,7 +19,7 @@ class Create_csv:
         days = Create_days()
         days.generate_appends()
         days.json_generate()
-        print(days.get_objects())
+        #print(days.get_objects())
 
         with open('neuronal.csv', 'w') as csv_file:
             
@@ -27,7 +27,15 @@ class Create_csv:
             writer.writerow(["date_reported"])
 
             for x in days.get_objects()[2017]:
-                print(type(x))
+                    
+                writer.writerow([x])
+            
+            for x in days.get_objects()[2018]:
+                
+                writer.writerow([x])
+            
+            for x in days.get_objects()[2019]:
+
                 writer.writerow([x])
 
 
