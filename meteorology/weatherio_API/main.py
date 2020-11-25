@@ -44,7 +44,14 @@ response = requests.get(url_parameters).json()
 #pprint(response)
 #pprint(response['data'])   
 
-pprint(response['data'])
+#pprint(len(response['data']))
+
+
+for x in response['data']:
+
+    print('clouds values: ',x['clouds'])
+
+
 
 class Create_days:
 
