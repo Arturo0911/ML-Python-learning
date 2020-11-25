@@ -44,7 +44,7 @@ response = requests.get(url_parameters).json()
 #pprint(response)
 #pprint(response['data'])   
 
-
+pprint(response['data'])
 
 class Create_days:
 
@@ -104,10 +104,15 @@ class Create_days:
         
         return self.objects
 
-
+"""
 if __name__ == "__main__":
     
     days = Create_days()
     days.generate_appends()
     days.json_generate()
     #print(days.get_objects())
+"""
+
+
+
+
