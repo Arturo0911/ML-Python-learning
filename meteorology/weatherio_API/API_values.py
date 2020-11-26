@@ -46,8 +46,9 @@ class API_values:
     def get_average_to_clouds(self):
         pass
 
-
-    def get_parameters(self,parameter ):
+    
+    # One param like clouds, time local
+    def get_parameters(self,parameter):
 
         # Here the first question is "How many parameters i must to cross to get the descriptions
         # of sky are in the weather data ?"
@@ -55,6 +56,11 @@ class API_values:
         for x in self.response_data['data']:
             print(x[parameter])
 
+    def get_parameters_sky_behavior(self):
+
+        for x in self.response_data['data']:
+
+            print(x['weather']['description'])
 
 
     

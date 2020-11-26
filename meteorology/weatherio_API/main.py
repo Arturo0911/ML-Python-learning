@@ -12,17 +12,13 @@ import json
 from API_values import API_values
 from Create_days import Create_days
 
-latitude = '-2.3352106'
-longitude = '-80.2300508'
+latitude = '-2.335017'
+longitude = '-80.229769'
 time_start = '2016-10-21'
 time_end = '2016-10-22'
 
-days = Create_days()
-days.generate_appends()
 
-print(days.return_days_keys())
 
-"""
 if __name__ == "__main__":
 
     # Instantiate from Create_days class
@@ -37,7 +33,7 @@ if __name__ == "__main__":
 
 
     # Generate a iterator to fetch values from dates
-
+    """
     for i in range(0, len(days.get_objects()[2017])):
 
         time_start = days.get_objects()[2017][i-1]
@@ -46,6 +42,7 @@ if __name__ == "__main__":
         # Instantiate from API_values class
 
         print(time_start, time_end)
+    """
 
     new_query = API_values(latitude, longitude, time_start, time_end)
         #print(new_query.get_api_key())
@@ -55,8 +52,8 @@ if __name__ == "__main__":
         #print("========================================== %s %s"%(time_start, time_end),"==========================================")
 
 
-    new_query.get_parameters('clouds')
-"""
+    new_query.get_parameters_sky_behavior()
+
 
 
 
