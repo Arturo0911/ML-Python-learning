@@ -24,7 +24,7 @@ class Create_csv:
         with open('neuronal.csv', 'w') as csv_file:
             
             writer = csv.writer(csv_file)
-            writer.writerow(["date_reported"])
+            writer.writerow(["time_start", "time_end"])
 
             for x in days.get_objects()[2017]:
                     
