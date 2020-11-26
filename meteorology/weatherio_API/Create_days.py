@@ -1,7 +1,9 @@
 from datetime import date, timedelta
 import json
 
-
+"""
+    this file return all the days to be parsed
+"""
 
 class Create_days:
 

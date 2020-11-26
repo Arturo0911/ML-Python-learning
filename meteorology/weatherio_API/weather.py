@@ -1,7 +1,11 @@
 import requests
 
 
+"""
+    This class is to parse any data from api
+    clouds, precipitacion, skies values, etc.
 
+"""
 
 class Weather:
 

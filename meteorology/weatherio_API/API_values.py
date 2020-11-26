@@ -47,6 +47,12 @@ class API_values:
         pass
 
 
+    def get_parameters(self,parameter ):
+
+        for x in self.response_data['data']:
+            print(x[parameter])
+
+
 
     
     

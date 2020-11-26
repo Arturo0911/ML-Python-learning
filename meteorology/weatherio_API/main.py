@@ -9,7 +9,8 @@ import requests
 from calendar import monthrange
 from datetime import date, timedelta
 import json
-from API_values import API_values 
+from API_values import API_values
+from Create_days import Create_days
 
 latitude = '-2.3352106'
 longitude = '-80.2300508'
@@ -17,13 +18,38 @@ time_start = '2016-10-21'
 time_end = '2016-10-22'
 
 if __name__ == "__main__":
+
+    # Instantiate from Create_days class
     
+    days = Create_days()
+    days.generate_appends()
+    print(len(days.get_objects()))
+    print(days.get_objects().keys())
+
+
+    
+
+
+    # Generate a iterator to fetch values from dates
+
+    for i in range(0, len(days.get_objects()[2017])):
+
+        time_start = days.get_objects()[2017][i-1]
+        time_end = days.get_objects()[2017][i]
+
+        # Instantiate from API_values class
+
+        print(time_start, time_end)
+
     new_query = API_values(latitude, longitude, time_start, time_end)
-    print(new_query.get_api_key())
-    print(new_query.get_keys())
-    print(new_query.check_location())
+        #print(new_query.get_api_key())
+        #print(new_query.get_keys())
+        #print(new_query.check_location())
+
+        #print("========================================== %s %s"%(time_start, time_end),"==========================================")
 
 
+    new_query.get_parameters('clouds')
 
 
 
