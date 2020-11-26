@@ -17,6 +17,12 @@ longitude = '-80.2300508'
 time_start = '2016-10-21'
 time_end = '2016-10-22'
 
+days = Create_days()
+days.generate_appends()
+
+print(days.return_days_keys())
+
+"""
 if __name__ == "__main__":
 
     # Instantiate from Create_days class
@@ -50,7 +56,7 @@ if __name__ == "__main__":
 
 
     new_query.get_parameters('clouds')
-
+"""
 
 
 

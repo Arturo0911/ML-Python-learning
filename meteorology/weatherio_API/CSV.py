@@ -10,10 +10,18 @@ from main import Create_days
 
 class Create_csv:
 
+    """
+        Define parameters and values will be storage 
+        in CSV file
+
+    """
+
     def __init__(self):
 
         pass
+    
 
+    # first method to created files
     def create_file(self):
 
         days = Create_days()
@@ -37,6 +45,9 @@ class Create_csv:
             for x in days.get_objects()[2019]:
 
                 writer.writerow([x])
+
+
+    # Second method to create files and another params
 
 
 csv_files = Create_csv()

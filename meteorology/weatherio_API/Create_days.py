@@ -56,9 +56,10 @@ class Create_days:
         with open('neuronal.json', 'w') as f:
             json.dump(self.objects,f,indent=4)
 
-    
-
-
     def get_objects(self):
         
         return self.objects
+
+    def return_days_keys(self):
+
+        return self.objects.keys()

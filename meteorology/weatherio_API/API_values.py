@@ -49,6 +49,9 @@ class API_values:
 
     def get_parameters(self,parameter ):
 
+        # Here the first question is "How many parameters i must to cross to get the descriptions
+        # of sky are in the weather data ?"
+
         for x in self.response_data['data']:
             print(x[parameter])
 
