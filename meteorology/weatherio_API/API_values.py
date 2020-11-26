@@ -8,6 +8,8 @@ class API_values:
         
         """
         @parameters latitude, longitud, time_start, time_end
+        time_start and time_end must be Strings, because the algorythm it's getting 
+        the time using for loops with timedelat inside
         """
         self.latitude = latitude
         self.longitud = longitud
