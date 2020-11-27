@@ -25,17 +25,10 @@ if __name__ == "__main__":
     
     days = Create_days()
     days.generate_appends()
-    # print(len(days.get_objects()))
-    # print(days.get_objects().keys())
-
 
     # Initialize process
 
     new_query = API_values(latitude, longitude)
-
-
-    
-
 
     # Generate a iterator to fetch values from dates
     
@@ -55,19 +48,6 @@ if __name__ == "__main__":
 
             if j['weather']['description'] not in list_values :
                 list_values.append(j['weather']['description'])
-
-        # if (new_query.get_parameters_sky_behavior() not in list_values):
-        #    list_values.append(new_query.get_parameters_sky_behavior())
-        
-        # new_query.get_parameters()
-        # print(new_query.get_api_key())
-        # print(new_query.get_keys())
-        # print(new_query.check_location())
-
-        # print("========================================== %s %s"%(time_start, time_end),"==========================================")
-
-
-    #new_query.get_parameters_sky_behavior()
 
 print(list_values)
 

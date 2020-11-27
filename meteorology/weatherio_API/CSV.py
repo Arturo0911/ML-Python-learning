@@ -11,12 +11,24 @@ from main import Create_days
 
 
 
+def create_file_with_parameters(file_name, time_start, time_end,list_values):
+
+    with open(file_name+'.csv', 'w') as csv_file:
+
+        writer = csv.writer(csv_file)
+        writer.writerow(["time_start", "time_end", 'Overcast_clouds', 'Broken_clouds', 'Scattered_clouds', 'Light_rain', 'Few_clouds', 'Clear_Sky'])
+        writer.writerow([time_start,time_end, list_values.count('Overcast clouds'),list_values.count('Broken clouds'),list_values.count('Scattered clouds'),
+        list_values.count('Light rain'),list_values.count('Few clouds'),list_values.count('Clear Sky')])
+
+
+
+"""
 class Create_csv:
 
-    """
-        Define parameters and values will be storage 
-        in CSV file
-    """
+    
+        #Define parameters and values will be storage 
+        #in CSV file
+    
 
     # the file name will be contain the year of the query realizated
     def __init__(self, file_name):
@@ -54,6 +66,11 @@ class Create_csv:
 
                 writer.writerow([x])
 
-    def create_file_with_parameters(self, time_start, time_end, ):
-        pass
+    def create_file_with_parameters(self, time_start, time_end):
+
+        with open(self.file_name+'.csv', 'w') as csv_file:
+
+            writer = csv.writer(csv_file)
+            writer.writerow(["time_start", "time_end", 'Overcast_clouds', 'Broken_clouds', 'Scattered_clouds', 'Light_rain', 'Few_clouds', 'Clear_Sky'])
+"""
 
