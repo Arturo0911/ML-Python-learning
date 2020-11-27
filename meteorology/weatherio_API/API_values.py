@@ -5,7 +5,7 @@ import torch
 
 class API_values:
 
-    def __init__(self, latitude, longitude, time_start, time_end):
+    def __init__(self, latitude, longitude):
         
         """
         @parameters latitude, longitud, time_start, time_end
@@ -14,15 +14,23 @@ class API_values:
         """
         self.latitude = latitude
         self.longitude = longitude
-        self.time_start = time_start
-        self.time_end = time_end
+        self.time_start = None
+        self.time_end = None
+        
 
         self.weatherbi_key = 'c96c2aa02b1b43e184580f8efe648f59'
+        self.url = None
+        self.response_data = None
 
+
+    def generate_process(self, time_start, time_end):
+        self.time_start = time_start
+        self.time_end = time_end
         self.url = 'https://api.weatherbit.io/v2.0/history/hourly?lat={}&lon={}&start_date={}&end_date={}&tz=local&key={}'.format(self.latitude,
             self.longitude,self.time_start,self.time_end,self.weatherbi_key)
 
-        self.response_data = requests.get(self.url).json()
+        self.response_data  = requests.get(self.url).json()
+        
 
     def get_api_key(self):
 
@@ -48,13 +56,14 @@ class API_values:
 
     
     # One param like clouds, time local
-    def get_parameters(self,parameter):
+    def get_parameters(self):
 
         # Here the first question is "How many parameters i must to cross to get the descriptions
         # of sky are in the weather data ?"
 
-        for x in self.response_data['data']:
-            print(x[parameter])
+        print(len(self.response_data['data']))
+        #for x in self.response_data:
+        #    print(x['data'])
 
     def get_parameters_sky_behavior(self):
 

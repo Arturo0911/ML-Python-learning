@@ -14,8 +14,8 @@ from Create_days import Create_days
 
 latitude = '-2.335017'
 longitude = '-80.229769'
-time_start = '2016-10-21'
-time_end = '2016-10-22'
+# time_start = '2016-10-21'
+# time_end = '2016-10-22'
 
 
 
@@ -29,22 +29,27 @@ if __name__ == "__main__":
     print(days.get_objects().keys())
 
 
+    # Initialize process
+
+    new_query = API_values(latitude, longitude)
+
+
     
 
 
     # Generate a iterator to fetch values from dates
-    """
-    for i in range(0, len(days.get_objects()[2017])):
+    
+    for i in range(1, len(days.get_objects()[2018])):
 
-        time_start = days.get_objects()[2017][i-1]
-        time_end = days.get_objects()[2017][i]
+        time_start = days.get_objects()[2018][i-1]
+        time_end = days.get_objects()[2018][i]
 
         # Instantiate from API_values class
-
+            
         print(time_start, time_end)
-    """
-
-    new_query = API_values(latitude, longitude, time_start, time_end)
+    
+        new_query.generate_process(time_start, time_end)
+        new_query.get_parameters()
         #print(new_query.get_api_key())
         #print(new_query.get_keys())
         #print(new_query.check_location())
@@ -52,7 +57,7 @@ if __name__ == "__main__":
         #print("========================================== %s %s"%(time_start, time_end),"==========================================")
 
 
-    new_query.get_parameters_sky_behavior()
+    #new_query.get_parameters_sky_behavior()
 
 
 

@@ -13,7 +13,6 @@ class Create_csv:
     """
         Define parameters and values will be storage 
         in CSV file
-
     """
 
     def __init__(self):
