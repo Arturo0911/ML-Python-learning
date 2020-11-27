@@ -61,16 +61,20 @@ class API_values:
         # Here the first question is "How many parameters i must to cross to get the descriptions
         # of sky are in the weather data ?"
 
-        print(len(self.response_data['data']))
+        print(len(self.response_data['data'][0]))
         #for x in self.response_data:
         #    print(x['data'])
 
     def get_parameters_sky_behavior(self):
 
+        lista_value = []
+
         for x in self.response_data['data']:
 
-            print(x['weather']['description'])
+            if x['weather']['description'] not in lista_value :
+                lista_value.append(x['weather']['description'])
 
+        return lista_value
 
     
     

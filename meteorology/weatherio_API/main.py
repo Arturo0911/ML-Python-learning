@@ -17,7 +17,7 @@ longitude = '-80.229769'
 # time_start = '2016-10-21'
 # time_end = '2016-10-22'
 
-
+list_values = list()
 
 if __name__ == "__main__":
 
@@ -25,8 +25,8 @@ if __name__ == "__main__":
     
     days = Create_days()
     days.generate_appends()
-    print(len(days.get_objects()))
-    print(days.get_objects().keys())
+    # print(len(days.get_objects()))
+    # print(days.get_objects().keys())
 
 
     # Initialize process
@@ -39,27 +39,37 @@ if __name__ == "__main__":
 
     # Generate a iterator to fetch values from dates
     
-    for i in range(1, len(days.get_objects()[2018])):
+    for i in range(1, len(days.get_objects()[2019])):
 
-        time_start = days.get_objects()[2018][i-1]
-        time_end = days.get_objects()[2018][i]
+        time_start = days.get_objects()[2019][i-1]
+        time_end = days.get_objects()[2019][i]
 
         # Instantiate from API_values class
-            
+
         print(time_start, time_end)
     
         new_query.generate_process(time_start, time_end)
-        new_query.get_parameters()
-        #print(new_query.get_api_key())
-        #print(new_query.get_keys())
-        #print(new_query.check_location())
 
-        #print("========================================== %s %s"%(time_start, time_end),"==========================================")
+        for j in new_query.response_data['data']:
+
+
+            if j['weather']['description'] not in list_values :
+                list_values.append(j['weather']['description'])
+
+        # if (new_query.get_parameters_sky_behavior() not in list_values):
+        #    list_values.append(new_query.get_parameters_sky_behavior())
+        
+        # new_query.get_parameters()
+        # print(new_query.get_api_key())
+        # print(new_query.get_keys())
+        # print(new_query.check_location())
+
+        # print("========================================== %s %s"%(time_start, time_end),"==========================================")
 
 
     #new_query.get_parameters_sky_behavior()
 
-
+print(list_values)
 
 
 

@@ -8,6 +8,9 @@ from requests.api import options
 from main import Create_days
 
 
+
+
+
 class Create_csv:
 
     """
@@ -15,9 +18,10 @@ class Create_csv:
         in CSV file
     """
 
-    def __init__(self):
+    # the file name will be contain the year of the query realizated
+    def __init__(self, file_name):
 
-        pass
+        self.file_name = file_name
     
 
     # first method to created files
@@ -28,10 +32,15 @@ class Create_csv:
         days.json_generate()
         #print(days.get_objects())
 
-        with open('neuronal.csv', 'w') as csv_file:
+        with open(self.file_name+'.csv', 'w') as csv_file:
+
+            # ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 'Light rain', 'Few clouds', 'Clear Sky']
+            # ['Broken clouds', 'Overcast clouds', 'Scattered clouds', 'Few clouds', 'Clear Sky', 'Light rain']
+
+
             
             writer = csv.writer(csv_file)
-            writer.writerow(["time_start", "time_end"])
+            writer.writerow(["time_start", "time_end", 'Overcast_clouds', 'Broken_clouds', 'Scattered_clouds', 'Light_rain', 'Few_clouds', 'Clear_Sky'])
 
             for x in days.get_objects()[2017]:
                     
@@ -45,9 +54,6 @@ class Create_csv:
 
                 writer.writerow([x])
 
+    def create_file_with_parameters(self, time_start, time_end, ):
+        pass
 
-    # Second method to create files and another params
-
-
-csv_files = Create_csv()
-csv_files.create_file()
