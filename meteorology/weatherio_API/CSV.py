@@ -4,8 +4,8 @@ from datetime import date, timedelta
 import json
 from os import write
 
-from requests.api import options
-from main import Create_days
+#from requests.api import options
+#from main import Create_days
 
 
 
@@ -44,11 +44,25 @@ def create_values_csv_file(directory_name, file_name):
         
         # HEADERS
         writer = csv.writer(csv_file)
-        writer.writerow(["time_start", "time_end", "clouds_5", "precip_5", "temp_5"])
+        writer.writerow(["time_start", "time_end","temperature", "precips", "clouds"])
+
+def store_into_values(directory_name,file_name, time_start, time_end,list_temp, list_precip, list_clouds):
+
+    with open('csv'+'/values/'+str(directory_name)+'/'+str(file_name)+'.csv', 'a') as csv_file:
+
+        writer = csv.writer(csv_file)
+        writer.writerow([time_start, time_end, list_temp,list_precip, list_clouds])
 
 
 
 """
+with open('prueba.csv', 'w') as target:
+    
+    writer = csv.writer(target) 
+    writer.writerow(['primer', 'segundo','tercero'])
+    writer.writerow([2,3,[2,5,58,5,5,2,5]])
+
+
 class Create_csv:
 
     

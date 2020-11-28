@@ -42,6 +42,7 @@ if __name__ == "__main__":
         
         print(x)
         CSV.create_file(x,x)
+        CSV.create_values_csv_file(x,x)
 
         for i in range(1, len(days.get_objects()[x])):
 
@@ -53,7 +54,12 @@ if __name__ == "__main__":
             #print(time_start, time_end)
         
             new_query.generate_process(time_start, time_end)
-            list_values = list()
+
+
+            list_behavior = list()
+            list_temperature = list()
+            list_clouds = list()
+            list_precipitation = list()
             
 
             for j in new_query.response_data['data']:
@@ -61,12 +67,25 @@ if __name__ == "__main__":
                 # Here store all values of description into weather key
                 # after call the function 'create_file_with_parameters()'
 
-                list_values.append(j['weather']['description'])
+                list_behavior.append(j['weather']['description'])
+                list_temperature.append(j['temp'])
+                list_precipitation.append(j['precip'])
+                list_clouds.append(j['clouds'])
+                
 
 
-                # if j['weather']['description'] not in list_values :
-                #    list_values.append(j['weather']['description'])
-            CSV.create_file_with_parameters(x,x,time_start,time_end,list_values)
+                # if j['weather']['description'] not in list_behavior :
+                #    list_behavior.append(j['weather']['description'])
+
+
+
+            #for l in new_query.response_data['data']:
+
+
+
+            CSV.create_file_with_parameters(x,x,time_start,time_end,list_behavior)
+            
+            CSV.store_into_values(x,x, time_start, time_end,list_temperature, list_precipitation, list_clouds)
 
 
 
