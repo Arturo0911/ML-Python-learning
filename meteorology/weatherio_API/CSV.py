@@ -9,6 +9,10 @@ from main import Create_days
 
 
 
+# Here we will storage about cloud behavior
+# how have the clouds been
+# ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 'Light rain', 'Few clouds', 'Clear Sky']
+
 def create_file(directory_name,file_name):
 
     with open('csv'+'/'+str(directory_name)+'/'+str(file_name)+'.csv', 'w') as csv_file:
@@ -51,7 +55,7 @@ class Create_csv:
 
         with open(self.file_name+'.csv', 'w') as csv_file:
 
-            # ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 'Light rain', 'Few clouds', 'Clear Sky']
+            
             # ['Broken clouds', 'Overcast clouds', 'Scattered clouds', 'Few clouds', 'Clear Sky', 'Light rain']
 
 
