@@ -37,7 +37,6 @@ class Prediction_from_files:
         self.stats = self.dataframe[self.wathersubset > 5]
 
         return self.stats
-
     
         
     
