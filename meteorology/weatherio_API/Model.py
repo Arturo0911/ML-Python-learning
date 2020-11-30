@@ -4,11 +4,28 @@ import pandas as pd
 
 
 
-""" Import from csv files """
 
 
 
-# Initialize the main function from the project
+class Prediction_from_files:
 
-def main():
+    def __init__(self, path):
+
+        self.dataframe = pd.read_csv(path)
+        
+
+    
+
+    # Behavior methods
+    def read_file_behavior(self):
+        
+        return self.dataframe, self.dataframe.columns
+
+    
+
+    # Values methods
+
+    def read_file_values(self):
+        pass
+        
     
