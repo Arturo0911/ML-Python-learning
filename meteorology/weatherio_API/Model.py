@@ -26,7 +26,6 @@ class Prediction_from_files:
 
     def get_subset(self, parameter):
 
-
         """the subset will be return the type of parameter to be studied"""
         self.wathersubset = self.dataframe[parameter]
 
@@ -34,7 +33,7 @@ class Prediction_from_files:
 
     def return_stats(self):
 
-        self.stats = self.dataframe[self.wathersubset > 5]
+        self.stats = self.dataframe[self.wathersubset > 2]
 
         return self.stats
     
