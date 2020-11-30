@@ -16,24 +16,24 @@ path_2 = 'csv/behavior/{}/{}.csv'.format(2017,2017)
 time_start = ""
 time_end = ""
 
+parameter_to_filter = 'Light_rain'
+
 
 
 # define object
-prediction_behavior = Prediction_from_files(path_2)
-prediction_values = Prediction_from_files(path_1)
+prediction_behavior = Prediction_from_files(path_1)
+prediction_values = Prediction_from_files(path_2)
 
 # call methods
-dataframe_values, columns_values = prediction_values.read_file_behavior()
-dataframe_behavior, columns_behavior = prediction_behavior.read_file_behavior()
-
+dataframe_values, columns_values = prediction_values.read_file()
+dataframe_behavior, columns_behavior = prediction_behavior.read_file()
+prediction_values.get_subset(parameter_to_filter)
 
 #  print her methods
 print(len(columns_values))
 
 print(columns_behavior)
-
-for x in columns_values:
-    print(x)
+print(prediction_values.return_stats())
 
 # to stablish a filter to store
 # subset_datetimes = prediction.read_file_behavior(path_1)['time_start']
