@@ -5,6 +5,12 @@ import torch
 
 from Model import Prediction_from_files
 
+
+""" THIS FILE WILL BE LAUNCH THE PROJECT """
+
+
+
+
 # comparation from the same years
 # define constants
 # 2017
@@ -37,40 +43,37 @@ dataframe_values, columns_values = prediction_values.read_file()
 dataframe_behavior, columns_behavior = prediction_behavior.read_file()
 prediction_values.get_subset(parameter_to_filter)
 
-#  print her methods
-# print(len(columns_values))
-
-# print(columns_behavior)
-# print(prediction_values.return_stats())
-
-# print(len(prediction_values.return_stats()))
-# print(type(prediction_values.return_stats()))
+# call subset attribute
+prediction_behavior.get_subset('time_start')
 
 
 
-# As parameter we put 2 value, CUZ the behavior cloud
-# must be greater than 2
-# print(prediction_values.return_stats(2))
-# print(prediction_values.return_stats(2)['time_start'])
-# print(prediction_values.return_stats(2)['time_end'])
+# print(prediction_values.return_stats(2).to_numpy())
 
 
-list_provitional = []
+prediction_value_array = prediction_values.return_stats(2).to_numpy()
 
-for x in prediction_values.return_stats(2):
-    print(x)
-    if x == 'time_start' or  x == 'time_end':
-         list_provitional.append(prediction_values.return_stats(2)[x])
-
-print(list_provitional)
+list_parameters = list()
 
 
-# for x in prediction_values.return_stats():
-#    print(prediction_values.return_stats()[x])
 
-# to stablish a filter to store
-# subset_datetimes = prediction.read_file_behavior(path_1)['time_start']
-# print(subset_datetimes)
+for x in prediction_value_array:
+    print(x, '\n')
+
+for x in prediction_value_array:
+
+    list_parameters.append({'time_start':x[0], 'time_end':x[1]})
+
+
+print(list_parameters)
+
+
+
+
+# now we get the values from the day that already has a specific behavior 
+# on her clouds, for example light rain is the other parameter 
+# to be taken into account
+print(prediction_behavior.return_stats_string_parameter(list_parameters[0]['time_start']))
 
 
 

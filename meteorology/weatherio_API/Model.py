@@ -41,7 +41,20 @@ class Prediction_from_files:
 
         else:
             return None
-        
+
+    
+    def return_stats_string_parameter(self, parameter):
+
+        # method to get the filter, using strings as paramters
+        # to be filtered example: time start or time end
+        try:
+            self.stats = self.dataframe[self.weathersubset == parameter]
+            return self.stats
+        except Exception as e:
+            return str(e)
+
+        else:
+            return None
 
 
             
