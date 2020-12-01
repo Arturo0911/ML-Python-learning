@@ -12,7 +12,7 @@ class Prediction_from_files:
     def __init__(self, path):
 
         self.dataframe = pd.read_csv(path)
-        self.wathersubset = None
+        self.weathersubset = None
 
         self.stats = None
         
@@ -27,15 +27,24 @@ class Prediction_from_files:
     def get_subset(self, parameter):
 
         """the subset will be return the type of parameter to be studied"""
-        self.wathersubset = self.dataframe[parameter]
+        self.weathersubset = self.dataframe[parameter]
 
-        return self.wathersubset
+        return self.weathersubset
 
-    def return_stats(self):
+    def return_stats(self, parameter):
 
-        self.stats = self.dataframe[self.wathersubset > 2]
+        try:
+            self.stats = self.dataframe[self.weathersubset > parameter]
+            return self.stats
+        except Exception as e:
+            return str(e)
 
-        return self.stats
+        else:
+            return None
+        
+
+
+            
     
         
     

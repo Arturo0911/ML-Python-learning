@@ -43,11 +43,28 @@ prediction_values.get_subset(parameter_to_filter)
 # print(columns_behavior)
 # print(prediction_values.return_stats())
 
-print(len(prediction_values.return_stats()))
-print(type(prediction_values.return_stats()))
+# print(len(prediction_values.return_stats()))
+# print(type(prediction_values.return_stats()))
 
 
-print(prediction_values.return_stats().to_numpy()[0])
+
+# As parameter we put 2 value, CUZ the behavior cloud
+# must be greater than 2
+# print(prediction_values.return_stats(2))
+# print(prediction_values.return_stats(2)['time_start'])
+# print(prediction_values.return_stats(2)['time_end'])
+
+
+list_provitional = []
+
+for x in prediction_values.return_stats(2):
+    print(x)
+    if x == 'time_start' or  x == 'time_end':
+         list_provitional.append(prediction_values.return_stats(2)[x])
+
+print(list_provitional)
+
+
 # for x in prediction_values.return_stats():
 #    print(prediction_values.return_stats()[x])
 
