@@ -1,3 +1,4 @@
+from pandas.core.arrays import string_
 import torch
 import numpy as np
 import pandas as pd
@@ -25,9 +26,6 @@ class Prediction_model:
         return stats
         
 
-    
-
-    # Behavior methods
     def read_file(self):
         
         return self.dataframe, self.dataframe.columns
@@ -72,8 +70,9 @@ PATH_BEHAVIOR = 'csv/behavior/{}/{}.csv'.format(2017,2017)
 PATH_VALUES = 'csv/values/{}/{}.csv'.format(2017,2017)
 
 
+# instances objects
 behavior_model = Prediction_model(PATH_BEHAVIOR)
-values_model = Prediction_model(PATH_VALUES)
+#values_model = Prediction_model(PATH_VALUES)
 
 
 # print("Printing the dataframe")
@@ -108,6 +107,13 @@ for x in behavior_model.weathersubset_more_parameters['Light_rain']:
 
 
 
+# Declare an objects wherever xD to do comparations
+
+
+dataframe_value = pd.read_csv(PATH_VALUES)
+subset_value = dataframe_value[['time_start', 'time_end','temperature','precips']]
+
+#print(subset_value)
 
 
 
@@ -127,4 +133,15 @@ print(value_array)
 
 print("Printing valyes from light rain")
 for x in value_array:
-    print(x[0])
+    # Asign the time_start parameterm into the instance wherever i have called 
+
+    parameters_insterestings = dataframe_value[subset_value['time_start'] == x[0]][['temperature','precips']]
+
+    print(parameters_insterestings['temperature'].to_numpy()[0].split(", ")) # to fetch in array type splited (', ' )
+    # print(len(parameters_insterestings['temperature'].to_numpy()[0]))
+
+
+
+
+
+
