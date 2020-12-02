@@ -13,9 +13,16 @@ class Prediction_model:
 
         self.dataframe = pd.read_csv(path)
         self.weathersubset = None
-        self.weathersubset_more_parameters = self.dataframe[['Light_rain','Broken_clouds']]
+        self.weathersubset_more_parameters = self.dataframe[['time_start','time_end','Light_rain','Broken_clouds']]
 
         self.stats = None
+
+
+    def get_stats_by_more_paramters(self,keyword, parameter):
+
+        stats = self.dataframe[self.weathersubset_more_parameters[keyword] > parameter]
+
+        return stats
         
 
     
@@ -35,7 +42,7 @@ class Prediction_model:
     def return_stats(self, parameter):
 
         try:
-            self.stats = self.dataframe[self.weathersubset > parameter]
+            self.stats = self.dataframe[self.weathersubset['Light_rain'] > parameter]
             return self.stats
         except Exception as e:
             return str(e)
@@ -49,7 +56,7 @@ class Prediction_model:
         # method to get the filter, using strings as paramters
         # to be filtered example: time start or time end
         try:
-            self.stats = self.dataframe[self.weathersubset == parameter]
+            self.stats = self.dataframe[self.weathersubset['Light_rain'] > parameter]
             return self.stats
         except Exception as e:
             return str(e)
@@ -73,7 +80,7 @@ behavior_model = Prediction_model(PATH_BEHAVIOR)
 print(behavior_model.dataframe)
 
 # SET THE PARAMETER
-print(behavior_model.get_subset('Light_rain'))
+#print(behavior_model.get_subset('Light_rain'))
 # print(behavior_model.dataframe.columns)
 
 
@@ -84,5 +91,7 @@ print(behavior_model.weathersubset_more_parameters)
 
 # NOW IN THE STATS MODEL, PUT 2 AS MAIN PARAMETER TO
 # TO FECH THE FILTER BETWEEN LIGHT RAIN AND BROKEN CLOUDS
-        
+
+print(behavior_model.weathersubset_more_parameters)
+print(behavior_model.get_stats_by_more_paramters('Light_rain',2))
     
