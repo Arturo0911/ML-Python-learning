@@ -20,7 +20,7 @@ class Prediction_model:
 
     def get_stats_by_more_paramters(self,keyword, parameter):
 
-        stats = self.dataframe[self.weathersubset_more_parameters[keyword] > parameter]
+        stats = self.dataframe[self.weathersubset_more_parameters[keyword] >= parameter]
 
         return stats
         
@@ -73,11 +73,11 @@ PATH_VALUES = 'csv/values/{}/{}.csv'.format(2017,2017)
 
 
 behavior_model = Prediction_model(PATH_BEHAVIOR)
-#values_model = Prediction_model(PATH_VALUES)
+values_model = Prediction_model(PATH_VALUES)
 
 
-
-print(behavior_model.dataframe)
+# print("Printing the dataframe")
+# print(behavior_model.dataframe)
 
 # SET THE PARAMETER
 #print(behavior_model.get_subset('Light_rain'))
@@ -85,13 +85,46 @@ print(behavior_model.dataframe)
 
 
 # WE GONNA TO PRINT USING MORE PARAMETERS AS SUBSET
-print(behavior_model.weathersubset_more_parameters)
+# print(behavior_model.weathersubset_more_parameters)
 
 
 
 # NOW IN THE STATS MODEL, PUT 2 AS MAIN PARAMETER TO
 # TO FECH THE FILTER BETWEEN LIGHT RAIN AND BROKEN CLOUDS
 
-print(behavior_model.weathersubset_more_parameters)
-print(behavior_model.get_stats_by_more_paramters('Light_rain',2))
-    
+
+# print("Printing the subset with the parameters")
+# print(behavior_model.weathersubset_more_parameters)
+
+
+"""
+counter = 0
+for x in behavior_model.weathersubset_more_parameters['Light_rain']:
+    print(counter,"               ", x)
+    counter += 1
+    # printing the keywords or the headers
+"""    
+
+
+
+
+
+
+
+# print("Printing the filtered dataframes")
+# this one gonna print the filtered as dataframe[ parameter >= value]
+
+# defina a variable
+
+value = behavior_model.get_stats_by_more_paramters('Light_rain',2)
+print('printing the values filtered with the parameter {} are greater or equal to {}'.format('light_rain',2))
+print(value)
+value_array = value.to_numpy()
+
+
+print(value_array)
+
+
+print("Printing valyes from light rain")
+for x in value_array:
+    print(x[0])
