@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import torch
 
-from Model import Prediction_from_files
+from Model import Prediction_model
 
 
 """ THIS FILE WILL BE LAUNCH THE PROJECT """
@@ -36,8 +36,8 @@ first_parameter = 'Light_rain'
 
 
 # define object
-prediction_behavior = Prediction_from_files(path_values)
-prediction_values = Prediction_from_files(path_behavior)
+prediction_behavior = Prediction_model(path_values)
+prediction_values = Prediction_model(path_behavior)
 
 # call methods
 dataframe_values, columns_values = prediction_values.read_file()

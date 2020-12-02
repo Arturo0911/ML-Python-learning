@@ -7,12 +7,13 @@ import pandas as pd
 
 
 
-class Prediction_from_files:
+class Prediction_model:
 
     def __init__(self, path):
 
         self.dataframe = pd.read_csv(path)
         self.weathersubset = None
+        self.weathersubset_more_parameters = self.dataframe[['Light_rain','Broken_clouds']]
 
         self.stats = None
         
@@ -57,7 +58,31 @@ class Prediction_from_files:
             return None
 
 
-            
-    
+
+
+
+PATH_BEHAVIOR = 'csv/behavior/{}/{}.csv'.format(2017,2017)
+PATH_VALUES = 'csv/values/{}/{}.csv'.format(2017,2017)
+
+
+behavior_model = Prediction_model(PATH_BEHAVIOR)
+#values_model = Prediction_model(PATH_VALUES)
+
+
+
+print(behavior_model.dataframe)
+
+# SET THE PARAMETER
+print(behavior_model.get_subset('Light_rain'))
+# print(behavior_model.dataframe.columns)
+
+
+# WE GONNA TO PRINT USING MORE PARAMETERS AS SUBSET
+print(behavior_model.weathersubset_more_parameters)
+
+
+
+# NOW IN THE STATS MODEL, PUT 2 AS MAIN PARAMETER TO
+# TO FECH THE FILTER BETWEEN LIGHT RAIN AND BROKEN CLOUDS
         
     
