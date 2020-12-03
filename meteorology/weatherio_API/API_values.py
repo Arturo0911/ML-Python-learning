@@ -3,6 +3,9 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 import torch
 
+
+
+
 class API_values:
 
     def __init__(self, latitude, longitude):

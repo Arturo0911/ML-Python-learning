@@ -4,9 +4,6 @@ from datetime import date, timedelta
 import json
 from os import write
 
-#from requests.api import options
-#from main import Create_days
-
 
 
 # Here we will storage about cloud behavior
