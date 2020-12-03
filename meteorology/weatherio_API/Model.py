@@ -116,7 +116,7 @@ subset_value = dataframe_value[['time_start', 'time_end','temperature','precips'
 # print("Printing the filtered dataframes")
 # this one gonna print the filtered as dataframe[ parameter >= value]
 
-# defina a variable
+# define a variable
 
 value = behavior_model.get_stats_by_more_paramters('Light_rain',2)
 print('printing the values filtered with the parameter {} are greater or equal to {}'.format('light_rain',2))
@@ -135,21 +135,3 @@ for x in value_array:
 
     print(parameters_insterestings['temperature'].to_numpy()[0].split(", ")) # to fetch in array type splited (', ' )
     # print(len(parameters_insterestings['temperature'].to_numpy()[0]))
-
-
-
-
-
-
-# Python para los algoritmos y la predicción y el servidor que será con Flask
-# Java para la elaboración de Android
-# Database Mongodb
-# GraphQl que es lenguaje de scripting que nos permitirá la comunicación entre el servidor y el cliente
-
-
-
-# Cliente Android envia las coordenadas de geolocalización de la persona
-
-# Servidor (Python con flask hará el mining de datos la API weatherio para descargar los datos por medio de las coordendas) ylas enviará por GraphQL al cliente
-
-# Cliente Android procesa los datos y pinta por pantalla los datos ya procesados
