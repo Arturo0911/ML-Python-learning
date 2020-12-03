@@ -2,7 +2,9 @@ from pandas.core.arrays import string_
 import torch
 import numpy as np
 import pandas as pd
+import csv
 
+from Math import Generate_average
 
 class Prediction_model:
 
@@ -127,11 +129,27 @@ value_array = value.to_numpy()
 print(value_array)
 
 
-print("Printing valyes from light rain")
+print("Printing values from light rain")
+
+
+
+
 for x in value_array:
     # Asign the time_start parameterm into the instance wherever i have called 
 
-    parameters_insterestings = dataframe_value[subset_value['time_start'] == x[0]][['temperature','precips']]
+    parameters_interestings = dataframe_value[subset_value['time_start'] == x[0]][['temperature','precips']]['temperature'].to_numpy()[0].split(', ')
+    
+    print('temperature values')
+    #print(parameters_interestings)
+    for y in parameters_interestings:
+        print(y)
 
-    print(parameters_insterestings['temperature'].to_numpy()[0].split(", ")) # to fetch in array type splited (', ' )
-    # print(len(parameters_insterestings['temperature'].to_numpy()[0]))
+    #print(Generate_average(parameters_interestings))
+    break
+    
+    
+
+    #print(parameters_insterestings['temperature'].to_numpy()[0].split(", ")) # to fetch in array type splited (', ' )
+    
+
+
