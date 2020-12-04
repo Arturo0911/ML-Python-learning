@@ -2,11 +2,14 @@ import csv
 from calendar import monthrange
 from datetime import date, timedelta
 import json
-from os import write
+import os 
+from os.path import *
 
 # The main directory whenever the data gonna be stored
-MAIN_DIRECTORY = '.csv_api'
-CO_MAIN_DIRECTORY = '.clouds_parameters'
+# MAIN_DIRECTORY = '.csv_api'
+# CO_MAIN_DIRECTORY = '.clouds_parameters'
+from Math_process import Math_process
+
 
 # Here we will storage about cloud behavior
 # how have the clouds been
@@ -59,15 +62,39 @@ def store_into_values(directory_name,file_name, time_start, time_end,list_temp, 
     BASED IN LINUX KERNEL, AND HER BASED ON UNIX, WE WILL MAKE OCCULT THE FILES ON THE DIRECTORIES """
 
 
-def store_values():
-    
-    # Apply a context manager
 
-    # clouds parameters
+# create the directory
+def create_main_directories():
+    global new_main_directory
 
-    with open(MAIN_DIRECTORY+'/') as field:
+    clouds_behavior_list = ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 
+                            'Light rain', 'Few clouds', 'Clear Sky']
+    new_main_directory = '.csv/.clouds_parameters/'
+
+    if (exists('.csv')):
+        return True
+    else:
+
+        os.makedirs(new_main_directory)
+
+        for x in clouds_behavior_list:
+
+            os.makedirs(new_main_directory+'.'+x+'/.2017')
+            os.makedirs(new_main_directory+'.'+x+'/.2018')
+            os.makedirs(new_main_directory+'.'+x+'/.2019')
+
+        return None
+
+create_main_directories()
+
+def store_into_csv_files(dir_name, file_name, cloud_parameter, list_values):
+
+    with open(new_main_directory+'.'+cloud_parameter+'/.'+dir_name+'/.'+file_name+'.csv') as file:
+
+        writer = 
+
         pass
 
     pass
 
-    
+print(new_main_directory)
