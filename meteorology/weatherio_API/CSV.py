@@ -49,9 +49,8 @@ def create_values_csv_file(directory_name, file_name):
         writer.writerow(["time_start", "time_end","temperature", "precips", "clouds"])
 
 def store_into_values(directory_name,file_name, time_start, time_end,list_temp, list_precip, list_clouds):
-
+    
     with open('csv'+'/values/'+str(directory_name)+'/'+str(file_name)+'.csv', 'a') as csv_file:
-
         writer = csv.writer(csv_file)
         writer.writerow([time_start, time_end, list_temp,list_precip, list_clouds])
 
@@ -74,27 +73,31 @@ def create_main_directories():
     if (exists('.csv')):
         return True
     else:
-
         os.makedirs(new_main_directory)
-
         for x in clouds_behavior_list:
-
             os.makedirs(new_main_directory+'.'+x+'/.2017')
             os.makedirs(new_main_directory+'.'+x+'/.2018')
             os.makedirs(new_main_directory+'.'+x+'/.2019')
-
         return None
 
-create_main_directories()
+# reate_main_directories() call this method to access to global variable
 
-def store_into_csv_files(dir_name, file_name, cloud_parameter, list_values):
+# this method must be instantiated first, this one created the headers and the file name
+def store_into_csv_files(dir_name, file_name, cloud_parameter):
+    # Create headers, with the corrects values
+    with open(new_main_directory+'.'+cloud_parameter+'/.'+str(dir_name)+'/.'+str(file_name)+'.csv', 'w') as file:
 
-    with open(new_main_directory+'.'+cloud_parameter+'/.'+dir_name+'/.'+file_name+'.csv') as file:
+        writer = csv.writer(file)
+        writer.writerow(['time_start', 'time_end', 'cloud_description','clouds' ,'precip', 'temperature', 'icon','code'])
 
-        writer = 
+    return
 
-        pass
 
-    pass
+def generate_data_into_csv_files(dir_name, file_name,time_start, time_end, cloud_parameter, list_values):
 
-print(new_main_directory)
+    with open(new_main_directory+'.'+cloud_parameter+'/.'+str(dir_name)+'/.'+str(file_name)+'.csv', 'a') as file_csv:
+        
+        writer = csv.writer(file_csv)
+        writer.writerow([time_start,time_end]) # complete the cells
+
+    return
