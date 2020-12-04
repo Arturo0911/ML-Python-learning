@@ -49,3 +49,13 @@ def store_into_values(directory_name,file_name, time_start, time_end,list_temp, 
 
         writer = csv.writer(csv_file)
         writer.writerow([time_start, time_end, list_temp,list_precip, list_clouds])
+
+
+""" STORE TAKEN IN CARE WHICH PARAMETERS APPEAR WHENEVER THE BEHAVIOR CLOUD IS SHOWIG [LIGHT RAIN, HAS HER SELF PARAMETERS SUCH
+    TEMPERATURE, PRECIPITATION, AND THE CODES OF THE CLOUDS]
+    EVERY DIRECTORY MUST BE CREATED WITH A POINT IN THE BEGGINING TO BE OCCULT FROM THE ANOTHERS READERS, SUCH THE OS GONNA BE ANDROID
+    BASED IN LINUX KERNEL, AND HER BASED ON UNIX, WE WILL MAKE OCCULT THE FILES AN DIRECTORIES"""
+
+
+def store_values():
+    pass
