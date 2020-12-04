@@ -4,7 +4,9 @@ from datetime import date, timedelta
 import json
 from os import write
 
-
+# The main directory whenever the data gonna be stored
+MAIN_DIRECTORY = '.csv_api'
+CO_MAIN_DIRECTORY = '.clouds_parameters'
 
 # Here we will storage about cloud behavior
 # how have the clouds been
@@ -58,5 +60,14 @@ def store_into_values(directory_name,file_name, time_start, time_end,list_temp, 
 
 
 def store_values():
+    
+    # Apply a context manager
+
+    # clouds parameters
+
+    with open(MAIN_DIRECTORY+'/') as field:
+        pass
 
     pass
+
+    
