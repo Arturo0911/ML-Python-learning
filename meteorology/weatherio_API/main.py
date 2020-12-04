@@ -16,10 +16,24 @@ import CSV
 from API_values import API_values
 from Create_days import Create_days
 
+
+# CONSTANTS
 latitude = '-2.335017'
 longitude = '-80.229769'
-# time_start = '2016-10-21'
-# time_end = '2016-10-22'
+
+scattered_cloud_object = list()
+broken_cloud_object = list()
+light_rain_object = list()
+few_clouds_object = list()
+clear_sky_object = list()
+overcasted_clouds_objects= list()
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
@@ -37,6 +51,46 @@ if __name__ == "__main__":
     # Generate a iterator to fetch values from dates
     # print(days.return_days_keys())
 
+    for x in days.get_objects():
+        
+        # first of all, call csv to create new files into the directories exists
+        #CSV.create_hidden_directories() # this one gonna be return None value, it's only process xD
+        #CSV.create_headers_into_hidden_directories(x,x)
+
+        for y in range(1,len(days.get_objects()[x])):
+
+            # time start and time end
+            time_start = days.get_objects()[x][y-1]
+            time_end = days.get_objects()[x][y]
+            # print(time_start,time_end)
+
+            new_query.generate_process(time_start, time_end) # process ins called, and keys from the API is used
+            #pprint(new_query.response_data['data'])
+
+            for z in new_query.response_data['data']:
+                lista_values = list()
+
+                # waiting for test. automatizate a function
+                if z['weather']['description'] == "Few clouds":
+                    few_clouds_object.append({'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
+                    'code':z['weather']['code'] ,'temperature': z['temp'],
+                    'clouds':z['clouds'], 'precipitation':z['precip'] })
+                
+                break
+            break
+
+
+
+
+
+
+
+
+
+
+
+
+    """
     CSV.create_file(2019, 2019)
     CSV.create_values_csv_file(2019, 2019)
 
@@ -76,4 +130,6 @@ if __name__ == "__main__":
 
         CSV.store_into_values(2019, 2019, time_start, time_end,
                               list_temperature, list_precipitation, list_clouds)
+
+    """
 

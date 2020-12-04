@@ -63,7 +63,7 @@ def store_into_values(directory_name,file_name, time_start, time_end,list_temp, 
 
 
 # create the directory if this one not exists
-def create_main_directories():
+def create_hidden_directories():
 
     global new_main_directory
     clouds_behavior_list = ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 
@@ -83,7 +83,7 @@ def create_main_directories():
 # reate_main_directories() call this method to access to global variable
 
 # this method must be instantiated first, this one created the headers and the file name
-def store_into_csv_files(dir_name, file_name, cloud_parameter):
+def create_headers_into_hidden_directories(dir_name, file_name, cloud_parameter):
     # Create headers, with the corrects values
     with open(new_main_directory+'.'+cloud_parameter+'/.'+str(dir_name)+'/.'+str(file_name)+'.csv', 'w') as file:
 
