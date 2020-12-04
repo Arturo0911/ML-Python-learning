@@ -63,10 +63,10 @@ def store_into_values(directory_name,file_name, time_start, time_end,list_temp, 
 
 
 
-# create the directory
+# create the directory if this one not exists
 def create_main_directories():
-    global new_main_directory
 
+    global new_main_directory
     clouds_behavior_list = ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 
                             'Light rain', 'Few clouds', 'Clear Sky']
     new_main_directory = '.csv/.clouds_parameters/'
