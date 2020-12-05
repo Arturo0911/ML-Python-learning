@@ -66,8 +66,8 @@ def store_into_values(directory_name,file_name, time_start, time_end,list_temp, 
 def create_hidden_directories():
 
     global new_main_directory
-    clouds_behavior_list = ['Overcast clouds', 'Broken clouds', 'Scattered clouds', 
-                            'Light rain', 'Few clouds', 'Clear Sky']
+    clouds_behavior_list = ['Overcast_clouds', 'Broken_clouds', 'Scattered_clouds', 
+                            'Light_rain', 'Few_clouds', 'Clear_Sky']
     new_main_directory = '.csv/.clouds_parameters/'
 
     if (exists('.csv')):
@@ -79,7 +79,7 @@ def create_hidden_directories():
             os.makedirs(new_main_directory+'.'+x+'/.2018')
             os.makedirs(new_main_directory+'.'+x+'/.2019')
         return None
-
+create_hidden_directories()
 # reate_main_directories() call this method to access to global variable
 
 # this method must be instantiated first, this one created the headers and the file name
@@ -93,11 +93,12 @@ def create_headers_into_hidden_directories(dir_name, file_name, cloud_parameter)
     return
 
 
-def generate_data_into_csv_files(dir_name, file_name,time_start, time_end, cloud_parameter, list_values):
+def generate_data_into_csv_files(dir_name, file_name,time_start, time_end, cloud_parameter, objects_values):
 
     with open(new_main_directory+'.'+cloud_parameter+'/.'+str(dir_name)+'/.'+str(file_name)+'.csv', 'a') as file_csv:
         
         writer = csv.writer(file_csv)
-        writer.writerow([time_start,time_end]) # complete the cells
+        writer.writerow([time_start,time_end,cloud_parameter, objects_values['clouds'],objects_values['precipitation'],objects_values['temperature'],
+        objects_values['icon'],objects_values['code'] ]) # complete the cells
 
     return

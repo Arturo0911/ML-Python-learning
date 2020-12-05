@@ -15,7 +15,7 @@ import CSV
 
 from API_values import API_values
 from Create_days import Create_days
-
+import Interface_objects
 
 # CONSTANTS
 latitude = '-2.335017'
@@ -46,6 +46,7 @@ if __name__ == "__main__":
     # Initialize process
 
     new_query = API_values(latitude, longitude)
+    CSV.create_hidden_directories()
     # CSV.create_file(2018,2018)
 
     # Generate a iterator to fetch values from dates
@@ -54,31 +55,34 @@ if __name__ == "__main__":
     for x in days.get_objects():
         
         # first of all, call csv to create new files into the directories exists
-        #CSV.create_hidden_directories() # this one gonna be return None value, it's only process xD
-        #CSV.create_headers_into_hidden_directories(x,x)
+
+        for i in Interface_objects.make_list():
+
+             # this one gonna be return None value, it's only process xD
+
+
+            CSV.create_headers_into_hidden_directories(x,x,i)
 
         for y in range(1,len(days.get_objects()[x])):
 
             # time start and time end
             time_start = days.get_objects()[x][y-1]
             time_end = days.get_objects()[x][y]
-            # print(time_start,time_end)
+            print(time_start,time_end)
 
             new_query.generate_process(time_start, time_end) # process ins called, and keys from the API is used
-            #pprint(new_query.response_data['data'])
+            # pprint(new_query.response_data['data'])
 
-            for z in new_query.response_data['data']:
-                lista_values = list()
+            # print(Interface_objects.create_objects_from_clouds(new_query.response_data['data']))
 
-                # waiting for test. automatizate a function
-                if z['weather']['description'] == "Few clouds":
-                    few_clouds_object.append({'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-                    'code':z['weather']['code'] ,'temperature': z['temp'],
-                    'clouds':z['clouds'], 'precipitation':z['precip'] })
-                print(few_clouds_object)
-                
-                break
-            break
+            
+            for j in Interface_objects.create_objects_from_clouds(new_query.response_data['data']):
+
+                CSV.generate_data_into_csv_files(x,x,time_start,time_end, j,Interface_objects.create_objects_from_clouds(new_query.response_data['data'])[j])
+            
+            # break
+
+        # break
 
 
 
