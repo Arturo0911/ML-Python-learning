@@ -75,13 +75,14 @@ if __name__ == "__main__":
                     few_clouds_object.append({'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
                     'code':z['weather']['code'] ,'temperature': z['temp'],
                     'clouds':z['clouds'], 'precipitation':z['precip'] })
+                print(few_clouds_object)
                 
                 break
             break
 
 
 
-
+        
 
 
 
