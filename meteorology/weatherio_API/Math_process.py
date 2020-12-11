@@ -66,6 +66,9 @@ class Math_process:
         else:
             final_object = {
 
+                # In case that the result will not do any with the value
+                # 'None' then i will change None by "None" as String
+
                 'cloud_description': description,
                 'icon':None,'code': None,
                 'temperature': None,
