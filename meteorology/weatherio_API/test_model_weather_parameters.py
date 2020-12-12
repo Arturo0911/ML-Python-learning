@@ -14,9 +14,7 @@ from Interface_objects import make_list # this one return the list o behavior to
 
 
 
-class Init_test:
-    
-     
+class Init_test:     
 
     def __init__(self,cloud_parameter, year_consult):
         # initialize the parameters to be the query
