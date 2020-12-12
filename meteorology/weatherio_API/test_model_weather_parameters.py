@@ -20,6 +20,7 @@ class Init_test:
         # initialize the parameters to be the query
         
         self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'
+        self._path = '.csv/.cloud_parameters/.{}/.{}/.{}.csv'.format(cloud_parameter, year_consult, year_consult)
         self.dataframe_weather = pd.read_csv(self.path)
         
 
@@ -28,8 +29,14 @@ class Init_test:
         
         return self.dataframe_weather
 
+    def make_subset(self):
+        
+        data_frame_subset = None
 
-    def make_subset(self,first_parameter, second_parameter):
+        return None
+
+
+    """def make_subset(self,first_parameter, second_parameter):
         # compare two or more clouds behavior
         # Each parameter is for the clouds behavior
         # using the states, we can compare into the dataframe values
@@ -38,7 +45,7 @@ class Init_test:
         subset_first = self.dataframe_weather[first_parameter]
         subset_second = self.dataframe_weather[second_parameter]
 
-        return subset_first, subset_second
+        return subset_first, subset_second"""
 
 
 # Print whole behavior clouds
