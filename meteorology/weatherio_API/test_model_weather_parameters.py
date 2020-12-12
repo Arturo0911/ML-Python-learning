@@ -6,6 +6,9 @@ import torch
 """ Libraries of the data storage """
 
 
+from Interface_objects import make_list
+
+
 
 class Init_test:
     
@@ -28,3 +31,8 @@ class Init_test:
 
 test_init = Init_test('Broken_clouds', 2017)
 print(test_init.read_dataframe())
+
+
+
+
+print(make_list())
