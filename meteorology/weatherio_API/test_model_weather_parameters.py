@@ -46,10 +46,26 @@ class Init_test:
 # Print whole behavior clouds
 # If the value is NaN is because nothing happened with that behavior
 
+"""
 for x in (make_list()):
 
     test_init = Init_test(x, 2017)
     print(test_init.read_dataframe())
+
+"""
+
+test_init = Init_test('Broken_clouds', 2017)
+print(test_init.read_dataframe())
+# first_parameter, second_parameter = test_init.make_subset('Broken_cloud', 'Ligth_rain')
+
+
+
+#print(first_parameter)
+
+
+
+
+
 
 
 
