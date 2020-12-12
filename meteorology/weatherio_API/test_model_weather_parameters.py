@@ -10,13 +10,6 @@ import torch
 """ Libraries of the data storage """
 
 
-
-
-
-
-
-
-
 from Interface_objects import make_list # this one return the list o behavior to be instantiated.
 
 
@@ -33,18 +26,21 @@ class Init_test:
         
 
     def read_dataframe(self):
-
+        # Return the dataframe
+        
         return self.dataframe_weather
 
 
-    def compare_parameters(self,):
+    def make_subset(self,first_parameter, second_parameter):
         # compare two or more clouds behavior
+        # Each parameter is for the clouds behavior
         # using the states, we can compare into the dataframe values
-        
+        # Return both subsets
 
-        
+        subset_first = self.dataframe_weather[first_parameter]
+        subset_second = self.dataframe_weather[second_parameter]
 
-        pass
+        return subset_first, subset_second
 
 
 # Print whole behavior clouds
