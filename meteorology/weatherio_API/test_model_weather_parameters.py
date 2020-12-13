@@ -9,8 +9,8 @@ from pprint import pprint
 
 """ Libraries of the data storage """
 
-
-from Interface_objects import make_list # this one return the list o behavior to be instantiated.
+# this one return the list o behavior to be instantiated.
+from Interface_objects import make_list 
 
 
 
@@ -32,31 +32,25 @@ class Init_test:
     def make_subset(self, object_parameters):
         # get the parameters with the object parameters
         # set cloud parameters in differents years
-
-
+        # create variables to avoid big names into the methods
+        # the variable first_param_year will be used two times, because the directory and the file has the same name
         """
+
+        Structure of the parameters to be evaluated
         object_parameters = {
 
-            'first_parameter': {'cloud_parameter': None, 'year_activity': None},
-            'second_parameter': {'cloud_parameter': None, 'year_activity': None},
+            'value': {'cloud_parameter': Behavior cloud: Broken_clouds, Light_rain, Clear_Sky, 'year_activity': None, 'filter': 'the filter is the header 
+                    of each column to be evaluated'}
         }
         """
-
+        
         first_param_cloud = object_parameters['values']['cloud_parameter']
         first_param_year = object_parameters['values']['year_activity']
         first_param_filter = object_parameters['values']['filter']
 
-        """second_param_cloud = None
-        second_param_year = None
-        second_param_filter = None"""
-
         first_data_frame_subset = pd.read_csv(self._path.format(first_param_cloud,first_param_year
         ,first_param_year))
 
-
-        """second_data_frame_subset = pd.read_csv(self._path.format(object_parameters['second_parameter']['cloud_parameter'],
-        object_parameters['first_parameter']['year_activity'], object_parameters['first_parameter']['year_activity']))
-        """
 
         # taking the first_data_parameter, put the parameter to be filtered
 
@@ -68,28 +62,16 @@ class Init_test:
         # this one gonna return the subset with the filter
         return subset_first
 
-    """def make_subset(self,first_parameter, second_parameter):
-        # compare two or more clouds behavior
-        # Each parameter is for the clouds behavior
-        # using the states, we can compare into the dataframe values
-        # Return both subsets
 
-        subset_first = self.dataframe_weather[first_parameter]
-        subset_second = self.dataframe_weather[second_parameter]
+    def set_parameters(self, object_parameters, range):
 
-        return subset_first, subset_second"""
+        subset = self.make_subset(object_parameters)
+
+        data_range = self.dataframe_weather[subset >= 20]
 
 
-# Print whole behavior clouds
-# If the value is NaN is because nothing happened with that behavior
+        return data_range
 
-"""
-for x in (make_list()):
-
-    test_init = Init_test(x, 2017)
-    print(test_init.read_dataframe())
-
-"""
 object_parameters = {
 
     'values': {
@@ -104,7 +86,7 @@ pprint(object_parameters)
 firstparam = test_init.make_subset(object_parameters)
 
 print(firstparam)
-
+print(test_init.set_parameters(object_parameters, 20))
 #print(test_init.read_dataframe())
 # first_parameter, second_parameter = test_init.make_subset('Broken_cloud', 'Ligth_rain')
 
