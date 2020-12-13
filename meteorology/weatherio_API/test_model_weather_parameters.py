@@ -5,7 +5,7 @@
 import numpy as np
 import pandas as pd
 import torch
-
+from pprint import pprint
 
 """ Libraries of the data storage """
 
@@ -20,7 +20,7 @@ class Init_test:
         # initialize the parameters to be the query
         
         self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'
-        self._path = '.csv/.cloud_parameters/.{}/.{}/.{}.csv'
+        self._path = '.csv/.clouds_parameters/.{}/.{}/.{}.csv'
         self.dataframe_weather = pd.read_csv(self.path)
         
 
@@ -37,15 +37,36 @@ class Init_test:
         """
         object_parameters = {
 
-            'first_parameter': [{'cloud_parameter': None, 'year_activity': None}],
-            'second_parameter': [{'cloud_parameter': None, 'year_activity': None}],
+            'first_parameter': {'cloud_parameter': None, 'year_activity': None},
+            'second_parameter': {'cloud_parameter': None, 'year_activity': None},
         }
         """
 
-        first_data_frame_subset = self._path.format(cloud_parameter, year_consult, year_consult)
-        second_data_frame_subset = self._path.format(cloud_parameter, year_consult, year_consult)
-        return data_frame_subset
+        first_param_cloud = object_parameters['values']['cloud_parameter']
+        first_param_year = object_parameters['values']['year_activity']
+        first_param_filter = object_parameters['values']['filter']
 
+        """second_param_cloud = None
+        second_param_year = None
+        second_param_filter = None"""
+
+        first_data_frame_subset = pd.read_csv(self._path.format(first_param_cloud,first_param_year
+        ,first_param_year))
+
+
+        """second_data_frame_subset = pd.read_csv(self._path.format(object_parameters['second_parameter']['cloud_parameter'],
+        object_parameters['first_parameter']['year_activity'], object_parameters['first_parameter']['year_activity']))
+        """
+
+        # taking the first_data_parameter, put the parameter to be filtered
+
+        subset_first = self.read_dataframe()[first_param_filter]
+
+
+        #return first_data_frame_subset , second_data_frame_subset
+
+        # this one gonna return the subset with the filter
+        return subset_first
 
     """def make_subset(self,first_parameter, second_parameter):
         # compare two or more clouds behavior
@@ -69,9 +90,22 @@ for x in (make_list()):
     print(test_init.read_dataframe())
 
 """
+object_parameters = {
 
+    'values': {
+        'cloud_parameter': 'Broken_clouds', 
+        'year_activity': 2017, 
+        'filter': 'temperature'
+        }
+    }
 test_init = Init_test('Broken_clouds', 2017)
-print(test_init.read_dataframe())
+pprint(object_parameters)
+
+firstparam = test_init.make_subset(object_parameters)
+
+print(firstparam)
+
+#print(test_init.read_dataframe())
 # first_parameter, second_parameter = test_init.make_subset('Broken_cloud', 'Ligth_rain')
 
 
