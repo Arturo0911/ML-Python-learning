@@ -147,6 +147,8 @@ objectives = {
     'x': [22,23,25,23,25,44,32],
     'y':[7,8,9,7,8,7,8]
 }
+
+
 mathematician.check_covariance(objectives)
 # print(mathematician.check_covariance(objectives))
 
