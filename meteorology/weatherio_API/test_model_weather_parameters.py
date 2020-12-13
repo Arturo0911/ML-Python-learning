@@ -67,7 +67,7 @@ class Init_test:
 
         subset = self.make_subset(object_parameters)
 
-        data_range = self.dataframe_weather[subset >= 20]
+        data_range = self.dataframe_weather[subset >= float(range)]
 
 
         return data_range
@@ -87,6 +87,24 @@ firstparam = test_init.make_subset(object_parameters)
 
 print(firstparam)
 print(test_init.set_parameters(object_parameters, 20))
+print(len(test_init.set_parameters(object_parameters, 20)))
+
+"""for x in test_init.set_parameters(object_parameters, 20):
+    print(x)"""
+
+# print(test_init.set_parameters(object_parameters, 20)['clouds'])
+
+"""for x in test_init.set_parameters(object_parameters, 20)['clouds']:
+    print(x)
+
+
+for x in test_init.set_parameters(object_parameters, 20)['temperature']:
+    print(x)
+"""
+
+for x,y in zip(test_init.set_parameters(object_parameters, 20)['clouds'],test_init.set_parameters(object_parameters, 20)['temperature']):
+    print(x,y)
+
 #print(test_init.read_dataframe())
 # first_parameter, second_parameter = test_init.make_subset('Broken_cloud', 'Ligth_rain')
 
