@@ -68,16 +68,62 @@ class Math_process:
             return final_object
 
 
-    def check_covariance(self, list_values):
-        # list values is the list with whole the parameters, without the NaN parameter
+    def check_covariance(self, object_values):
+        # This method will be return True o False
+        # object values is the list with all the parameters, without the NaN parameter
         # define a Sx and Sy as the covariance methods
+        # set the media of values
+        # use values with 3 decimals
+        
+
+        """
+            Structure from the list values
+            object_values = {
+                'x':None,
+                'y':None
+            }
+
+        """
+
+        # initializers
+        
+        covariance = 1
+        list_x = list()
+        list_y = list()
+
+        # Set the size of list
+
+        X_SIZE = len(object_values['x'])
+        Y_SIZE = len(object_values['y'])
+
+        average_x = float("{0:.3f}".format(sum(object_values['x'])/X_SIZE))
+        average_y = float("{0:.3f}".format(sum(object_values['y'])/Y_SIZE))
+        
+        # X
+
+        for x in range(object_values['x']):
+            list_x.append(float(x - average_x))
+
+        # Y
+        for y in range(object_values['y']):
+            list_y.append(float(y - average_y))
+        
+        # asssume that the values of x and y has the same length
+
+        for i in range(X_SIZE):
+
+            covariance = list_x[i] * list_y[i] 
+
+        Sxy = float("{0:.3f}".format(covariance / X_SIZE))
+        
+
+        if Sxy > 0: # if Sxy there is direct (positive) dependence
+            return True
+        else:
+            return False
         
         
-        
-        
-        
-        
-        pass
+        return
 
 
 
