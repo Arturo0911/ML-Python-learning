@@ -96,13 +96,13 @@ class Math_process:
         X_SIZE = len(object_values['x'])
         Y_SIZE = len(object_values['y'])
 
-        print("x size: ", X_SIZE)
-        print("y size: ", Y_SIZE)
+        # print("x size: ", X_SIZE)
+        # print("y size: ", Y_SIZE)
         average_x = float("{0:.3f}".format(sum(object_values['x'])/X_SIZE))
         average_y = float("{0:.3f}".format(sum(object_values['y'])/Y_SIZE))
 
-        print("average x: ",average_x)
-        print("average y: ",average_y)
+        # print("average x: ",average_x)
+        # print("average y: ",average_y)
         
         # X
 
@@ -114,29 +114,24 @@ class Math_process:
             list_y.append(float(y - average_y))
         
 
-        print(list_x)
-        print(list_y)
+        # print(list_x)
+        # print(list_y)
         # asssume that the values of x and y has the same length
 
         for i in range(X_SIZE):
 
             covariance = list_x[i] * list_y[i] 
 
-        print("covariance: ", covariance)
+        # print("covariance: ", covariance)
         Sxy = float("{0:.3f}".format(covariance / X_SIZE))
-
-        print(Sxy)
-        #return Sxy
         
-        """
         if Sxy > 0: # if Sxy there is direct (positive) dependence
             return True
         else:
             return False
-        
-        
+                
         return
-        """
+        
 
 
 mathematician = Math_process()
@@ -149,7 +144,7 @@ objectives = {
 }
 
 
-mathematician.check_covariance(objectives)
-# print(mathematician.check_covariance(objectives))
+# (mathematician.check_covariance(objectives))
+print(mathematician.check_covariance(objectives))
 
         
