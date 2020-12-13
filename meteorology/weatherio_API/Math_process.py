@@ -1,15 +1,11 @@
 
-
-
 """ MATH PROCESS  """
 
 from typing import final
 
-
 class Math_process:
 
     def Generate_average_from_list(self, list_values):
-
         # This one, gonna be util, whenever we want to get average 
         # from the API values
 
@@ -17,9 +13,8 @@ class Math_process:
 
         return average
 
-    def Generate_parameters_from_regretion(self):
-        
-        # β1 and β 0
+    def Generate_parameters_from_regretion(self):        
+        # β1 and β0
 
         pass
 
@@ -37,8 +32,6 @@ class Math_process:
             clouds_sum = 0
             precip_sum = 0
 
-            
-
             for x in _object_:
 
                 if x['temperature'] is not None:
@@ -50,7 +43,6 @@ class Math_process:
                 if x['precipitation'] is not None:
                     precip_sum += int(x['precipitation'])
 
-
             final_object = {
 
                 'cloud_description': description,
@@ -58,14 +50,11 @@ class Math_process:
                 'temperature': self._define_average(temp_sum, len(_object_)),
                 'clouds': self._define_average(clouds_sum, len(_object_)),
                 'precipitation': self._define_average(precip_sum, len(_object_))
-                
                 }
-
 
             return final_object
         else:
             final_object = {
-
                 # In case that the result will not do any with the value
                 # 'None' then i will change None by "None" as String
 
@@ -73,12 +62,23 @@ class Math_process:
                 'icon':None,'code': None,
                 'temperature': None,
                 'clouds':None,
-                'precipitation': None
-                
+                'precipitation': None                
                 }
 
-
             return final_object
+
+
+    def check_covariance(self, list_values):
+        # list values is the list with whole the parameters, without the NaN parameter
+        # define a Sx and Sy as the covariance methods
+        
+        
+        
+        
+        
+        
+        pass
+
 
 
 
