@@ -20,20 +20,31 @@ class Init_test:
         # initialize the parameters to be the query
         
         self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'
-        self._path = '.csv/.cloud_parameters/.{}/.{}/.{}.csv'.format(cloud_parameter, year_consult, year_consult)
+        self._path = '.csv/.cloud_parameters/.{}/.{}/.{}.csv'
         self.dataframe_weather = pd.read_csv(self.path)
         
 
     def read_dataframe(self):
-        # Return the dataframe
+        # Return the dataframe with all the values in the data
         
         return self.dataframe_weather
 
-    def make_subset(self):
-        
-        data_frame_subset = None
+    def make_subset(self, object_parameters):
+        # get the parameters with the object parameters
+        # set cloud parameters in differents years
 
-        return None
+
+        """
+        object_parameters = {
+
+            'first_parameter': [{'cloud_parameter': None, 'year_activity': None}],
+            'second_parameter': [{'cloud_parameter': None, 'year_activity': None}],
+        }
+        """
+
+        first_data_frame_subset = self._path.format(cloud_parameter, year_consult, year_consult)
+        second_data_frame_subset = self._path.format(cloud_parameter, year_consult, year_consult)
+        return data_frame_subset
 
 
     """def make_subset(self,first_parameter, second_parameter):
