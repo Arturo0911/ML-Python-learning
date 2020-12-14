@@ -11,7 +11,7 @@ from pprint import pprint
 
 # this one return the list o behavior to be instantiated.
 from Interface_objects import make_list 
-
+from Math_process import Math_process
 
 
 class Init_test:     
@@ -102,13 +102,35 @@ for x in test_init.set_parameters(object_parameters, 20)['temperature']:
     print(x)
 """
 
-for x,y in zip(test_init.set_parameters(object_parameters, 20)['clouds'],test_init.set_parameters(object_parameters, 20)['temperature']):
-    print(x,y)
 
+list_x = list()
+list_y = list()
+for x,y in zip(test_init.set_parameters(object_parameters, 20)['clouds'],test_init.set_parameters(object_parameters, 20)['temperature']):
+    # print(x,y)
+
+    list_x.append(x)
+    list_y.append(y)
+
+"""
+print("leng of list x %s "%len(list_x))
+print(list_x)
+
+print("leng of list y %s "%len(list_y))
+print(list_y)
+
+"""
+object_parameters_to_compare = {
+    'x': list_x,
+    'y': list_y
+}
+
+print(object_parameters_to_compare)
 #print(test_init.read_dataframe())
 # first_parameter, second_parameter = test_init.make_subset('Broken_cloud', 'Ligth_rain')
 
-
+# instantiate from Math_process
+math_process = Math_process()
+print(math_process.check_covariance(object_parameters_to_compare))
 
 #print(first_parameter)
 
