@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import torch
 from pprint import pprint
+import matplotlib.pyplot as plt
 
 """ Libraries of the data storage """
 
@@ -211,7 +212,10 @@ objetivo = {
 print(math_process.check_covariance(objetivo))
 
 """
-
+plt.scatter(objective['x'], objective['y'])
+plt.xlabel('clouds')
+plt.ylabel('temperature')
+plt.show()
 
 
 

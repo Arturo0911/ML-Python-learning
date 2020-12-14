@@ -3,6 +3,7 @@
 
 from os import truncate
 from typing import final
+import matplotlib.pyplot as plt
 
 class Math_process:
 
@@ -162,5 +163,10 @@ objetivo = {
 
 # mathematician.check_covariance(objetivo)
 print(mathematician.check_covariance(objetivo))
+"""
+plt.scatter(objetivo['x'], objetivo['y'])
+plt.xlabel('Nota parcial')
+plt.ylabel('Nota final')
+plt.show()
+"""
 
-        
