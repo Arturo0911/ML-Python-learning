@@ -3,6 +3,8 @@
 """
 
 from os import O_TRUNC
+
+from pandas.io import api
 import numpy as np
 import pandas as pd
 import torch
@@ -160,8 +162,59 @@ parameters_object_temperature = {
 # print(test_init.make_subset(parameters_object_clouds))
 # print(test_init.make_subset(parameters_object_temperature))
 
-print(test_init.set_parameters(parameters_object_clouds, 0))
-print(test_init.set_parameters(parameters_object_temperature, 0))
+# print(test_init.set_parameters(parameters_object_clouds, 0)['clouds'])
+# print(test_init.set_parameters(parameters_object_temperature, 0)['temperature'])
+
+
+# set another test side
+
+list_to_x = list() # clouds
+list_to_y = list() # temperature
+
+for x in test_init.set_parameters(parameters_object_clouds, 0)['clouds']:
+    list_to_x.append(x)
+
+for y in test_init.set_parameters(parameters_object_temperature, 0)['temperature']:
+    list_to_y.append(y)
+
+
+
+
+print("presentation...")
+objective = {
+    'x': list_to_x,
+    'y': list_to_y
+}
+
+print(objective)
+
+print(math_process.check_covariance(objective))
+
+"""
+test_list_x = [39,43,21,64,57,43,38,75,34,52]
+test_list_y = [65
+,75
+,52
+,82
+,92
+,80
+,73
+,98
+,56
+,75]
+
+objetivo = {
+    'x':test_list_x,
+    'y':test_list_y
+}
+
+print(math_process.check_covariance(objetivo))
+
+"""
+
+
+
+
 
 
 
