@@ -90,18 +90,6 @@ print(firstparam)
 print(test_init.set_parameters(object_parameters, 20))
 print(len(test_init.set_parameters(object_parameters, 20)))
 
-"""for x in test_init.set_parameters(object_parameters, 20):
-    print(x)"""
-
-# print(test_init.set_parameters(object_parameters, 20)['clouds'])
-
-"""for x in test_init.set_parameters(object_parameters, 20)['clouds']:
-    print(x)
-
-
-for x in test_init.set_parameters(object_parameters, 20)['temperature']:
-    print(x)
-"""
 
 
 list_x = list()
@@ -113,20 +101,13 @@ for x,y in zip(test_init.set_parameters(object_parameters, 20)['clouds'],
     list_x.append(x)
     list_y.append(y)
 
-"""
-print("leng of list x %s "%len(list_x))
-print(list_x)
 
-print("leng of list y %s "%len(list_y))
-print(list_y)
-
-"""
 object_parameters_to_compare = {
     'x': list_x,
     'y': list_y
 }
 
-print(object_parameters_to_compare)
+# print(object_parameters_to_compare)
 #print(test_init.read_dataframe())
 # first_parameter, second_parameter = test_init.make_subset('Broken_cloud', 'Ligth_rain')
 
@@ -141,7 +122,46 @@ else:
 
 #print(first_parameter)
 
+# To set the new parameters, we will to have set new settings
+# Maybe using another filters.
+# set new object parameters
 
+parameters_object_clouds = {
+
+    'values': {
+        'cloud_parameter': 'Broken_clouds', 
+        'year_activity': 2017, 
+        'filter': 'clouds'
+        }
+    }
+
+parameters_object_temperature = {
+
+    'values': {
+        'cloud_parameter': 'Broken_clouds', 
+        'year_activity': 2017, 
+        'filter': 'temperature'
+        }
+    }
+
+"""
+    object_parameters = {
+
+    'values': {
+        'cloud_parameter': 'Broken_clouds', 
+        'year_activity': 2017, 
+        'filter': 'temperature'
+        }
+    }
+
+
+"""
+
+# print(test_init.make_subset(parameters_object_clouds))
+# print(test_init.make_subset(parameters_object_temperature))
+
+print(test_init.set_parameters(parameters_object_clouds, 0))
+print(test_init.set_parameters(parameters_object_temperature, 0))
 
 
 
