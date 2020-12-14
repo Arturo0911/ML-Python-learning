@@ -118,7 +118,7 @@ class Math_process:
         if Sxy > 0: # if Sxy there is direct (positive) dependence
             return True
         else:
-            return Sxy
+            return False
                 
         return
         

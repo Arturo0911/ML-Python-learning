@@ -2,6 +2,7 @@
     
 """
 
+from os import O_TRUNC
 import numpy as np
 import pandas as pd
 import torch
@@ -105,7 +106,8 @@ for x in test_init.set_parameters(object_parameters, 20)['temperature']:
 
 list_x = list()
 list_y = list()
-for x,y in zip(test_init.set_parameters(object_parameters, 20)['clouds'],test_init.set_parameters(object_parameters, 20)['temperature']):
+for x,y in zip(test_init.set_parameters(object_parameters, 20)['clouds'],
+            test_init.set_parameters(object_parameters, 20)['temperature']):
     # print(x,y)
 
     list_x.append(x)
@@ -130,7 +132,12 @@ print(object_parameters_to_compare)
 
 # instantiate from Math_process
 math_process = Math_process()
-print(math_process.check_covariance(object_parameters_to_compare))
+# print(math_process.check_covariance(object_parameters_to_compare))
+
+if math_process.check_covariance(object_parameters_to_compare) is not True:
+    print("There isn't covariance ")
+else:
+    print("There is covariance. ")
 
 #print(first_parameter)
 
