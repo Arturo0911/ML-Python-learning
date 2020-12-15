@@ -123,14 +123,14 @@ class Math_process:
 
         Sxy = float("{0:.3f}".format(covariance /( X_SIZE - 1)))
         
-        if Sxy > 0: # if Sxy there is direct (positive) dependence
+        """if Sxy > 0: # if Sxy there is direct (positive) dependence
             return Sxy
             #  print(Sxy)
         else:
             return Sxy
             #print(Sxy)
-                
-        return
+        """        
+        return Sxy
 
     def variance(self, object_values):
         # As the whole values both x and y has the same lenght, then use only a constant to set the length
@@ -143,6 +143,9 @@ class Math_process:
         average_x = float("{0:.3f}".format((sum(object_values['x']) /SIZE_VALUES)))
         average_y = float("{0:.3f}".format((sum(object_values['y']) /SIZE_VALUES)))
 
+        # print(average_x)
+        # print(average_y)
+
         # First loops to store the difference between the value and her average
         for x in object_values['x']:
 
@@ -154,11 +157,25 @@ class Math_process:
         
         # Set the Variance from both values, the format is with 3 decimals
 
+        print(sum(list_x)/9)
+        print(sum(list_y) /9)
+
         Sx = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_x))/(SIZE_VALUES - 1))),0.5)))
         Sy = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_y))/(SIZE_VALUES - 1))),0.5)))
 
         # Return the Variance from both values
-        return Sx, Sy
+        # return Sx, Sy
+
+        print(Sx, Sy)
+
+    def correlation_coefficent(self, object_values):
+
+        Sxy = self.check_covariance(object_values)
+        Sx, Sy = self.variance(object_values)
+
+        
+
+        return "The correlation coefficent is: " + "{0:.3f}".format((Sxy) / (Sx *Sy))
 
 
 mathematician = Math_process()
@@ -190,11 +207,13 @@ objetivo = {
 
 
 # mathematician.check_covariance(objetivo)
-print(mathematician.check_covariance(objetivo))
+# print(mathematician.check_covariance(objetivo))
 """
 plt.scatter(objetivo['x'], objetivo['y'])
 plt.xlabel('Nota parcial')
 plt.ylabel('Nota final')
 plt.show()
 """
+mathematician.variance(objetivo)
+# print(mathematician.correlation_coefficent(objetivo))
 
