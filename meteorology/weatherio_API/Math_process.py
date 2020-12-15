@@ -143,21 +143,22 @@ class Math_process:
         average_x = float("{0:.3f}".format((sum(object_values['x']) /SIZE_VALUES)))
         average_y = float("{0:.3f}".format((sum(object_values['y']) /SIZE_VALUES)))
 
+        # First loops to store the difference between the value and her average
         for x in object_values['x']:
 
-            list_x.append(float("{0:.3f}".format(x - average_x)))
+            list_x.append(float(pow(float("{0:.3f}".format(x - average_x)),2)))
 
         for y in object_values['y']:
 
-            list_y.append(float("{0:.3f}".format(y - average_y)))
+            list_y.append(float(pow(float("{0:.3f}".format(y - average_y)),2)))
         
-        # Initializers
+        # Set the Variance from both values, the format is with 3 decimals
 
-        sum_x = 0
-        sum_y = 0
+        Sx = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_x))/(SIZE_VALUES - 1))),0.5)))
+        Sy = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_y))/(SIZE_VALUES - 1))),0.5)))
 
-
-        pass
+        # Return the Variance from both values
+        return Sx, Sy
 
 
 mathematician = Math_process()
