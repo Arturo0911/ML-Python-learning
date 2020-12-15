@@ -215,6 +215,8 @@ print(math_process.check_covariance(objetivo))
 plt.scatter(objective['x'], objective['y'])
 plt.xlabel('clouds')
 plt.ylabel('temperature')
+# the legend doesn't be a object not iterable
+# plt.legend(str(math_process.check_covariance(objective)))
 plt.show()
 
 

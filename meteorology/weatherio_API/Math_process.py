@@ -132,6 +132,33 @@ class Math_process:
                 
         return
 
+    def variance(self, object_values):
+        # As the whole values both x and y has the same lenght, then use only a constant to set the length
+        SIZE_VALUES = len(object_values['x'])
+
+        list_x = list()
+        list_y = list()
+
+        # define average from both values
+        average_x = float("{0:.3f}".format((sum(object_values['x']) /SIZE_VALUES)))
+        average_y = float("{0:.3f}".format((sum(object_values['y']) /SIZE_VALUES)))
+
+        for x in object_values['x']:
+
+            list_x.append(float("{0:.3f}".format(x - average_x)))
+
+        for y in object_values['y']:
+
+            list_y.append(float("{0:.3f}".format(y - average_y)))
+        
+        # Initializers
+
+        sum_x = 0
+        sum_y = 0
+
+
+        pass
+
 
 mathematician = Math_process()
 
