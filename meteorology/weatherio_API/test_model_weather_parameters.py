@@ -5,6 +5,7 @@
 from Interface_objects import make_list
 from Math_process import Math_process
 from os import O_TRUNC
+from Create_days import Create_days as cd
 
 from pandas.io import api
 import numpy as np
@@ -91,6 +92,15 @@ class Init_test:
         
         return
 
+create_days = cd()
+create_days.generate_appends()
+
+for x in create_days.get_objects():
+    print(x)
+# print(create_days.get_objects())
+
+
+
 # Using comparation but in this case using the years as values from future object
 """
     # Structure of the data will be:
@@ -123,6 +133,8 @@ object_parameters = {
         'year_activity': 2017
     }
 }
+
+
 
 
 test_init = Init_test()
