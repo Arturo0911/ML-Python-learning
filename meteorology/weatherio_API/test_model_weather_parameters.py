@@ -109,9 +109,6 @@ class Init_test:
         list_temperature = list()
 
 
-
-
-
         for x in create_days.get_objects():
 
             objects_ = {
@@ -122,7 +119,16 @@ class Init_test:
             }
             # set the subset, temperature, is the best parameter to filter by.
             dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
-            print(dataframe_filtered)
+            for i in dataframe_filtered['time_start']:
+                list_date.append(i)
+
+            for j in dataframe_filtered['temperature']:
+                list_temperature.append(j)
+            # print(dataframe_filtered)
+
+
+        print(list_date)
+        print(list_temperature)
 
 
 
