@@ -157,16 +157,16 @@ class Math_process:
         
         # Set the Variance from both values, the format is with 3 decimals
 
-        print(sum(list_x)/9)
-        print(sum(list_y) /9)
+        # print(sum(list_x)/9)
+        # print(sum(list_y) /9)
 
         Sx = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_x))/(SIZE_VALUES - 1))),0.5)))
         Sy = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_y))/(SIZE_VALUES - 1))),0.5)))
 
         # Return the Variance from both values
-        # return Sx, Sy
+        return Sx, Sy
 
-        print(Sx, Sy)
+        # print(Sx, Sy)
 
     def correlation_coefficent(self, object_values):
 
@@ -214,6 +214,6 @@ plt.xlabel('Nota parcial')
 plt.ylabel('Nota final')
 plt.show()
 """
-mathematician.variance(objetivo)
+# mathematician.variance(objetivo)
 # print(mathematician.correlation_coefficent(objetivo))
 

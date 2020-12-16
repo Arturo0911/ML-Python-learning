@@ -118,11 +118,12 @@ object_parameters_to_compare = {
 math_process = Math_process()
 # print(math_process.check_covariance(object_parameters_to_compare))
 
+"""
 if math_process.check_covariance(object_parameters_to_compare) is not True:
     print("There isn't covariance ")
 else:
     print("There is covariance. ")
-
+"""
 #print(first_parameter)
 
 # To set the new parameters, we will to have set new settings
@@ -191,6 +192,8 @@ print(objective)
 
 print(math_process.check_covariance(objective))
 
+print(math_process.correlation_coefficent(objective))
+
 """
 test_list_x = [39,43,21,64,57,43,38,75,34,52]
 test_list_y = [65
@@ -211,7 +214,7 @@ objetivo = {
 
 print(math_process.check_covariance(objetivo))
 
-"""
+
 plt.scatter(objective['x'], objective['y'])
 plt.xlabel('clouds')
 plt.ylabel('temperature')
@@ -219,7 +222,7 @@ plt.ylabel('temperature')
 # plt.legend(str(math_process.check_covariance(objective)))
 plt.show()
 
-
+"""
 
 
 
