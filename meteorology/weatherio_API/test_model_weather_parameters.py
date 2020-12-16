@@ -81,22 +81,33 @@ class Init_test:
 
         return data_range
 
-    def _comparative_between_three_years(self, parameter_list):
+    def _comparative_between_three_years(self):
         """
         In this method, we will called all the values, parsed and draw a charted scattered, but presenting 
         in a loop for the three years, we already have stored in csv files.
         """
 
-        for x in parameter_list:
-            pass
+        # Instance from the Create_days class
+        create_days = cd()
+        create_days.generate_appends()
+
+
+        for x in create_days.get_objects():
+
+            objects_ = {
+                'values': {
+                'cloud_parameter': 'Broken_clouds',
+                'year_activity': x
+                }
+            }
+
+            print(self.read_dataframe(objects_))
         
-        return
 
-create_days = cd()
-create_days.generate_appends()
+# create_days = cd()
+# create_days.generate_appends()
 
-for x in create_days.get_objects():
-    print(x)
+
 # print(create_days.get_objects())
 
 
@@ -138,14 +149,16 @@ object_parameters = {
 
 
 test_init = Init_test()
-print(test_init.read_dataframe(object_parameters))
+test_init._comparative_between_three_years()
+# print(test_init.read_dataframe(object_parameters))
 
-"""for x in make_list():
+"""for x in create_days.get_objects():
+    print(x)
 
     objects_ = {
         'values': {
-        'cloud_parameter': x,
-        'year_activity': 2017
+        'cloud_parameter': 'Broken_clouds',
+        'year_activity': x
         }
     }
     # print(objects_)
@@ -154,6 +167,12 @@ print(test_init.read_dataframe(object_parameters))
 
 
 # print(test_init.make_subset(object_parameters))
+
+
+
+
+
+
 
 
 """
