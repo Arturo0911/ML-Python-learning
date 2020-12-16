@@ -33,6 +33,7 @@ class Math_process:
             temp_sum = 0
             clouds_sum = 0
             precip_sum = 0
+            relative_humidity_sum = 0
 
             for x in _object_:
 
@@ -45,10 +46,14 @@ class Math_process:
                 if x['precipitation'] is not None:
                     precip_sum += int(x['precipitation'])
 
+                if x['relative_humidity'] is not None:
+                    relative_humidity_sum += int(x['relative_humidity'])
+
             final_object = {
 
                 'cloud_description': description,
-                'icon':_object_[0]['icon'],'code': _object_[0]['code'],
+                'icon':_object_[0]['icon'],'relative_humidity':self._define_average(relative_humidity_sum, 
+                len(_object_)) ,'code': _object_[0]['code'],
                 'temperature': self._define_average(temp_sum, len(_object_)),
                 'clouds': self._define_average(clouds_sum, len(_object_)),
                 'precipitation': self._define_average(precip_sum, len(_object_))
@@ -61,7 +66,7 @@ class Math_process:
                 # 'None' then i will change None by "None" as String
 
                 'cloud_description': description,
-                'icon':None,'code': None,
+                'icon':None,'relative_humidity':None,'code': None,
                 'temperature': None,
                 'clouds':None,
                 'precipitation': None                
@@ -178,7 +183,7 @@ class Math_process:
         return "The correlation coefficent is: " + "{0:.3f}".format((Sxy) / (Sx *Sy))
 
 
-mathematician = Math_process()
+# mathematician = Math_process()
 
 
 """
@@ -186,7 +191,7 @@ objectives = {
     'x': [22,23,25,23,25,44,32],
     'y':[7,8,9,7,8,7,8]
 }
-"""
+
 
 test_list_x = [39,43,21,64,57,43,38,75,34,52]
 test_list_y = [65
@@ -208,7 +213,6 @@ objetivo = {
 
 # mathematician.check_covariance(objetivo)
 # print(mathematician.check_covariance(objetivo))
-"""
 plt.scatter(objetivo['x'], objetivo['y'])
 plt.xlabel('Nota parcial')
 plt.ylabel('Nota final')

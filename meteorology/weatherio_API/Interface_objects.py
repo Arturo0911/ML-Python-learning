@@ -23,7 +23,7 @@ def create_objects_from_clouds(api_object):
     light_rain_object = list()
     few_clouds_object = list()
     clear_sky_object = list()
-    overcast_clouds_objects= list()
+    overcast_clouds_objects = list()
 
     
     # loop
@@ -33,7 +33,7 @@ def create_objects_from_clouds(api_object):
         if z['weather']['description'] == "Few clouds":
             few_clouds_object.append(
                 {'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-            'code':z['weather']['code'] ,'temperature': z['temp'],
+            'relative_humidity':z['rh'],'code':z['weather']['code'] ,'temperature': z['temp'],
             'clouds':z['clouds'], 'precipitation':z['precip']}
             )
             #print(few_clouds_object)
@@ -42,7 +42,7 @@ def create_objects_from_clouds(api_object):
         elif z['weather']['description'] == "Broken clouds":
             broken_cloud_object.append(
                 {'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-            'code':z['weather']['code'] ,'temperature': z['temp'],
+            'relative_humidity':z['rh'],'code':z['weather']['code'] ,'temperature': z['temp'],
             'clouds':z['clouds'], 'precipitation':z['precip']}
             )
             #print(broken_cloud_object)
@@ -52,7 +52,7 @@ def create_objects_from_clouds(api_object):
         elif z['weather']['description'] == "Overcast clouds":
             overcast_clouds_objects.append(
                 {'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-            'code':z['weather']['code'] ,'temperature': z['temp'],
+            'relative_humidity':z['rh'],'code':z['weather']['code'] ,'temperature': z['temp'],
             'clouds':z['clouds'], 'precipitation':z['precip']}
             )
             
@@ -61,7 +61,7 @@ def create_objects_from_clouds(api_object):
         elif z['weather']['description'] == "Scattered clouds":
             scattered_cloud_object.append(
                 {'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-            'code':z['weather']['code'] ,'temperature': z['temp'],
+            'relative_humidity':z['rh'],'code':z['weather']['code'] ,'temperature': z['temp'],
             'clouds':z['clouds'], 'precipitation':z['precip']}
             )
             #print(scattered_cloud_object)
@@ -70,7 +70,7 @@ def create_objects_from_clouds(api_object):
         elif z['weather']['description'] == "Light rain":
             light_rain_object.append(
                 {'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-            'code':z['weather']['code'] ,'temperature': z['temp'],
+            'relative_humidity':z['rh'],'code':z['weather']['code'] ,'temperature': z['temp'],
             'clouds':z['clouds'], 'precipitation':z['precip']}
             )
             #print(light_rain_object)
@@ -79,7 +79,7 @@ def create_objects_from_clouds(api_object):
         elif z['weather']['description'] == "Clear Sky":
             clear_sky_object.append(
                 {'cloud_description':z['weather']['description'],'icon':z['weather']['icon'],
-            'code':z['weather']['code'] ,'temperature': z['temp'],
+            'relative_humidity':z['rh'],'code':z['weather']['code'] ,'temperature': z['temp'],
             'clouds':z['clouds'], 'precipitation':z['precip']}
             )
             #print(clear_sky_object)

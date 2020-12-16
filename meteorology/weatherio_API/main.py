@@ -68,9 +68,9 @@ if __name__ == "__main__":
             # time start and time end
             time_start = days.get_objects()[x][y-1]
             time_end = days.get_objects()[x][y]
-            print(time_start,time_end)
+            # print(time_start,time_end)
 
-            new_query.generate_process(time_start, time_end) # process ins called, and keys from the API is used
+            new_query.generate_process(time_start, time_end) # process is called, and keys from the API is used
             # pprint(new_query.response_data['data'])
 
             # print(Interface_objects.create_objects_from_clouds(new_query.response_data['data']))

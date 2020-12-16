@@ -88,7 +88,7 @@ def create_headers_into_hidden_directories(dir_name, file_name, cloud_parameter)
     with open(new_main_directory+'.'+cloud_parameter+'/.'+str(dir_name)+'/.'+str(file_name)+'.csv', 'w') as file:
 
         writer = csv.writer(file)
-        writer.writerow(['time_start', 'time_end', 'cloud_description','clouds' ,'precip', 'temperature', 'icon','code'])
+        writer.writerow(['time_start', 'time_end', 'cloud_description','relative_humidity','clouds' ,'precip', 'temperature', 'icon','code'])
 
     return
 
@@ -98,7 +98,11 @@ def generate_data_into_csv_files(dir_name, file_name,time_start, time_end, cloud
     with open(new_main_directory+'.'+cloud_parameter+'/.'+str(dir_name)+'/.'+str(file_name)+'.csv', 'a') as file_csv:
         
         writer = csv.writer(file_csv)
-        writer.writerow([time_start,time_end,cloud_parameter, objects_values['clouds'],objects_values['precipitation'],objects_values['temperature'],
+        writer.writerow([time_start,time_end,cloud_parameter, objects_values['relative_humidity'],objects_values['clouds'],objects_values['precipitation'],objects_values['temperature'],
         objects_values['icon'],objects_values['code'] ]) # complete the cells
 
     return
+
+
+
+    
