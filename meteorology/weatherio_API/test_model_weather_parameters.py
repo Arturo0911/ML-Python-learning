@@ -2,6 +2,8 @@
     
 """
 
+from Interface_objects import make_list
+from Math_process import Math_process
 from os import O_TRUNC
 
 from pandas.io import api
@@ -14,24 +16,26 @@ import matplotlib.pyplot as plt
 """ Libraries of the data storage """
 
 # this one return the list o behavior to be instantiated.
-from Interface_objects import make_list 
-from Math_process import Math_process
 
 
-class Init_test:     
+class Init_test:
 
-    def __init__(self,cloud_parameter, year_consult):
+    def __init__(self):  # cloud_parameter, year_consult):
         # initialize the parameters to be the query
-        
-        self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'
-        self._path = '.csv/.clouds_parameters/.{}/.{}/.{}.csv'
-        self.dataframe_weather = pd.read_csv(self.path)
-        
 
-    def read_dataframe(self):
+        # self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'
+        self._path = '.csv/.clouds_parameters/.{}/.{}/.{}.csv'
+        # self.dataframe_weather = pd.read_csv(self.path)
+
+    
+    def read_dataframe(self,object_parameters):
         # Return the dataframe with all the values in the data
-        
-        return self.dataframe_weather
+        # set the names of parameters, to avoid get verbose mode on the algorithm
+
+        cloud_param = object_parameters['values']['cloud_parameter']
+        year_param = object_parameters['values']['year_activity']
+        data_frame = pd.read_csv(self._path.format(cloud_param, year_param, year_param))
+        return data_frame
 
     def make_subset(self, object_parameters):
         # get the parameters with the object parameters
@@ -47,25 +51,24 @@ class Init_test:
                     of each column to be evaluated'}
         }
         """
-        
+
         first_param_cloud = object_parameters['values']['cloud_parameter']
         first_param_year = object_parameters['values']['year_activity']
         first_param_filter = object_parameters['values']['filter']
 
-        first_data_frame_subset = pd.read_csv(self._path.format(first_param_cloud,first_param_year
-        ,first_param_year))
-
+        dataframe = pd.read_csv(self._path.format(
+            first_param_cloud, first_param_year, first_param_year))
 
         # taking the first_data_parameter, put the parameter to be filtered
 
-        subset_first = self.read_dataframe()[first_param_filter]
+        # subset_first = self.read_dataframe()[first_param_filter]
 
-
-        #return first_data_frame_subset , second_data_frame_subset
+        # return first_data_frame_subset , second_data_frame_subset
 
         # this one gonna return the subset with the filter
-        return subset_first
+        # return subset_first
 
+        return dataframe
 
     def set_parameters(self, object_parameters, range):
 
@@ -73,9 +76,18 @@ class Init_test:
 
         data_range = self.dataframe_weather[subset >= float(range)]
 
-
         return data_range
 
+    def _comparative_between_three_years(self, parameter_list):
+        """
+        In this method, we will called all the values, parsed and draw a charted scattered, but presenting 
+        in a loop for the three years, we already have stored in csv files.
+        """
+
+        for x in parameter_list:
+            pass
+        
+        return
 
 # Using comparation but in this case using the years as values from future object
 """
@@ -91,27 +103,30 @@ class Init_test:
         but each change or evolution in those 3 years for each query
 
 
+        object_parameters = {
+
+        'values': {
+            'cloud_parameter': 'Broken_clouds', 
+            'year_activity': 2017, 
+            'filter': 'temperature'
+            }
+        }
+
 """
 
+object_parameters = {
+
+    'values': {
+        'cloud_parameter': 'Broken_clouds',
+        'year_activity': 2017,
+        'filter': 'temperature'
+    }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+test_init = Init_test()
+print(test_init.read_dataframe(object_parameters))
+# print(test_init.make_subset(object_parameters))
 
 
 """
@@ -272,10 +287,3 @@ plt.ylabel('temperature')
 plt.show()
 
 """
-
-
-
-
-
-
-
