@@ -39,16 +39,23 @@ class Init_test:
         return data_frame
 
     def make_subset(self, object_parameters):
-        # get the parameters with the object parameters
-        # set cloud parameters in differents years
-        # create variables to avoid big names into the methods
-        # the variable first_param_year will be used two times, because the directory and the file has the same name
+        """
+        get the parameters with the object parameters
+        set cloud parameters in differents years
+        create variables to avoid big names into the methods
+        the variable first_param_year will be used two times, 
+        because the directory and the file has the same name
+        """
+
+
+
         """
 
         Structure of the parameters to be evaluated
         object_parameters = {
 
-            'value': {'cloud_parameter': Behavior cloud: Broken_clouds, Light_rain, Clear_Sky, 'year_activity': None, 'filter': 'the filter is the header 
+            'value': {'cloud_parameter': Behavior cloud: Broken_clouds, Light_rain, Clear_Sky, 
+                        'year_activity': None, 'filter': 'the filter is the header 
                     of each column to be evaluated'}
         }
         """
@@ -72,8 +79,11 @@ class Init_test:
         return dataframe
 
     def set_parameters(self, object_parameters, range):
-        # get the values from the dictionary object_parameters
-        # set the range of the filter that we wanna show
+
+        """
+        get the values from the dictionary object_parameters
+        set the range of the filter that we wanna show
+        """
 
         subset = self.make_subset(object_parameters)
 
@@ -83,8 +93,9 @@ class Init_test:
 
     def _comparative_between_three_years(self):
         """
-        In this method, we will called all the values, parsed and draw a charted scattered, but presenting 
-        in a loop for the three years, we already have stored in csv files.
+        In this method, we will called all the values, parsed and draw a 
+        charted scattered, but presenting in a loop for the three years, 
+        we already have stored in csv files.
         """
 
         # Instance from the Create_days class
@@ -101,14 +112,8 @@ class Init_test:
                 }
             }
 
-            print(self.read_dataframe(objects_))
-        
+            print(self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0])
 
-# create_days = cd()
-# create_days.generate_appends()
-
-
-# print(create_days.get_objects())
 
 
 
