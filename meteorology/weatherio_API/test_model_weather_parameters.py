@@ -71,7 +71,9 @@ class Init_test:
         return dataframe
 
     def set_parameters(self, object_parameters, range):
-
+        # get the values from the dictionary object_parameters
+        # set the range of the filter that we wanna show
+        
         subset = self.make_subset(object_parameters)
 
         data_range = self.dataframe_weather[subset >= float(range)]
