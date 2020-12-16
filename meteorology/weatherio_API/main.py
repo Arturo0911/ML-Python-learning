@@ -32,10 +32,6 @@ overcasted_clouds_objects= list()
 
 
 
-
-
-
-
 if __name__ == "__main__":
 
     # Instantiate from Create_days class
@@ -80,5 +76,9 @@ if __name__ == "__main__":
 
                 CSV.generate_data_into_csv_files(x,x,time_start,time_end, j,Interface_objects.create_objects_from_clouds(new_query.response_data['data'])[j])
             
+
+
+
+
 
 
