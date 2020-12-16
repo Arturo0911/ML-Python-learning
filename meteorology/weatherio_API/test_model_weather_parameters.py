@@ -73,7 +73,7 @@ class Init_test:
     def set_parameters(self, object_parameters, range):
         # get the values from the dictionary object_parameters
         # set the range of the filter that we wanna show
-        
+
         subset = self.make_subset(object_parameters)
 
         data_range = self.dataframe_weather[subset >= float(range)]
@@ -120,14 +120,27 @@ object_parameters = {
 
     'values': {
         'cloud_parameter': 'Broken_clouds',
-        'year_activity': 2017,
-        'filter': 'temperature'
+        'year_activity': 2017
     }
 }
 
 
 test_init = Init_test()
 print(test_init.read_dataframe(object_parameters))
+
+"""for x in make_list():
+
+    objects_ = {
+        'values': {
+        'cloud_parameter': x,
+        'year_activity': 2017
+        }
+    }
+    # print(objects_)
+    print(test_init.read_dataframe(objects_))"""
+
+
+
 # print(test_init.make_subset(object_parameters))
 
 

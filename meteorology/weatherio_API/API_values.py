@@ -1,9 +1,6 @@
 import requests
 from urllib.request import urlopen
 from urllib.error import HTTPError
-import torch
-
-
 
 
 class API_values:
