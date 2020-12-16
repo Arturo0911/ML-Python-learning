@@ -102,6 +102,15 @@ class Init_test:
         create_days = cd()
         create_days.generate_appends()
 
+        # Initializers
+        # the only reason is for to generate a list with the time start at the list_date 
+        # and temperature values at the list_temperature
+        list_date = list()
+        list_temperature = list()
+
+
+
+
 
         for x in create_days.get_objects():
 
@@ -111,8 +120,9 @@ class Init_test:
                 'year_activity': x
                 }
             }
-
-            print(self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0])
+            # set the subset, temperature, is the best parameter to filter by.
+            dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
+            print(dataframe_filtered)
 
 
 
