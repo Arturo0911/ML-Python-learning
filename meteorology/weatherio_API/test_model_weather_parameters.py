@@ -76,6 +76,50 @@ class Init_test:
 
         return data_range
 
+
+# Using comparation but in this case using the years as values from future object
+"""
+    # Structure of the data will be:
+
+        object_callable = {
+            '2017': Some data, possible array,
+            '2018': "" "" "" "" "" "" "" "",
+            '2019': "" "" "" "" "" "" "" ""
+        }
+
+        and that's datas, charted on a scattered chart
+        but each change or evolution in those 3 years for each query
+
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+# Uncoment this block, whenever you wanna test using comparation from
+# two variables
+
+
+
 object_parameters = {
 
     'values': {
@@ -85,6 +129,7 @@ object_parameters = {
         }
     }
 test_init = Init_test('Broken_clouds', 2017)
+
 pprint(object_parameters)
 
 firstparam = test_init.make_subset(object_parameters)
@@ -118,26 +163,26 @@ object_parameters_to_compare = {
 math_process = Math_process()
 # print(math_process.check_covariance(object_parameters_to_compare))
 
-"""
-if math_process.check_covariance(object_parameters_to_compare) is not True:
-    print("There isn't covariance ")
-else:
-    print("There is covariance. ")
-"""
 #print(first_parameter)
 
 # To set the new parameters, we will to have set new settings
 # Maybe using another filters.
 # set new object parameters
 
+math_process = Math_process()
+
+
+
+
+####################################################
 parameters_object_clouds = {
 
     'values': {
         'cloud_parameter': 'Broken_clouds', 
         'year_activity': 2017, 
         'filter': 'clouds'
-        }
     }
+}
 
 parameters_object_temperature = {
 
@@ -145,21 +190,17 @@ parameters_object_temperature = {
         'cloud_parameter': 'Broken_clouds', 
         'year_activity': 2017, 
         'filter': 'temperature'
-        }
     }
+}
 
-"""
-    object_parameters = {
-
+parameters_object_humidity = {
     'values': {
-        'cloud_parameter': 'Broken_clouds', 
-        'year_activity': 2017, 
-        'filter': 'temperature'
-        }
+        'cloud_parameter': 'Broken_clouds',
+        'year_activity':2017,
+        'filter': 'relative_humidity'
     }
+}
 
-
-"""
 
 # print(test_init.make_subset(parameters_object_clouds))
 # print(test_init.make_subset(parameters_object_temperature))
@@ -173,7 +214,7 @@ parameters_object_temperature = {
 list_to_x = list() # clouds
 list_to_y = list() # temperature
 
-for x in test_init.set_parameters(parameters_object_clouds, 0)['clouds']:
+for x in test_init.set_parameters(parameters_object_humidity, 0)['relative_humidity']:
     list_to_x.append(x)
 
 for y in test_init.set_parameters(parameters_object_temperature, 0)['temperature']:
@@ -194,7 +235,15 @@ print(math_process.check_covariance(objective))
 
 print(math_process.correlation_coefficent(objective))
 
-"""
+plt.scatter(objective['x'], objective['y'])
+plt.xlabel('humidity')
+plt.ylabel('temperature')
+# the legend doesn't be a object not iterable
+# plt.legend(str(math_process.check_covariance(objective)))
+plt.show()
+
+
+
 test_list_x = [39,43,21,64,57,43,38,75,34,52]
 test_list_y = [65
 ,75
