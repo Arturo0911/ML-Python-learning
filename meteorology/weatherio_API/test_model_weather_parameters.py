@@ -100,8 +100,6 @@ class Init_test:
         create_days = cd()
         create_days.generate_appends()
 
-        
-
 
         for x in create_days.get_objects():
             # Initializers
@@ -127,14 +125,19 @@ class Init_test:
                 list_temperature.append(j)
             
             # set the object_data with the values.
-            print(x)
+            # print(x)
             object_data = {
                 'x': list_humidity,
                 'y':list_temperature
             }
-            print(object_data)
+            # print(object_data)
 
-            print(math_process.check_covariance(object_data))
+            # print(math_process.check_covariance(object_data))
+
+            if math_process.check_covariance(object_data) > 0:
+                print(True)
+            else:
+                print(False)
             
             """
                 # Commented until the test of covariance from the years
