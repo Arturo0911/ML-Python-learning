@@ -29,14 +29,14 @@ class Init_test:
         self._path = '.csv/.clouds_parameters/.{}/.{}/.{}.csv'
         # self.dataframe_weather = pd.read_csv(self.path)
 
-    
-    def read_dataframe(self,object_parameters):
+    def read_dataframe(self, object_parameters):
         # Return the dataframe with all the values in the data
         # set the names of parameters, to avoid get verbose mode on the algorithm
 
         cloud_param = object_parameters['values']['cloud_parameter']
         year_param = object_parameters['values']['year_activity']
-        data_frame = pd.read_csv(self._path.format(cloud_param, year_param, year_param))
+        data_frame = pd.read_csv(self._path.format(
+            cloud_param, year_param, year_param))
         return data_frame
 
     def make_subset(self, object_parameters):
@@ -75,7 +75,6 @@ class Init_test:
         return dataframe
 
     def set_parameters(self, object_parameters, range):
-
         """
         get the values from the dictionary object_parameters
         set the range of the filter that we wanna show
@@ -97,42 +96,43 @@ class Init_test:
         # Instance from the another main classes
 
         math_process = Math_process()
-        
+
         create_days = cd()
         create_days.generate_appends()
 
+        # Object
+        final_object = []
 
-        #for x in create_days.get_objects():
+        # for x in create_days.get_objects():
         for x in make_list():
-            
-            # print(x)
-            # Initializers
-            # the only reason is for to generate a list with the time start at the list_date 
-            # and temperature values at the list_temperature
-            list_humidity = list()
-            list_temperature = list()
-            # Loop in eachyear stored 2017 2018 2019; comming soon 2020.
 
+            # print(x)
+
+            # Loop in each year stored 2017 2018 2019; comming soon 2020.
 
             # Now we can get the antoher parameters of the sky such overcastered
             # from the make_list() function
+            change_object = []
 
             for y in create_days.get_objects():
-                # print(y)
+                print(y)
 
-                print("Parameters %s %s"%(x,y))
+                # Initializers
+                # the only reason is for to generate a list with the time start at the list_date
+                # and temperature values at the list_temperature
+                list_humidity = list()
+                list_temperature = list()
 
                 objects_ = {
                     'values': {
-                    'cloud_parameter': x,
-                    'year_activity': y
+                        'cloud_parameter': x,
+                        'year_activity': y
                     }
                 }
 
-                print("Presenting the obeject to be evaluated: ", objects_)
-
                 # set the subset, temperature, is the best parameter to filter by.
-                dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
+                dataframe_filtered = self.read_dataframe(
+                    objects_)[self.read_dataframe(objects_)['temperature'] > 0]
 
                 # LOOPS FOR APPENDS
                 for i in dataframe_filtered['relative_humidity']:
@@ -140,42 +140,74 @@ class Init_test:
 
                 for j in dataframe_filtered['temperature']:
                     list_temperature.append(j)
-                
+
                 # set the object_data with the values.
                 # print(x)
                 object_data = {
                     'x': list_humidity,
-                    'y':list_temperature
+                    'y': list_temperature
                 }
+
                 # print(object_data)
 
                 # print(math_process.check_covariance(object_data))
 
                 if math_process.check_covariance(object_data) > 0:
-                    print("Dataframe filtered")
-                    print(dataframe_filtered)
-                    print("\n")
-                    print("Covariance: ", math_process.check_covariance(object_data), end="")
-                    print("[*] Covariance is more than 1")
-                    plt.scatter(object_data['x'], object_data['y'])
+                    # print("Parameters %s %s"%(x,y))
+                    # print("Presenting the obeject to be evaluated: ", objects_)
+                    # print("Dataframe filtered")
+                    # print(dataframe_filtered)
+                    # print("\n")
+                    # print("[*] Covariance is more than 1")
+                    # print("[*] Covariance: ", math_process.check_covariance(object_data), end="")
+
+                    # print("[*] Correlation coefficent: ", math_process.correlation_coefficent(object_data))
+
+                    final_object.append({
+
+                        'parameter': x,
+                        'year': y,
+                        'covariance': math_process.check_covariance(object_data),
+                        'correlation_coefficent': math_process.correlation_coefficent(object_data)
+
+                    })
+
+                    """change_object.append({
+                        str(y): list_temperature
+                    })"""
+                    print(final_object)
+
+                    """plt.scatter(object_data['x'], object_data['y'])
                     plt.xlabel("Dates")
                     plt.ylabel("Temperature")
-                    plt.show()
-                    # break
-                    # print(True)
-                
-                """
+                    plt.show()"""
+
                 elif math_process.check_covariance(object_data) == 0:
-                    print("Covariance: ", math_process.check_covariance(object_data), end="")
-                    print("[0] Covariance is Zero")
+                    # print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    # print("[0] Covariance is Zero")
+                    pass
                 else:
-                    print("Covariance: ", math_process.check_covariance(object_data), end="")
-                    print("[x] Covariance is negative")
-                """
+                    # print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    #print("[x] Covariance is negative")
+                    pass
+            
+            #print(change_object)
+            """if len(change_object) == 3:
+                math_process.set_relation_three_years(change_object)"""
 
-                print("\n")
 
-            """
+def test_function_with_parameters():
+    """
+        This function, only will be read the instancies, from the main Class
+    """
+    test_init = Init_test()
+    test_init._comparative_between_three_years()
+
+
+test_function_with_parameters()
+
+
+"""
             objects_ = {
                 'values': {
                 'cloud_parameter': 'Scattered_clouds',
@@ -208,24 +240,17 @@ class Init_test:
             else:
                 print(False)
             """
-            
-            """
-                # Commented until the test of covariance from the years
-                # printing using pyplot data in a scattered chart.
 
-                plt.scatter(object_data['x'], object_data['y'])
-                plt.xlabel("Dates")
-                plt.ylabel("Temperature")
-                plt.show()
-            """
-        
+"""
+        # Commented until the test of covariance from the years
+        # printing using pyplot data in a scattered chart.
 
-
-def test_function_with_parameters():
+        plt.scatter(object_data['x'], object_data['y'])
+        plt.xlabel("Dates")
+        plt.ylabel("Temperature")
+        plt.show()
     """
-        This function, only will be read the instancies, from the main Class
-    """
-    test_init = Init_test()
-    test_init._comparative_between_three_years()
 
-test_function_with_parameters()
+# pprint(final_object)
+
+# pprint(change_object)

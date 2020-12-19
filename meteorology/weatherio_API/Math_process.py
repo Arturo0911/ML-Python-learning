@@ -180,7 +180,36 @@ class Math_process:
 
         
 
-        return "The correlation coefficent is: " + "{0:.3f}".format((Sxy) / (Sx *Sy))
+        return float("{0:.3f}".format((Sxy) / (Sx *Sy)))
+
+
+
+    def set_relation_three_years(self, object_values):
+        
+        """
+            principla_object = [
+                {'2017':[list of values]},
+                {'2018':[list of values]},
+                {'2019':[list of values]}
+            ]
+        """
+
+        average_2017 = float("{0:.3f}".format((sum(object_values[0]['2017']))/(len(object_values[0]['2017']))))
+        average_2018 = float("{0:.3f}".format((sum(object_values[1]['2018']))/(len(object_values[1]['2018']))))
+        average_2019 = float("{0:.3f}".format((sum(object_values[2]['2019']))/(len(object_values[2]['2019']))))
+
+        """print(average_2017)
+        print(average_2018)
+        print(average_2019)"""
+        
+        final_average = float("{0:.3f}".format((average_2017 + average_2018 + average_2019)/3))
+
+        # print(final_average)
+        print("Variation from the year 2017 is: %s percent  "%"{0:.3f}".format(((final_average - average_2017)/final_average)*100))
+        print("Variation from the year 2018 is: %s percent "%"{0:.3f}".format(((final_average - average_2018)/final_average)*100))
+        print("Variation from the year 2019 is: %s percent "%"{0:.3f}".format(((final_average - average_2019)/final_average)*100))
+        
+        
 
 
 # mathematician = Math_process()
