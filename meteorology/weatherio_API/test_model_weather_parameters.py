@@ -113,9 +113,9 @@ class Init_test:
             # Now we can get the antoher parameters of the sky such overcastered
             # from the make_list() function
             change_object = []
-
+            # print(x)
             for y in create_days.get_objects():
-                print(y)
+                # print(y)
 
                 # Initializers
                 # the only reason is for to generate a list with the time start at the list_date
@@ -162,7 +162,7 @@ class Init_test:
                     # print("[*] Covariance: ", math_process.check_covariance(object_data), end="")
 
                     # print("[*] Correlation coefficent: ", math_process.correlation_coefficent(object_data))
-
+                    print("Behavior %s  and year %s..."%(x,y))
                     final_object.append({
 
                         'parameter': x,
@@ -175,7 +175,7 @@ class Init_test:
                     """change_object.append({
                         str(y): list_temperature
                     })"""
-                    print(final_object)
+                    
 
                     """plt.scatter(object_data['x'], object_data['y'])
                     plt.xlabel("Dates")
@@ -183,17 +183,23 @@ class Init_test:
                     plt.show()"""
 
                 elif math_process.check_covariance(object_data) == 0:
+                    # print("Behavior %s  and year %s..."%(x,y))
                     # print("Covariance: ", math_process.check_covariance(object_data), end="")
                     # print("[0] Covariance is Zero")
                     pass
+                    
                 else:
+                    # print("Behavior %s  and year %s..."%(x,y))
                     # print("Covariance: ", math_process.check_covariance(object_data), end="")
-                    #print("[x] Covariance is negative")
+                    # print("[x] Covariance is negative")
                     pass
+                    
             
             #print(change_object)
             """if len(change_object) == 3:
                 math_process.set_relation_three_years(change_object)"""
+
+        pprint(final_object)
 
 
 def test_function_with_parameters():

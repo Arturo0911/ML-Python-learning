@@ -169,6 +169,32 @@ class Math_process:
         Sy = float("{0:.3f}".format(pow(float("{0:.3f}".format((sum(list_y))/(SIZE_VALUES - 1))),0.5)))
 
         # Return the Variance from both values
+        # Doing the testing in the test_model_weather_parameters.py
+        """
+            [
+                {'correlation_coefficent': 0.615,
+                'covariance': 33.663,
+                'parameter': 'Overcast_clouds',
+                'year': 2017},
+                {'correlation_coefficent': 0.411,
+                'covariance': 10.164,
+                'parameter': 'Overcast_clouds',
+                'year': 2018},
+                {'correlation_coefficent': 0.176,
+                'covariance': 13.742,
+                'parameter': 'Overcast_clouds',
+                'year': 2019},
+                {'correlation_coefficent': 0.089,
+                'covariance': 6.043,
+                'parameter': 'Broken_clouds',
+                'year': 2019},
+                {'correlation_coefficent': 0.018,
+                'covariance': 1.088,
+                'parameter': 'Scattered_clouds',
+                'year': 2019}
+            ]
+
+        """
         return Sx, Sy
 
         # print(Sx, Sy)
@@ -185,6 +211,9 @@ class Math_process:
 
 
     def set_relation_three_years(self, object_values):
+        # How mucho is the difference between the actual value
+        # of the parameter and the value of the average between the
+        # the three years
         
         """
             principla_object = [
