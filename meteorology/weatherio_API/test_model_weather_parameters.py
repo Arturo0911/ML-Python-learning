@@ -1,7 +1,8 @@
 """ IN THIS FILE, WE GONNA TEST THE DATA, USING COMPARATIONS BETWEEN DATAS, AND PARAMETERS
     
 """
-
+import time
+from datetime import time
 from Interface_objects import make_list
 from Math_process import Math_process
 from os import O_TRUNC
@@ -101,13 +102,80 @@ class Init_test:
         create_days.generate_appends()
 
 
-        for x in create_days.get_objects():
+        #for x in create_days.get_objects():
+        for x in make_list():
+            
+            # print(x)
             # Initializers
             # the only reason is for to generate a list with the time start at the list_date 
             # and temperature values at the list_temperature
             list_humidity = list()
             list_temperature = list()
             # Loop in eachyear stored 2017 2018 2019; comming soon 2020.
+
+
+            # Now we can get the antoher parameters of the sky such overcastered
+            # from the make_list() function
+
+            for y in create_days.get_objects():
+                # print(y)
+
+                print("Parameters %s %s"%(x,y))
+
+                objects_ = {
+                    'values': {
+                    'cloud_parameter': x,
+                    'year_activity': y
+                    }
+                }
+
+                print("Presenting the obeject to be evaluated: ", objects_)
+
+                # set the subset, temperature, is the best parameter to filter by.
+                dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
+
+                # LOOPS FOR APPENDS
+                for i in dataframe_filtered['relative_humidity']:
+                    list_humidity.append(i)
+
+                for j in dataframe_filtered['temperature']:
+                    list_temperature.append(j)
+                
+                # set the object_data with the values.
+                # print(x)
+                object_data = {
+                    'x': list_humidity,
+                    'y':list_temperature
+                }
+                # print(object_data)
+
+                # print(math_process.check_covariance(object_data))
+
+                if math_process.check_covariance(object_data) > 0:
+                    print("Dataframe filtered")
+                    print(dataframe_filtered)
+                    print("\n")
+                    print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    print("[*] Covariance is more than 1")
+                    plt.scatter(object_data['x'], object_data['y'])
+                    plt.xlabel("Dates")
+                    plt.ylabel("Temperature")
+                    plt.show()
+                    # break
+                    # print(True)
+                
+                """
+                elif math_process.check_covariance(object_data) == 0:
+                    print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    print("[0] Covariance is Zero")
+                else:
+                    print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    print("[x] Covariance is negative")
+                """
+
+                print("\n")
+
+            """
             objects_ = {
                 'values': {
                 'cloud_parameter': 'Scattered_clouds',
@@ -135,9 +203,11 @@ class Init_test:
             # print(math_process.check_covariance(object_data))
 
             if math_process.check_covariance(object_data) > 0:
+                print("[*] Covariance is", end="")
                 print(True)
             else:
                 print(False)
+            """
             
             """
                 # Commented until the test of covariance from the years
@@ -159,5 +229,3 @@ def test_function_with_parameters():
     test_init._comparative_between_three_years()
 
 test_function_with_parameters()
-
-
