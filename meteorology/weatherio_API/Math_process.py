@@ -20,6 +20,8 @@ class Math_process:
         # the Math model of linear regretion
         # Y = β0 + β1*x
 
+        
+
         pass
 
     def _define_average(self,number, length):
