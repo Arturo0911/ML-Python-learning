@@ -165,7 +165,7 @@ class Init_test:
                     print("Behavior %s  and year %s..."%(x,y))
 
                     if x == "Overcast_clouds":
-                        
+                        # Only use this condition to show three years with the covariance positive.
 
                         final_object.append({
 
