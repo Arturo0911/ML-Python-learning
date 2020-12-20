@@ -29,9 +29,11 @@ clear_sky_object = list()
 overcasted_clouds_objects= list()
 
 
+# Create a object with the values 
 url_from_API = {
-    'latitude': latitude,
-    'longitude':longitude
+    'latitude': '-2.335017',
+    'longitude':'-80.229769',
+    'key_url_api':'c96c2aa02b1b43e184580f8efe648f59'
 }
 
 
