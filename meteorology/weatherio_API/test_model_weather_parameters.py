@@ -163,14 +163,18 @@ class Init_test:
 
                     # print("[*] Correlation coefficent: ", math_process.correlation_coefficent(object_data))
                     print("Behavior %s  and year %s..."%(x,y))
-                    final_object.append({
 
-                        'parameter': x,
-                        'year': y,
-                        'covariance': math_process.check_covariance(object_data),
-                        'correlation_coefficent': math_process.correlation_coefficent(object_data)
+                    if x == "Overcast_clouds":
+                        
 
-                    })
+                        final_object.append({
+
+                            'parameter': x,
+                            'year': y,
+                            'covariance': math_process.check_covariance(object_data),
+                            'correlation_coefficent': math_process.correlation_coefficent(object_data)
+
+                        })
 
                     """change_object.append({
                         str(y): list_temperature

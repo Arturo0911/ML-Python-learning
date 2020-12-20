@@ -29,7 +29,10 @@ clear_sky_object = list()
 overcasted_clouds_objects= list()
 
 
-
+url_from_API = {
+    'latitude': latitude,
+    'longitude':longitude
+}
 
 
 if __name__ == "__main__":
