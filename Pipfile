@@ -6,16 +6,9 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-torch = "*"
-torchvision = "*"
-matplotlib = "*"
-pandas = "*"
-tensorflow = "*"
-keras = "*"
-mysql-connector-python = "*"
-django = "*"
 scikit-learn = "*"
-flask = "*"
+pandas = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.8"
