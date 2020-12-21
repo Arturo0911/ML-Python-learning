@@ -11,6 +11,7 @@ pandas = "*"
 numpy = "*"
 matplotlib = "*"
 flask = "*"
+seaborn = "*"
 
 [requires]
 python_version = "3.8"
