@@ -37,6 +37,12 @@ class Init_test:
             cloud_param, year_param, year_param))
         return data_frame
 
+
+    def readdataframe_using_seaborn(self):
+
+        new_data_frame = pd.read_csv(self._path.format('Overcast_clouds', 2017,2017))
+        return new_data_frame
+
     def make_subset(self, object_parameters):
         """
             get the parameters with the object parameters
@@ -209,8 +215,19 @@ def test_function_with_parameters():
         This function, only will be read the instancies, from the main Class
     """
     test_init = Init_test()
-    print(da)
-    test_init._comparative_between_three_years()
+
+    print(test_init.readdataframe_using_seaborn())
+    print(test_init.readdataframe_using_seaborn().info())
+    print(test_init.readdataframe_using_seaborn()[test_init.readdataframe_using_seaborn()['temperature'] > 0].corr())
+    
+
+    # sns.pairplot(test_init.readdataframe_using_seaborn())
+    # sns.displot(test_init.readdataframe_using_seaborn()['clouds'])
+
+    # always when i want to show my chart using another library, first i must to use 'plt.show()'
+    # to draw the chart
+    # plt.show()
+    # test_init._comparative_between_three_years()
 
 
 test_function_with_parameters()
