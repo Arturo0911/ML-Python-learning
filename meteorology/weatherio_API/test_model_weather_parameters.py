@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 from pprint import pprint
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 """ Libraries of the data storage """
 
@@ -24,9 +25,7 @@ class Init_test:
     def __init__(self):
         # initialize the parameters to be the query
 
-        # self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'
         self._path = '.csv/.clouds_parameters/.{}/.{}/.{}.csv'
-        # self.dataframe_weather = pd.read_csv(self.path)
 
     def read_dataframe(self, object_parameters):
         # Return the dataframe with all the values in the data
@@ -179,11 +178,11 @@ class Init_test:
                         str(y): list_temperature
                     })"""
                     
-
-                    """plt.scatter(object_data['x'], object_data['y'])
+                    'exec(%matplotlib inline)'
+                    plt.scatter(object_data['x'], object_data['y'], c=".3")
                     plt.xlabel("Dates")
                     plt.ylabel("Temperature")
-                    plt.show()"""
+                    plt.show()
 
                 elif math_process.check_covariance(object_data) == 0:
                     # print("Behavior %s  and year %s..."%(x,y))
@@ -210,6 +209,7 @@ def test_function_with_parameters():
         This function, only will be read the instancies, from the main Class
     """
     test_init = Init_test()
+    print(da)
     test_init._comparative_between_three_years()
 
 
