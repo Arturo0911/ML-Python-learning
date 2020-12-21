@@ -11,7 +11,6 @@ from Create_days import Create_days as cd
 from pandas.io import api
 import numpy as np
 import pandas as pd
-import torch
 from pprint import pprint
 import matplotlib.pyplot as plt
 
@@ -22,7 +21,7 @@ import matplotlib.pyplot as plt
 
 class Init_test:
 
-    def __init__(self):  # cloud_parameter, year_consult):
+    def __init__(self):
         # initialize the parameters to be the query
 
         # self.path = '.csv/.clouds_parameters/.'+ cloud_parameter+'/.'+str(year_consult)+'/.'+str(year_consult)+'.csv'

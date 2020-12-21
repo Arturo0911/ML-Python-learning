@@ -5,6 +5,7 @@ from os import truncate
 from typing import final
 
 
+
 class Math_process:
 
     def Generate_average_from_list(self, list_values):
