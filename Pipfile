@@ -10,6 +10,7 @@ scikit-learn = "*"
 pandas = "*"
 numpy = "*"
 matplotlib = "*"
+flask = "*"
 
 [requires]
 python_version = "3.8"
