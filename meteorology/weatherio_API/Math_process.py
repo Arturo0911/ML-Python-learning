@@ -55,10 +55,10 @@ class Math_process:
         for z in objects_data['x']:
             list_pow.append(float(pow((z - x_average), 2)))
 
-
+        # Assuming, that both lists, has the same length
         CONST_LENGHT = len(list_x)
         total_sum = 0
-        # Assuming, that both lists, has the same length
+        
 
         for i in range(CONST_LENGHT):
             total_sum += (float(list_x[i] *list_y[i]))
@@ -69,8 +69,8 @@ class Math_process:
 
         prediction_model = {
 
-            'β1': β1,
-            'β0':β0,
+            'β1': float("{0:.3f}".format(β1)),
+            'β0':float("{0:.3f}".format(β0)),
             'x_average':x_average,
             'y_average': y_average
 
@@ -78,6 +78,20 @@ class Math_process:
 
         return prediction_model
 
+
+    # Use the math model to test the prediction
+
+    def test_math_model(self, objects_data):
+        """
+        Where x_data is the value to be inserted, to calculated the aprox of the value requiered
+        """
+        # assing the prediction model to variable, to access whole data stored
+        object_model = self.Generate_parameters_from_regretion(objects_data)
+
+        print("[*] The prediction model is Y  = %s + X * %s  "%( object_model['β0'],object_model['β1'] ))
+
+
+        
 
 
 
@@ -293,3 +307,15 @@ class Math_process:
         
         
 
+# Testing
+
+
+math_processing = Math_process()
+objects_data = {
+    'x': [1.7,1.6,2.8,5.6,1.3,2.2,1.3,1.1,3.2,1.5,5.2,4.6,5.8,3],
+    'y': [3.7,3.9,6.7,9.5,3.4,5.6,3.7,2.7,5.5,2.9,10.7,7.6,11.8,4.1]
+}
+
+
+print(math_processing.Generate_parameters_from_regretion(objects_data))
+math_processing.test_math_model(objects_data)
