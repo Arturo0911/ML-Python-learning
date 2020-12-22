@@ -16,14 +16,70 @@ class Math_process:
 
         return average
 
-    def Generate_parameters_from_regretion(self):        
+    def Generate_parameters_from_regretion(self, objects_data):        
         # β1 and β0
         # the Math model of linear regretion
         # Y = β0 + β1*x
+        """
+        β1 =  Sumatory of products between differences the x's and y's with respectives averages/ in sumatory in
+                pow difference between x and her average
 
-        
+        β0 = Y - β1X
 
-        pass
+
+        Structure of the obejcts_data = {
+            
+            'x': list,
+            'y': list
+
+        }
+        """
+
+        # Define list
+        list_x = list()
+        list_y = list()
+        list_pow = list()
+
+
+        x_average = self._define_average(objects_data['x'], len(objects_data['x']))
+        y_average = self._define_average(objects_data['y'], len(objects_data['y']))
+
+
+        for x in objects_data['x']:
+            list_x.append(float(x  - x_average))
+
+        for y in objects_data['y']:
+            list_y.append(float(y - y_average))
+
+
+        for z in objects_data['x']:
+            list_pow.append(float(pow((z - x_average), 2)))
+
+
+        CONST_LENGHT = len(list_x)
+        total_sum = 0
+        # Assuming, that both lists, has the same length
+
+        for i in range(CONST_LENGHT):
+            total_sum += (float(list_x[i] *list_y[i]))
+
+
+        β1 = float("{0:.3f}".format((total_sum / (sum(list_pow)))))
+        β0 = float( y_average - (β1*x_average))
+
+        prediction_model = {
+
+            'β1': β1,
+            'β0':β0,
+            'x_average':x_average,
+            'y_average': y_average
+
+        }
+
+        return prediction_model
+
+
+
 
     def _define_average(self,number, length):
 
