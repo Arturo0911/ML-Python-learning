@@ -4,7 +4,7 @@
 """ MATH PROCESS  """
 import math
 from pprint import pprint
-
+from COLORS import bcolors
 
 class Math_process:
 
@@ -20,26 +20,20 @@ class Math_process:
 
         #----------------------------------------------#
         #      Generate_parameters_from_regretion      #
+        #           Y = β0 + β1*x                      #
         #----------------------------------------------#
 
-        # β1 and β0
-        # the Math model of linear regretion
-        # Y = β0 + β1*x
-        """
-        β1 =  Sumatory of products between differences the x's and y's with respectives averages/ in sumatory in
-                pow difference between x and her average
+        #------------------------------------------------#
+        #       β1 = ⅀((x - x⁻)*(y - y⁻))               # 
+        #                 ⅀ ( x - x²)                   #
+        #-----------------------------------------------#
 
-        β0 = Y - β1X
-
-
-        Structure of the obejcts_data = {
-
-            'x': list,
-            'y': list
-
-        }
-        """
-
+        #------------------------------------------------#
+        #    Structure of the obejcts_data = {          #
+        #            'x': list,                         #
+        #            'y': list                          #
+        #           }                                   #
+        #------------------------------------------------#
         # Define parameters
         list_x = list()
         list_y = list()
@@ -78,9 +72,8 @@ class Math_process:
             'x_average': x_average,
             'y_average': y_average,
             'max_value': MAX_X,  # is necessary set this kinna value
-            # in each test, the value cannot be much more of max value and lesser than min value
-            'min_value': MIN_X
-
+            'min_value': MIN_X   # in each test, the value cannot be much more 
+                                 # of max value and lesser than min value
         }
 
 
@@ -93,25 +86,53 @@ class Math_process:
     # Use the math model to test the prediction
 
     def test_math_model(self, objects_data, x_data):
-        """
-        Where x_data is the value to be inserted, to calculated the aprox of the value requiered
-        """
+        # Where x_data is the list of values to be proveds, 
+        # to calculated the aprox of the value requiered
+        # Every value rejectted will be stored in an array, 
+        # after that, calculate which is the percent of wins
+        # under the total of the values inserteds
+        
+
+        # Set the list of contain the values
+        rejected_list = list()
+        winner_list = list()
+        cases = 1
+
         # assing the prediction model to variable, to access whole data stored
         object_model = self.Generate_parameters_from_regretion(objects_data)
         y = 0
-        print("[*] The prediction model is Y  = %s + X * %s  " %
+        print(bcolors.OKGREEN+"[*] The prediction model is Y  = %s + X * %s  " %
             (object_model['β0'], object_model['β1']))
-        print("[*] The value to be tested in the model %s" % x_data)
+        print(bcolors.OKGREEN+"[*] The value to be tested in the model %s" % x_data)
 
-        print("[*] The max %s and min %s value to be take in account" %
+        print(bcolors.OKGREEN+"[*] The max %s and min %s value to be take in account" %
             (object_model['max_value'], object_model['min_value']))
 
-            
-        if x_data > object_model['max_value'] or x_data < object_model['min_value']:
-            print("[x] this value cannot be used, because it is not in the stablished range.")
+        # try catch statement
+        try:
+            # initialized ttry catch with loop insided
+            for x in x_data:
+                # print(x)
+                if float(x) > object_model['max_value'] or float(x) < object_model['min_value']:
+                    # print(bcolors.WARNING+"[x] this value cannot be used, because it is not in the stablished range.")
+                    rejected_list.append(x)
+                else:
+                    y = float("{0:.3f}".format(float(object_model['β0']) + (float(object_model['β1']) * float(x))))
+                    print("[*] CASE %s      "%cases+(bcolors.OKGREEN+"Passed!"))
+                    winner_list.append(x)
+                    # print (bcolors.OKBLUE+"the prediction is: %s"%y)
+                cases +=1
+
+        except Exception as e:
+            print("Error by: "+str(e))
         else:
-            y = float("{0:.3f}".format(float(object_model['β0']) + (float(object_model['β1']) * float(x_data))))
-            print ("the prediction is: %s"%y)
+            print("rejected list %s and winner list %s"%(rejected_list, winner_list))
+            
+        finally:
+            rejecteds_percents = float((len(rejected_list) / len(x_data))*100)
+            print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
+        
+        
 
 
 
@@ -331,7 +352,7 @@ objects_data = {
     'x': [1.7, 1.6, 2.8, 5.6, 1.3, 2.2, 1.3, 1.1,3.2,1.5,5.2,4.6,5.8,3],
     'y': [3.7, 3.9, 6.7, 9.5, 3.4, 5.6, 3.7, 2.7,5.5,2.9,10.7,7.6,11.8,4.1]
 }
-
+list_proves = [25,5,1,55,3,3.2,8,9,1,2,3,3.3,56,5.2,22.3,2.0,2.1,2.3,2.6]
 
 pprint(math_processing.Generate_parameters_from_regretion(objects_data))
-math_processing.test_math_model(objects_data, 6)
+math_processing.test_math_model(objects_data, list_proves)
