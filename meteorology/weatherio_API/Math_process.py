@@ -1,6 +1,7 @@
 
 """ MATH PROCESS  """
 
+from Model import Prediction_model
 from os import truncate
 from typing import final
 
@@ -81,7 +82,7 @@ class Math_process:
 
     # Use the math model to test the prediction
 
-    def test_math_model(self, objects_data):
+    def test_math_model(self, objects_data, x_data):
         """
         Where x_data is the value to be inserted, to calculated the aprox of the value requiered
         """
@@ -89,7 +90,9 @@ class Math_process:
         object_model = self.Generate_parameters_from_regretion(objects_data)
 
         print("[*] The prediction model is Y  = %s + X * %s  "%( object_model['β0'],object_model['β1'] ))
+        print("[*] the value to be tested in the model %s"%x_data)
 
+        print("[*] the result Y = ")
 
         
 
@@ -311,6 +314,9 @@ class Math_process:
 
 
 math_processing = Math_process()
+
+# prediction about the sales per year
+# example extracted from the Statstics in 5th semester.
 objects_data = {
     'x': [1.7,1.6,2.8,5.6,1.3,2.2,1.3,1.1,3.2,1.5,5.2,4.6,5.8,3],
     'y': [3.7,3.9,6.7,9.5,3.4,5.6,3.7,2.7,5.5,2.9,10.7,7.6,11.8,4.1]
