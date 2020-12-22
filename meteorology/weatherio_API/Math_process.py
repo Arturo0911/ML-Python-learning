@@ -1,9 +1,9 @@
 
 """ MATH PROCESS  """
 
-from Model import Prediction_model
 from os import truncate
 from typing import final
+from pprint import pprint
 
 
 
@@ -36,11 +36,12 @@ class Math_process:
         }
         """
 
-        # Define list
+        # Define parameters
         list_x = list()
         list_y = list()
         list_pow = list()
-
+        MAX_X = sorted(objects_data['x'])[len(objects_data['x']) - 1]
+        MIN_X = sorted(objects_data['x'])[0]
 
         x_average = self._define_average(sum(objects_data['x']), len(objects_data['x']))
         y_average = self._define_average(sum(objects_data['y']), len(objects_data['y']))
@@ -73,7 +74,9 @@ class Math_process:
             'β1': float("{0:.3f}".format(β1)),
             'β0':float("{0:.3f}".format(β0)),
             'x_average':x_average,
-            'y_average': y_average
+            'y_average': y_average,
+            'max_value':MAX_X,
+            'min_value':MIN_X
 
         }
 
@@ -90,9 +93,9 @@ class Math_process:
         object_model = self.Generate_parameters_from_regretion(objects_data)
 
         print("[*] The prediction model is Y  = %s + X * %s  "%( object_model['β0'],object_model['β1'] ))
-        print("[*] the value to be tested in the model %s"%x_data)
+        print("[*] The value to be tested in the model %s"%x_data)
 
-        print("[*] the result Y = ")
+        print("[*] The max %s and min %s value to be take in account"%(object_model['max_value'], object_model['min_value']))
 
         
 
@@ -323,5 +326,5 @@ objects_data = {
 }
 
 
-print(math_processing.Generate_parameters_from_regretion(objects_data))
-math_processing.test_math_model(objects_data)
+pprint(math_processing.Generate_parameters_from_regretion(objects_data))
+math_processing.test_math_model(objects_data,5)
