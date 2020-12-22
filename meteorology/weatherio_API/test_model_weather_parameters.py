@@ -104,8 +104,9 @@ class Init_test:
         create_days = cd()
         create_days.generate_appends()
 
-        # Object
+        # Objects
         final_object = []
+        object_with_correlassion_positive = []
 
         # for x in create_days.get_objects():
         for x in make_list():
@@ -210,15 +211,22 @@ class Init_test:
         pprint(final_object)
 
 
+    def define_math_model(self):
+
+        """
+        This method, will test the first math model
+        """
+        pass
+
 def test_function_with_parameters():
     """
         This function, only will be read the instancies, from the main Class
     """
     test_init = Init_test()
 
-    print(test_init.readdataframe_using_seaborn())
-    print(test_init.readdataframe_using_seaborn().info())
-    print(test_init.readdataframe_using_seaborn()[test_init.readdataframe_using_seaborn()['temperature'] > 0].corr())
+    # print(test_init.readdataframe_using_seaborn())
+    # print(test_init.readdataframe_using_seaborn().info())
+    # print(test_init.readdataframe_using_seaborn()[test_init.readdataframe_using_seaborn()['temperature'] > 0].corr())
     
 
     # sns.pairplot(test_init.readdataframe_using_seaborn())
@@ -227,7 +235,7 @@ def test_function_with_parameters():
     # always when i want to show my chart using another library, first i must to use 'plt.show()'
     # to draw the chart
     # plt.show()
-    # test_init._comparative_between_three_years()
+    test_init._comparative_between_three_years()
 
 
 test_function_with_parameters()
