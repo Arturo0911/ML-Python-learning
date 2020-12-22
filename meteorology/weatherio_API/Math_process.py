@@ -83,6 +83,11 @@ class Math_process:
 
         }
 
+
+        #----------------------------------------------#
+        #               Y = β0 + β1*x                  #
+        #----------------------------------------------#
+
         return prediction_model
 
     # Use the math model to test the prediction
@@ -93,7 +98,7 @@ class Math_process:
         """
         # assing the prediction model to variable, to access whole data stored
         object_model = self.Generate_parameters_from_regretion(objects_data)
-
+        y = 0
         print("[*] The prediction model is Y  = %s + X * %s  " %
             (object_model['β0'], object_model['β1']))
         print("[*] The value to be tested in the model %s" % x_data)
@@ -105,7 +110,10 @@ class Math_process:
         if x_data > object_model['max_value'] or x_data < object_model['min_value']:
             print("[x] this value cannot be used, because it is not in the stablished range.")
         else:
-            pass
+            y = float("{0:.3f}".format(float(object_model['β0']) + (float(object_model['β1']) * float(x_data))))
+            print ("the prediction is: %s"%y)
+
+
 
     def _define_average(self, number, length):
 
@@ -326,4 +334,4 @@ objects_data = {
 
 
 pprint(math_processing.Generate_parameters_from_regretion(objects_data))
-math_processing.test_math_model(objects_data, 5)
+math_processing.test_math_model(objects_data, 6)
