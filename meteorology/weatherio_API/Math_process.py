@@ -41,8 +41,8 @@ class Math_process:
         list_pow = list()
 
 
-        x_average = self._define_average(objects_data['x'], len(objects_data['x']))
-        y_average = self._define_average(objects_data['y'], len(objects_data['y']))
+        x_average = self._define_average(sum(objects_data['x']), len(objects_data['x']))
+        y_average = self._define_average(sum(objects_data['y']), len(objects_data['y']))
 
 
         for x in objects_data['x']:

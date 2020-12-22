@@ -184,6 +184,9 @@ class Init_test:
                     """change_object.append({
                         str(y): list_temperature
                     })"""
+
+                    print(math_process.Generate_parameters_from_regretion(object_data))
+                    break
                     
                     'exec(%matplotlib inline)'
                     plt.scatter(object_data['x'], object_data['y'], c=".3")
