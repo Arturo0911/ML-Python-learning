@@ -97,6 +97,7 @@ class Math_process:
         rejected_list = list()
         winner_list = list()
         cases = 1
+        
 
         # assing the prediction model to variable, to access whole data stored
         object_model = self.Generate_parameters_from_regretion(objects_data)
@@ -130,8 +131,17 @@ class Math_process:
             print("rejected list %s and winner list %s"%(rejected_list, winner_list))
             
         finally:
-            rejecteds_percents = float((len(winner_list) / len(x_data))*100)
+            
+            rejecteds_percents = float((len(rejected_list) / len(x_data))*100)
+            accepted_percents = float((len(winner_list) / len(x_data))*100)
             print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
+            prediction = {
+                    'rejected_elements': rejected_list,
+                    'acepted_elements': winner_list,
+                    'rejected_percents': float("{0:.3f}".format(rejecteds_percents)),
+                    'accepted_elements':float("{0:.3f}".format(accepted_percents)),
+            }
+            print(prediction)
         
         
 
@@ -324,6 +334,7 @@ class Math_process:
             ((final_average - average_2019)/final_average)*100))
 
 
+"""
 # Testing
 
 math_processing = Math_process()
@@ -338,3 +349,4 @@ list_proves = [25,5,1,55,3,3.2,8,9,1,2,3,3.3,56,5.2,22.3,2.0,2.1,2.3,2.6]
 
 pprint(math_processing.Generate_parameters_from_regretion(objects_data))
 math_processing.test_math_model(objects_data, list_proves)
+"""

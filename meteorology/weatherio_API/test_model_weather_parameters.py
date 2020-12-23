@@ -107,6 +107,7 @@ class Init_test:
         # Objects
         final_object = []
         object_with_correlassion_positive = []
+        prediction_object = list()
 
         # for x in create_days.get_objects():
         for x in make_list():
@@ -127,6 +128,7 @@ class Init_test:
                 # and temperature values at the list_temperature
                 list_humidity = list()
                 list_temperature = list()
+                
 
                 objects_ = {
                     'values': {
@@ -181,18 +183,19 @@ class Init_test:
 
                         })
 
-                    """change_object.append({
-                        str(y): list_temperature
-                    })"""
+                        prediction_object.append({str(y): object_data })
 
-                    print(math_process.Generate_parameters_from_regretion(object_data))
-                    break
+                        # print(object_data)
+                    # print(math_process.Generate_parameters_from_regretion(object_data))
+                    # break
                     
+                    """
                     'exec(%matplotlib inline)'
                     plt.scatter(object_data['x'], object_data['y'], c=".3")
                     plt.xlabel("Dates")
                     plt.ylabel("Temperature")
                     plt.show()
+                    """
 
                 elif math_process.check_covariance(object_data) == 0:
                     # print("Behavior %s  and year %s..."%(x,y))
@@ -211,7 +214,11 @@ class Init_test:
             """if len(change_object) == 3:
                 math_process.set_relation_three_years(change_object)"""
 
-        pprint(final_object)
+        # pprint(final_object)
+        # pprint(prediction_object)
+        print(prediction_object)
+        math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
+        
 
 
     def define_math_model(self):
