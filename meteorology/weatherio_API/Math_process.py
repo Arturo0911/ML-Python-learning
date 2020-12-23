@@ -4,7 +4,7 @@
 """ MATH PROCESS  """
 import math
 from pprint import pprint
-from COLORS import bcolors
+
 
 class Math_process:
 
@@ -101,11 +101,11 @@ class Math_process:
         # assing the prediction model to variable, to access whole data stored
         object_model = self.Generate_parameters_from_regretion(objects_data)
         y = 0
-        print(bcolors.OKGREEN+"[*] The prediction model is Y  = %s + X * %s  " %
+        print("[*] The prediction model is Y  = %s + X * %s  " %
             (object_model['β0'], object_model['β1']))
-        print(bcolors.OKGREEN+"[*] The value to be tested in the model %s" % x_data)
+        print("[*] The value to be tested in the model %s" % x_data)
 
-        print(bcolors.OKGREEN+"[*] The max %s and min %s value to be take in account" %
+        print("[*] The max %s and min %s value to be take in account" %
             (object_model['max_value'], object_model['min_value']))
 
         # try catch statement
@@ -115,10 +115,11 @@ class Math_process:
                 # print(x)
                 if float(x) > object_model['max_value'] or float(x) < object_model['min_value']:
                     # print(bcolors.WARNING+"[x] this value cannot be used, because it is not in the stablished range.")
+                    print("[x] CASE %s      Rejected!"%cases)
                     rejected_list.append(x)
                 else:
                     y = float("{0:.3f}".format(float(object_model['β0']) + (float(object_model['β1']) * float(x))))
-                    print("[*] CASE %s      "%cases+(bcolors.OKGREEN+"Passed!"))
+                    print("[*] CASE %s      Passed!  "%cases)
                     winner_list.append(x)
                     # print (bcolors.OKBLUE+"the prediction is: %s"%y)
                 cases +=1
@@ -129,12 +130,17 @@ class Math_process:
             print("rejected list %s and winner list %s"%(rejected_list, winner_list))
             
         finally:
-            rejecteds_percents = float((len(rejected_list) / len(x_data))*100)
+            rejecteds_percents = float((len(winner_list) / len(x_data))*100)
             print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
         
         
 
-
+    def learning_supervised(self):
+        #--------------------------------------------------#
+        # This method will evaluate the value of percents  #
+        # of the test in the self method test_math_model   #
+        #--------------------------------------------------#
+        pass
 
     def _define_average(self, number, length):
 
@@ -271,31 +277,7 @@ class Math_process:
 
         # Return the Variance from both values
         # Doing the testing in the test_model_weather_parameters.py
-        """
-            [
-                {'correlation_coefficent': 0.615,
-                'covariance': 33.663,
-                'parameter': 'Overcast_clouds',
-                'year': 2017},
-                {'correlation_coefficent': 0.411,
-                'covariance': 10.164,
-                'parameter': 'Overcast_clouds',
-                'year': 2018},
-                {'correlation_coefficent': 0.176,
-                'covariance': 13.742,
-                'parameter': 'Overcast_clouds',
-                'year': 2019},
-                {'correlation_coefficent': 0.089,
-                'covariance': 6.043,
-                'parameter': 'Broken_clouds',
-                'year': 2019},
-                {'correlation_coefficent': 0.018,
-                'covariance': 1.088,
-                'parameter': 'Scattered_clouds',
-                'year': 2019}
-            ]
-
-        """
+        
         return Sx, Sy
 
         # print(Sx, Sy)
