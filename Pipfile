@@ -13,6 +13,8 @@ matplotlib = "*"
 flask = "*"
 seaborn = "*"
 flask-script = "*"
+graphene = "*"
+flask-graphql = "*"
 
 [requires]
 python_version = "3.8"
