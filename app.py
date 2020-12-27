@@ -1,5 +1,5 @@
 from flask import Flask
-from app import run_app
+# from app import run_app
 
 
 app = Flask(__name__)
@@ -10,4 +10,4 @@ def API_init():
 
 
 if __name__ == '__main__':
-    app.run(port = 4000, debug = True)
+    app.run(port = 5000, debug = True)
