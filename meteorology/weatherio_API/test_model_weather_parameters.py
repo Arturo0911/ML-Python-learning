@@ -169,7 +169,7 @@ class Init_test:
                     # print("[*] Covariance: ", math_process.check_covariance(object_data), end="")
 
                     # print("[*] Correlation coefficent: ", math_process.correlation_coefficent(object_data))
-                    print("Behavior %s  and year %s..."%(x,y))
+                    # print("Behavior %s  and year %s..."%(x,y))
 
                     if x == "Overcast_clouds":
                         # Only use this condition to show three years with the covariance positive.
@@ -198,18 +198,26 @@ class Init_test:
                     """
 
                 elif math_process.check_covariance(object_data) == 0:
-                    # print("Behavior %s  and year %s..."%(x,y))
-                    # print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    print("[*] covariance is Zero")
+                    print("Behavior %s  and year %s..."%(x,y))
+                    print("Covariance: ", math_process.check_covariance(object_data))
+                    print("Correlation coefficent %s "%math_process.correlation_coefficent(object_data))
                     # print("[0] Covariance is Zero")
-                    pass
+                    # pass
                     
                 else:
-                    # print("Behavior %s  and year %s..."%(x,y))
-                    # print("Covariance: ", math_process.check_covariance(object_data), end="")
+                    print("[*] covariance is lesser than 0")
+                    print("Behavior %s  and year %s..."%(x,y))
+                    print("Covariance: ", math_process.check_covariance(object_data))
+                    print("Correlation coefficent %s "%math_process.correlation_coefficent(object_data))
+                    plt.scatter(object_data['x'], object_data['y'])
+                    plt.xlabel("Dates")
+                    plt.ylabel("Temperature")
+                    plt.show()
                     # print("[x] Covariance is negative")
-                    pass
+                    # pass
         
-        math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
+        # math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
         
 
 
