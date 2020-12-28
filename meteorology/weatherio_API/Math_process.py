@@ -332,21 +332,3 @@ class Math_process:
             ((final_average - average_2018)/final_average)*100))
         print("Variation from the year 2019 is: %s percent " % "{0:.3f}".format(
             ((final_average - average_2019)/final_average)*100))
-
-
-"""
-# Testing
-
-math_processing = Math_process()
-
-# prediction about the sales per year
-# example extracted from the Statstics in 5th semester.
-objects_data = {
-    'x': [1.7, 1.6, 2.8, 5.6, 1.3, 2.2, 1.3, 1.1,3.2,1.5,5.2,4.6,5.8,3],
-    'y': [3.7, 3.9, 6.7, 9.5, 3.4, 5.6, 3.7, 2.7,5.5,2.9,10.7,7.6,11.8,4.1]
-}
-list_proves = [25,5,1,55,3,3.2,8,9,1,2,3,3.3,56,5.2,22.3,2.0,2.1,2.3,2.6]
-
-pprint(math_processing.Generate_parameters_from_regression(objects_data))
-math_processing.test_math_model(objects_data, list_proves)
-"""
