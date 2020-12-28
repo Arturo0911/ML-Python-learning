@@ -216,7 +216,7 @@ class Init_test:
 
         # pprint(final_object)
         # pprint(prediction_object)
-        print(prediction_object)
+        # print(prediction_object)
         math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
         
 

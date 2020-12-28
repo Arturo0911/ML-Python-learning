@@ -300,7 +300,7 @@ class Math_process:
         return float("{0:.3f}".format((Sxy) / (Sx * Sy)))
 
     def set_relation_three_years(self, object_values):
-        # How mucho is the difference between the actual value
+        # How much is the difference between the actual value
         # of the parameter and the value of the average between the
         # the three years
         """
