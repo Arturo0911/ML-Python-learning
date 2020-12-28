@@ -16,10 +16,10 @@ class Math_process:
 
         return average
 
-    def Generate_parameters_from_regretion(self, objects_data):
+    def Generate_parameters_from_regression(self, objects_data):
 
         #----------------------------------------------#
-        #      Generate_parameters_from_regretion      #
+        #      Generate_parameters_from_regression      #
         #           Y = β0 + β1*x                      #
         #----------------------------------------------#
 
@@ -88,7 +88,7 @@ class Math_process:
     def test_math_model(self, objects_data, x_data):
         # Where x_data is the list of values to be proveds, 
         # to calculated the aprox of the value requiered
-        # Every value rejectted will be stored in an array, 
+        # Every value rejected will be stored in an array, 
         # after that, calculate which is the percent of wins
         # under the total of the values inserteds
         
@@ -100,7 +100,7 @@ class Math_process:
         
 
         # assing the prediction model to variable, to access whole data stored
-        object_model = self.Generate_parameters_from_regretion(objects_data)
+        object_model = self.Generate_parameters_from_regression(objects_data)
         y = 0
         print("[*] The prediction model is Y  = %s + X * %s  " %
             (object_model['β0'], object_model['β1']))
@@ -347,6 +347,6 @@ objects_data = {
 }
 list_proves = [25,5,1,55,3,3.2,8,9,1,2,3,3.3,56,5.2,22.3,2.0,2.1,2.3,2.6]
 
-pprint(math_processing.Generate_parameters_from_regretion(objects_data))
+pprint(math_processing.Generate_parameters_from_regression(objects_data))
 math_processing.test_math_model(objects_data, list_proves)
 """

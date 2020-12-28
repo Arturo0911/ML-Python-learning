@@ -208,15 +208,7 @@ class Init_test:
                     # print("Covariance: ", math_process.check_covariance(object_data), end="")
                     # print("[x] Covariance is negative")
                     pass
-                    
-            
-            #print(change_object)
-            """if len(change_object) == 3:
-                math_process.set_relation_three_years(change_object)"""
-
-        # pprint(final_object)
-        # pprint(prediction_object)
-        # print(prediction_object)
+        
         math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
         
 
