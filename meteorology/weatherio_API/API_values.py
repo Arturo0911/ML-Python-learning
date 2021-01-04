@@ -17,8 +17,10 @@ class API_values:
         self.time_start = None
         self.time_end = None
         
-
-        self.weatherbi_key = 'c96c2aa02b1b43e184580f8efe648f59'
+        # New api key is c09b8f1a39d14a8bb9d343ccab529441
+        # self.weatherbi_key = 'c96c2aa02b1b43e184580f8efe648f59'
+        
+        self.weatherbi_key = 'c09b8f1a39d14a8bb9d343ccab529441'
         self.url = None
         self.response_data = None
 

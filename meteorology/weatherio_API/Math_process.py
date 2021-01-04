@@ -332,3 +332,8 @@ class Math_process:
             ((final_average - average_2018)/final_average)*100))
         print("Variation from the year 2019 is: %s percent " % "{0:.3f}".format(
             ((final_average - average_2019)/final_average)*100))
+
+
+
+
+
