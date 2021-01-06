@@ -112,7 +112,7 @@ class Init_test:
         # for x in create_days.get_objects():
         for x in make_list():
 
-            # print(x)
+            # print("x: ",x)
 
             # Loop in each year stored 2017 2018 2019; comming soon 2020.
 
@@ -121,7 +121,8 @@ class Init_test:
             change_object = []
             # print(x)
             for y in create_days.get_objects():
-                # print(y)
+                # print("y: ",y)
+
 
                 # Initializers
                 # the only reason is for to generate a list with the time start at the list_date
@@ -196,6 +197,7 @@ class Init_test:
                     plt.ylabel("Temperature")
                     plt.show()
                     """
+                    
 
                 elif math_process.check_covariance(object_data) == 0:
                     print("[*] covariance is Zero")
@@ -206,6 +208,9 @@ class Init_test:
                     # pass
                     
                 else:
+
+                    print("[*] the sequence of the fata with the coefficient correlation negative are: %s %s"%(x,y))
+                    """
                     print("[*] covariance is lesser than 0")
                     print("Behavior %s  and year %s..."%(x,y))
                     print("Covariance: ", math_process.check_covariance(object_data))
@@ -216,8 +221,9 @@ class Init_test:
                     plt.show()
                     # print("[x] Covariance is negative")
                     # pass
-        
-        # math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
+                    """
+        # invoke the instance from the Math_process file
+        math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
         
 
 
@@ -295,6 +301,7 @@ test_function_with_parameters()
         plt.show()
     """
 
-# pprint(final_object)
 
-# pprint(change_object)
+
+
+
