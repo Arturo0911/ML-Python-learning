@@ -209,7 +209,7 @@ class Init_test:
                     
                 else:
 
-                    print("[*] the sequence of the fata with the coefficient correlation negative are: %s %s"%(x,y))
+                    # print("[*] the sequence of the fata with the coefficient correlation negative are: %s %s"%(x,y))
                     """
                     print("[*] covariance is lesser than 0")
                     print("Behavior %s  and year %s..."%(x,y))
@@ -222,6 +222,7 @@ class Init_test:
                     # print("[x] Covariance is negative")
                     # pass
                     """
+                    pass
         # invoke the instance from the Math_process file
         math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
         

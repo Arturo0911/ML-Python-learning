@@ -68,14 +68,16 @@ class Math_process:
         β0 = float(y_average - (β1*x_average))
 
         prediction_model = {
+            # is necessary set the MAX and MIN value
+            # in each test, the value cannot be much more 
+            # of max value and lesser than min value
 
             'β1': float("{0:.3f}".format(β1)),
             'β0': float("{0:.3f}".format(β0)),
             'x_average': x_average,
             'y_average': y_average,
-            'max_value': MAX_X,  # is necessary set this kinna value
-            'min_value': MIN_X   # in each test, the value cannot be much more 
-                                 # of max value and lesser than min value
+            'max_value': MAX_X,
+            'min_value': MIN_X       
         }
 
 
@@ -99,6 +101,7 @@ class Math_process:
         rejected_list = list()
         winner_list = list()
         cases = 1
+        rejected_cases = 0
         
 
         # Assign the prediction model to the variable, to access all the stored data.
@@ -106,11 +109,11 @@ class Math_process:
         y = 0
         print("[*] The prediction model is Y  = %s + X * %s  " %
             (object_model['β0'], object_model['β1']))
-        print("[*] The value to be tested in the model %s" % x_data)
+        """print("[*] The value to be tested in the model %s" % x_data)
 
         print("[*] The max %s and min %s value to be take in account" %
-            (object_model['max_value'], object_model['min_value']))
-
+            (object_model['max_value'], object_model['min_value']))"""
+        # print(x_data)
         # try catch statement
         try:
             # initialized ttry catch with loop insided
@@ -118,11 +121,12 @@ class Math_process:
                 # print(x)
                 if float(x) > object_model['max_value'] or float(x) < object_model['min_value']:
                     # print(bcolors.WARNING+"[x] this value cannot be used, because it is not in the stablished range.")
-                    print("[x] CASE %s      Rejected!"%cases)
+                    # print("[x] CASE %s  value %s    Rejected."%(cases,x))
+                    rejected_cases += 1
                     rejected_list.append(x)
                 else:
                     y = float("{0:.3f}".format(float(object_model['β0']) + (float(object_model['β1']) * float(x))))
-                    print("[*] CASE %s      Passed!  "%cases)
+                    print("[*] CASE %s  Passed  value %s."%(cases,x))
                     winner_list.append(x)
                     # print (bcolors.OKBLUE+"the prediction is: %s"%y)
                 cases +=1
@@ -130,20 +134,23 @@ class Math_process:
         except Exception as e:
             print("Error by: "+str(e))
         else:
-            print("rejected list %s and winner list %s"%(rejected_list, winner_list))
-            
+            # print("rejected list %s and winner list %s"%(rejected_list, winner_list))
+            print("\n")
+            print("[*] Total cases %s, number of passed cases %s and rejected %s"%(len(x_data),(len(x_data) - rejected_cases),(rejected_cases)))
+            pass
         finally:
             
             rejecteds_percents = float((len(rejected_list) / len(x_data))*100)
             accepted_percents = float((len(winner_list) / len(x_data))*100)
-            print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
+            # print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
             prediction = {
-                    'rejected_elements': rejected_list,
-                    'acepted_elements': winner_list,
+                    'rejected_elements': len(rejected_list),
+                    'acepted_elements': len(winner_list),
                     'rejected_percents': float("{0:.3f}".format(rejecteds_percents)),
-                    'accepted_elements':float("{0:.3f}".format(accepted_percents)),
+                    'acepted_percents':float("{0:.3f}".format(accepted_percents)),
             }
-            print(prediction)
+            print("\n")
+            pprint(prediction)
         
         
 
