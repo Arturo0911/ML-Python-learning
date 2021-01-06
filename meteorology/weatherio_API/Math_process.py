@@ -101,7 +101,7 @@ class Math_process:
         cases = 1
         
 
-        # assing the prediction model to variable, to access whole data stored
+        # Assign the prediction model to the variable, to access all the stored data.
         object_model = self.Generate_parameters_from_regression(objects_data)
         y = 0
         print("[*] The prediction model is Y  = %s + X * %s  " %
