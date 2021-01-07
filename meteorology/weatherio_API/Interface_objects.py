@@ -119,3 +119,6 @@ def make_list():
     description_cloud_list = ['Overcast_clouds','Broken_clouds','Few_clouds', 'Clear_Sky','Light_rain','Scattered_clouds']
 
     return description_cloud_list
+
+
+
