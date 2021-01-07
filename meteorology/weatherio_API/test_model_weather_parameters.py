@@ -186,7 +186,7 @@ class Init_test:
 
                         prediction_object.append({str(y): object_data })
 
-                        # print(object_data)
+                        print("cloud_type %s and %s "%(x,object_data))
                     # print(math_process.Generate_parameters_from_regretion(object_data))
                     # break
                     
@@ -224,7 +224,8 @@ class Init_test:
                     """
                     pass
         # invoke the instance from the Math_process file
-        math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
+        # pprint(prediction_object)
+        # math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
         
 
 

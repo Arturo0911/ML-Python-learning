@@ -24,7 +24,7 @@ class Math_process:
         #----------------------------------------------#
 
         #----------------------------------------------#
-        #       β1 = ⅀((x - x⁻)*(y - y⁻))              # 
+        #       β1 = ⅀((x - x⁻)*(y - y⁻))              #
         #                 ⅀ ( x - x²)                  #
         #----------------------------------------------#
 
@@ -34,7 +34,6 @@ class Math_process:
         #            'y': list                         #
         #           }                                  #
         #----------------------------------------------#
-
 
         # Define parameters
         list_x = list()
@@ -69,7 +68,7 @@ class Math_process:
 
         prediction_model = {
             # is necessary set the MAX and MIN value
-            # in each test, the value cannot be much more 
+            # in each test, the value cannot be much more
             # of max value and lesser than min value
 
             'β1': float("{0:.3f}".format(β1)),
@@ -77,9 +76,8 @@ class Math_process:
             'x_average': x_average,
             'y_average': y_average,
             'max_value': MAX_X,
-            'min_value': MIN_X       
+            'min_value': MIN_X
         }
-
 
         #----------------------------------------------#
         #               Y = β0 + β1*x                  #
@@ -90,25 +88,23 @@ class Math_process:
     # Use the math model to test the prediction
 
     def test_math_model(self, objects_data, x_data):
-        # Where x_data is the list of values to be proveds, 
+        # Where x_data is the list of values to be proveds,
         # to calculated the aprox of the value requiered
-        # Every value rejected will be stored in an array, 
+        # Every value rejected will be stored in an array,
         # after that, calculate which is the percent of wins
         # under the total of the values inserteds
-        
 
         # Set the list of contain the values
         rejected_list = list()
         winner_list = list()
         cases = 1
         rejected_cases = 0
-        
 
         # Assign the prediction model to the variable, to access all the stored data.
         object_model = self.Generate_parameters_from_regression(objects_data)
         y = 0
         print("[*] The prediction model is Y  = %s + X * %s  " %
-            (object_model['β0'], object_model['β1']))
+              (object_model['β0'], object_model['β1']))
         """print("[*] The value to be tested in the model %s" % x_data)
 
         print("[*] The max %s and min %s value to be take in account" %
@@ -125,34 +121,34 @@ class Math_process:
                     rejected_cases += 1
                     rejected_list.append(x)
                 else:
-                    y = float("{0:.3f}".format(float(object_model['β0']) + (float(object_model['β1']) * float(x))))
-                    print("[*] CASE %s  Passed  value %s."%(cases,x))
+                    y = float("{0:.3f}".format(
+                        float(object_model['β0']) + (float(object_model['β1']) * float(x))))
+                    print("[*] CASE %s  Passed  value %s." % (cases, x))
                     winner_list.append(x)
                     # print (bcolors.OKBLUE+"the prediction is: %s"%y)
-                cases +=1
+                cases += 1
 
         except Exception as e:
             print("Error by: "+str(e))
         else:
             # print("rejected list %s and winner list %s"%(rejected_list, winner_list))
             print("\n")
-            print("[*] Total cases %s, number of passed cases %s and rejected %s"%(len(x_data),(len(x_data) - rejected_cases),(rejected_cases)))
+            print("[*] Total cases %s, number of passed cases %s and rejected %s" %
+                  (len(x_data), (len(x_data) - rejected_cases), (rejected_cases)))
             pass
         finally:
-            
+
             rejecteds_percents = float((len(rejected_list) / len(x_data))*100)
             accepted_percents = float((len(winner_list) / len(x_data))*100)
             # print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
             prediction = {
-                    'rejected_elements': len(rejected_list),
-                    'acepted_elements': len(winner_list),
-                    'rejected_percents': float("{0:.3f}".format(rejecteds_percents)),
-                    'acepted_percents':float("{0:.3f}".format(accepted_percents)),
+                'rejected_elements': len(rejected_list),
+                'acepted_elements': len(winner_list),
+                'rejected_percents': float("{0:.3f}".format(rejecteds_percents)),
+                'acepted_percents': float("{0:.3f}".format(accepted_percents)),
             }
             print("\n")
             pprint(prediction)
-        
-        
 
     def learning_supervised(self):
         #--------------------------------------------------#
@@ -296,7 +292,7 @@ class Math_process:
 
         # Return the Variance from both values
         # Doing the testing in the test_model_weather_parameters.py
-        
+
         return Sx, Sy
 
         # print(Sx, Sy)
@@ -341,8 +337,3 @@ class Math_process:
             ((final_average - average_2018)/final_average)*100))
         print("Variation from the year 2019 is: %s percent " % "{0:.3f}".format(
             ((final_average - average_2019)/final_average)*100))
-
-
-
-
-
