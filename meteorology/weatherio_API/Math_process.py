@@ -220,6 +220,9 @@ class Math_process:
         # set the media of values
         # use values with 3 decimals
         # asssume that the values of x and y has the same length
+        # whenever the covariance is greater than 1, it's mean
+        # that your correlation is strong and on higher values to x is
+        # higher values to y
         """
             Structure from the list values
             object_values = {

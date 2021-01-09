@@ -150,17 +150,13 @@ class Init_test:
                     list_temperature.append(j)
 
                 # set the object_data with the values.
-                # print(x)
+                
                 object_data = {
                     'x': list_humidity,
                     'y': list_temperature
                 }
 
-                # print(object_data)
-
-                # print(math_process.check_covariance(object_data))
-
-                if math_process.check_covariance(object_data) > 0:
+                if math_process.correlation_coefficent(object_data) > 0:
                     # print("Parameters %s %s"%(x,y))
                     # print("Presenting the obeject to be evaluated: ", objects_)
                     # print("Dataframe filtered")
@@ -191,6 +187,8 @@ class Init_test:
                     # break
                     
                     """
+                    # to show in scatter with plots
+
                     'exec(%matplotlib inline)'
                     plt.scatter(object_data['x'], object_data['y'], c=".3")
                     plt.xlabel("Dates")
@@ -199,7 +197,7 @@ class Init_test:
                     """
                     
 
-                elif math_process.check_covariance(object_data) == 0:
+                elif math_process.correlation_coefficent(object_data) == 0:
                     print("[*] covariance is Zero")
                     print("Behavior %s  and year %s..."%(x,y))
                     print("Covariance: ", math_process.check_covariance(object_data))
