@@ -130,7 +130,7 @@ class Init_test:
                 list_humidity = list()
                 list_temperature = list()
                 
-
+                # get the list of clouds parameters and year activity
                 objects_ = {
                     'values': {
                         'cloud_parameter': x,
