@@ -116,7 +116,8 @@ class Math_process:
             for x in x_data:
                 # print(x)
                 if float(x) > object_model['max_value'] or float(x) < object_model['min_value']:
-                    # print(bcolors.WARNING+"[x] this value cannot be used, because it is not in the stablished range.")
+                    # print(bcolors.WARNING+"[x] this value cannot be used, because 
+                    # it is not in the stablished range.")
                     # print("[x] CASE %s  value %s    Rejected."%(cases,x))
                     rejected_cases += 1
                     rejected_list.append(x)
@@ -189,8 +190,9 @@ class Math_process:
             final_object = {
 
                 'cloud_description': description,
-                'icon': _object_[0]['icon'], 'relative_humidity': self._define_average(relative_humidity_sum,
-                                                                                       len(_object_)), 'code': _object_[0]['code'],
+                'icon': _object_[0]['icon'], 
+                'relative_humidity': self._define_average(relative_humidity_sum,len(_object_)), 
+                'code': _object_[0]['code'],
                 'temperature': self._define_average(temp_sum, len(_object_)),
                 'clouds': self._define_average(clouds_sum, len(_object_)),
                 'precipitation': self._define_average(precip_sum, len(_object_))
