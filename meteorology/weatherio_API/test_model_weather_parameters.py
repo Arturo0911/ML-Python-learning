@@ -4,7 +4,7 @@
 import time
 from datetime import time
 from Interface_objects import make_list
-from Math_process import Math_process
+from Math_process import Math_process 
 from os import O_TRUNC
 from Create_days import Create_days as cd
 
@@ -14,6 +14,7 @@ import pandas as pd
 from pprint import pprint
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 
 """ Libraries of the data storage """
 
@@ -156,7 +157,8 @@ class Init_test:
                     'y': list_temperature
                 }
 
-                if math_process.correlation_coefficent(object_data) > 0:
+                # use correlation_coefficient() instead of check_covariance()
+                if math_process.correlation_coefficient(object_data) > 0:
                     # print("Parameters %s %s"%(x,y))
                     # print("Presenting the obeject to be evaluated: ", objects_)
                     # print("Dataframe filtered")
@@ -176,7 +178,7 @@ class Init_test:
                             'parameter': x,
                             'year': y,
                             'covariance': math_process.check_covariance(object_data),
-                            'correlation_coefficent': math_process.correlation_coefficent(object_data)
+                            'correlation_coefficient': math_process.correlation_coefficient(object_data)
 
                         })
 
@@ -197,11 +199,11 @@ class Init_test:
                     """
                     
 
-                elif math_process.correlation_coefficent(object_data) == 0:
+                elif math_process.correlation_coefficient(object_data) == 0:
                     print("[*] covariance is Zero")
                     print("Behavior %s  and year %s..."%(x,y))
                     print("Covariance: ", math_process.check_covariance(object_data))
-                    print("Correlation coefficent %s "%math_process.correlation_coefficent(object_data))
+                    print("Correlation coefficent %s "%math_process.correlation_coefficient(object_data))
                     # print("[0] Covariance is Zero")
                     # pass
                     
@@ -212,7 +214,7 @@ class Init_test:
                     print("[*] covariance is lesser than 0")
                     print("Behavior %s  and year %s..."%(x,y))
                     print("Covariance: ", math_process.check_covariance(object_data))
-                    print("Correlation coefficent %s "%math_process.correlation_coefficent(object_data))
+                    print("Correlation coefficent %s "%math_process.correlation_coefficient(object_data))
                     plt.scatter(object_data['x'], object_data['y'])
                     plt.xlabel("Dates")
                     plt.ylabel("Temperature")

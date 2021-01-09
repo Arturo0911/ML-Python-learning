@@ -302,7 +302,7 @@ class Math_process:
 
         # print(Sx, Sy)
 
-    def correlation_coefficent(self, object_values):
+    def correlation_coefficient(self, object_values):
 
         Sxy = self.check_covariance(object_values)
         Sx, Sy = self.variance(object_values)
