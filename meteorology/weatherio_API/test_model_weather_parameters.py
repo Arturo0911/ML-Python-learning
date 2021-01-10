@@ -142,12 +142,13 @@ class Init_test:
                         'year_activity': y
                     }
                 }
-                print(objects_)
+                
 
                 # set the subset, temperature, is the best parameter to filter by.
                 
                 dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
-                print(dataframe_filtered)
+
+
                 # LOOPS FOR APPENDS
                 for i in dataframe_filtered['relative_humidity']:
                     list_humidity.append(i)
@@ -164,13 +165,8 @@ class Init_test:
 
                 # use correlation_coefficient() instead of check_covariance()
                 if math_process.correlation_coefficient(object_data) > 0:
-                    coefficient_positive.append({'cloud_type': x,str(y): len(object_data), 
+                    coefficient_positive.append({'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
-                    # print("Parameters %s %s"%(x,y))
-                    # print("Presenting the obeject to be evaluated: ", objects_)
-                    # print("Dataframe filtered")
-                    # print(dataframe_filtered)
-                    # print("\n")
                     # print("[*] Covariance is more than 0")
                     # print("[*] Covariance: ", math_process.check_covariance(object_data), end="")
 
@@ -190,10 +186,7 @@ class Init_test:
                         })
 
                         coefficient_positive.append({'cloud_type': x,str(y): object_data })
-
-                        # print("cloud_type %s and %s "%(x,object_data))
-                    # print(math_process.Generate_parameters_from_regretion(object_data))
-                    # break'''
+                    # print(math_process.Generate_parameters_from_regretion(object_data))'''
                     
                     """
                     # to show in scatter with plots
@@ -284,7 +277,7 @@ def test_function_with_parameters():
     #pprint(positive)
 
     for x in positive[0]:
-        print(x)
+        print(x+" : "+positive[0][x])
     
 
 

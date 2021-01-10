@@ -344,6 +344,23 @@ class Math_process:
             ((final_average - average_2019)/final_average)*100))
 
 
+    def optimization_gradient_descent(self):
+        # this method is to verify the errors in the math model
 
+        pass
+
+    def testing_mathematician_model():
+        '''
+        testing the math model taking in aacount about 
+        the values to be proccessed
+        the another goal in this method is take how many variables (speaking in percent)
+        aren't matching with the parameters, for example:
+        we have the variables X & Y
+        There are a limit to use the values to be processed 
+        the max and the min, and after that using one proccess to get the value in the intercept 'b'
+        to get the wished value intercept
+        '''
+
+        pass
 
         
