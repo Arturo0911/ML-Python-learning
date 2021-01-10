@@ -319,9 +319,9 @@ class Math_process:
         '''
         testing the math model taking in aacount about 
         the values to be proccessed
-        the another goal in this method is take how many variables (speaking in percent)
-        aren't matching with the parameters, for example:
-        we have the variables X & Y
+        the another goal in this method is take how many variables 
+        (speaking in percent) aren't matching with the parameters, 
+        for example: we have the variables X & Y
         There are a limit to use the values to be processed 
         the max and the min, and after that using one proccess to get the value in the intercept 'b'
         to get the wished value intercept
@@ -329,6 +329,17 @@ class Math_process:
         Every value is indexed in one ArrayList and inserted into the function
         '''
 
-        pass
+        #----------------------------------------------#
+        #    Structure of the obejcts_data = {         #
+        #            'x': list,                        #
+        #            'y': list                         #
+        #           }                                  #
+        #----------------------------------------------#
+
+
+        math_model = self.Generate_parameters_from_regression(objects_data)
+        #print(math_model)
+        print( math_model)
+
 
         

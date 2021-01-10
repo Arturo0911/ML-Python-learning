@@ -228,9 +228,10 @@ class Init_test:
 
         # invoke the instance from the Math_process file
         # pprint(prediction_object)
-        # math_process.test_math_model(prediction_object[1]['2018'], prediction_object[2]['2019']['x'])
-
-
+        #math_process.test_math_model(coefficient_positive[1]['2018'], coefficient_positive[2]['2019']['x'])
+        # math_process.test_math_model(coefficient_positive[0]['2018'])
+        #print(coefficient_positive[0]['2017'])
+        #math_process.testing_mathematician_model(coefficient_positive[0]['2017'])
         return coefficient_positive, coefficient_negative
         
 
@@ -273,11 +274,22 @@ def test_function_with_parameters():
 
     positive, negative = test_init._comparative_between_three_years()
 
-    print("positive")
+    #print("positive")
+    #print(positive[0]['2017'])
     #pprint(positive)
+    #print(len(positive))
+    #pprint(positive[1])
 
-    for x in positive[0]:
-        print(x+" : "+positive[0][x])
+    #print(positive[0]['2017']['x'])
+    # print(positive[0]['2017']['y'])
+
+    objects_data = {
+        'x':positive[0]['2017']['x'],
+        'y': positive[0]['2017']['y']
+        }
+
+    Math_process().testing_mathematician_model(objects_data)
+
     
 
 
