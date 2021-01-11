@@ -341,5 +341,18 @@ class Math_process:
         #print(math_model)
         return math_model
 
+    def print_linear_equation(self, beta_0, beta_1):
 
-        
+
+        print("Y = %s + (%s)X"%(beta_0, beta_1))
+
+
+
+
+
+
+
+
+
+
+            

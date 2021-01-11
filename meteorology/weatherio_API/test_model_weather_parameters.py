@@ -15,6 +15,8 @@ from pprint import pprint
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from concurrent.futures import ThreadPoolExecutor
+
 
 """ Libraries of the data storage """
 
@@ -220,11 +222,11 @@ def test_function_with_parameters():
 
 
 
-    print(model_prediction_1)
+    '''print(model_prediction_1)
     print(model_prediction_2)
-    print(model_prediction_3)
-
-    # print("Y = %s + X.(%s)"%(model_prediction_1['β0'], model_prediction_1['β1']))
+    print(model_prediction_3)'''
+    Math_process().print_linear_equation(model_prediction_1['β0'], model_prediction_1['β1'])
+    print("Y = %s + X.(%s)"%(model_prediction_1['β0'], model_prediction_1['β1']))
 
 # Load the algorithm and execute 
 test_function_with_parameters()
