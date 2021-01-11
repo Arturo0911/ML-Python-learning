@@ -328,6 +328,16 @@ class Math_process:
         to get the wished value intercept
 
         Every value is indexed in one ArrayList and inserted into the function
+
+
+
+        Read this one in case that i can't prove the code above 
+        x_data_model are the x values from different year with the which one create de object model
+        in some words, if the model was created with the object with the year 2017
+        then x_data_model and y_data_model will be the x's and y's values from 2018 or 2019 
+        years
+
+
         '''
 
         #----------------------------------------------#
