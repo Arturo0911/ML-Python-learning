@@ -132,16 +132,17 @@ class Math_process:
         except Exception as e:
             print("Error by: "+str(e))
         else:
-            # print("rejected list %s and winner list %s"%(rejected_list, winner_list))
-            print("\n")
-            print("[*] Total cases %s, number of passed cases %s and rejected %s" %
-                  (len(x_data), (len(x_data) - rejected_cases), (rejected_cases)))
             pass
+            # print("rejected list %s and winner list %s"%(rejected_list, winner_list))
+            '''print("\n")
+            print("[*] Total cases %s, number of passed cases %s and rejected %s" %
+                  (len(x_data), (len(x_data) - rejected_cases), (rejected_cases)))'''
+            
         finally:
 
             rejecteds_percents = float((len(rejected_list) / len(x_data))*100)
             accepted_percents = float((len(winner_list) / len(x_data))*100)
-            # print("rejected percents of values: "+ "{0:.3f}".format(rejecteds_percents)+" %")
+            
             prediction = {
                 'rejected_elements': len(rejected_list),
                 'acepted_elements': len(winner_list),
@@ -315,7 +316,7 @@ class Math_process:
 
         pass
 
-    def testing_mathematician_model(self, objects_data):
+    def testing_mathematician_model(self, objects_data, x_data_model, x_data_prediction):
         '''
         testing the math model taking in aacount about 
         the values to be proccessed
