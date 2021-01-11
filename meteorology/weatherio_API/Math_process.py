@@ -339,7 +339,7 @@ class Math_process:
 
         math_model = self.Generate_parameters_from_regression(objects_data)
         #print(math_model)
-        print( math_model)
+        return math_model
 
 
         

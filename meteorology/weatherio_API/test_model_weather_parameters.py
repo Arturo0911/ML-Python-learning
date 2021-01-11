@@ -204,6 +204,7 @@ class Init_test:
 def test_function_with_parameters():
     """
         This function, only will be read the instancies, from the main Class
+        humidity relative is the X variable and the temperature is Y
     """
     test_init = Init_test()
     positive, negative = test_init._comparative_between_three_years()
@@ -213,11 +214,11 @@ def test_function_with_parameters():
         'y': positive[0]['2017']['y']
         }
 
-    Math_process().testing_mathematician_model(objects_data)
+    model_prediction = Math_process().testing_mathematician_model(objects_data)
+    print(model_prediction)
+    print("Y = %s + X.(%s)"%(model_prediction['β0'], model_prediction['β1']))
 
-    
-
-
+# Load the algorithm and execute 
 test_function_with_parameters()
 
 
