@@ -213,10 +213,18 @@ def test_function_with_parameters():
         'x':positive[0]['2017']['x'],
         'y': positive[0]['2017']['y']
         }
+    
+    model_prediction_1 = Math_process().testing_mathematician_model(positive[0]['2017'])
+    model_prediction_2 = Math_process().testing_mathematician_model(positive[1]['2018'])
+    model_prediction_3 = Math_process().testing_mathematician_model(positive[2]['2019'])
 
-    model_prediction = Math_process().testing_mathematician_model(objects_data)
-    print(model_prediction)
-    print("Y = %s + X.(%s)"%(model_prediction['β0'], model_prediction['β1']))
+
+
+    print(model_prediction_1)
+    print(model_prediction_2)
+    print(model_prediction_3)
+
+    # print("Y = %s + X.(%s)"%(model_prediction_1['β0'], model_prediction_1['β1']))
 
 # Load the algorithm and execute 
 test_function_with_parameters()
