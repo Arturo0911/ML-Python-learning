@@ -203,6 +203,7 @@ class Init_test:
         """
         pass
 
+
 def test_function_with_parameters():
     """
         This function, only will be read the instancies, from the main Class
@@ -210,23 +211,21 @@ def test_function_with_parameters():
     """
     test_init = Init_test()
     positive, negative = test_init._comparative_between_three_years()
-
-    objects_data = {
-        'x':positive[0]['2017']['x'],
-        'y': positive[0]['2017']['y']
-        }
     
-    model_prediction_1 = Math_process().testing_mathematician_model(positive[0]['2017'])
+    print(positive[0].keys())
+    
+    for x in positive:
+        for y in x:
+
+            print(y)
+
+    '''model_prediction_1 = Math_process().testing_mathematician_model(positive[0]['2017'])
     model_prediction_2 = Math_process().testing_mathematician_model(positive[1]['2018'])
     model_prediction_3 = Math_process().testing_mathematician_model(positive[2]['2019'])
 
 
-
-    '''print(model_prediction_1)
-    print(model_prediction_2)
-    print(model_prediction_3)'''
     Math_process().print_linear_equation(model_prediction_1['β0'], model_prediction_1['β1'])
-    print("Y = %s + X.(%s)"%(model_prediction_1['β0'], model_prediction_1['β1']))
+    Math_process().print_linear_equation(model_prediction_2['β0'], model_prediction_2['β1'])'''
 
 # Load the algorithm and execute 
 test_function_with_parameters()
