@@ -316,7 +316,7 @@ class Math_process:
 
         pass
 
-    def testing_mathematician_model(self, objects_data, x_data_model, x_data_prediction):
+    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model):
         '''
         testing the math model taking in aacount about 
         the values to be proccessed
@@ -338,14 +338,43 @@ class Math_process:
         #----------------------------------------------#
 
 
+        # Define the intercept 'b' as None value
+
+        b = None
+
         math_model = self.Generate_parameters_from_regression(objects_data)
+        self.print_linear_equation(math_model['β0'], math_model['β1'])
+
+        try:
+
+            for x, y in zip(x_data_model, y_data_model):
+                
+                if self.y_prediction(math_model['β0'], math_model['β1'], x) == y:
+
+                    print("[*] Test case Passed!")
+                else:
+                    print("[x] Test case Failed!")
+                
+        except Exception as e:
+            print("exception by: "+str(e))
+        else:
+            pass
+        finally:
+            pass
         #print(math_model)
-        return math_model
+        #return math_model
 
     def print_linear_equation(self, beta_0, beta_1):
 
 
         print("Y = %s + (%s)X"%(beta_0, beta_1))
+
+    def y_prediction(beta_0, beta_1, x_value):
+
+        y = float("{0:.3f}".format(beta_0 + (x_value * beta_1)))
+
+
+        return y
 
 
 
