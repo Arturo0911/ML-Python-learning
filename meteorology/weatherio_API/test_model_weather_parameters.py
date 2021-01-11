@@ -1,5 +1,5 @@
-""" IN THIS FILE, WE GONNA TEST THE DATA, USING COMPARATIONS BETWEEN DATAS, AND PARAMETERS
-    
+""" 
+IN THIS FILE, WE GONNA TEST THE DATA, USING COMPARATIONS BETWEEN DATAS, AND PARAMETERS   
 """
 import time
 from datetime import time
@@ -165,64 +165,22 @@ class Init_test:
 
                 # use correlation_coefficient() instead of check_covariance()
                 if math_process.correlation_coefficient(object_data) > 0:
+                    # here prove that the coefficient is greater than 0
                     coefficient_positive.append({'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
-                    # print("[*] Covariance is more than 0")
-                    # print("[*] Covariance: ", math_process.check_covariance(object_data), end="")
-
-                    # print("[*] Correlation coefficent: ", math_process.correlation_coefficent(object_data))
-                    # print("Behavior %s  and year %s..."%(x,y))
-
-                    '''if x == "Overcast_clouds":
-                        # Only use this condition to show three years with the covariance positive.
-
-                        final_object.append({
-                            
-                            'parameter': x,
-                            'year': y,
-                            'covariance': math_process.check_covariance(object_data),
-                            'correlation_coefficient': math_process.correlation_coefficient(object_data)
-
-                        })
-
-                        coefficient_positive.append({'cloud_type': x,str(y): object_data })
-                    # print(math_process.Generate_parameters_from_regretion(object_data))'''
-                    
-                    """
-                    # to show in scatter with plots
-
-                    'exec(%matplotlib inline)'
-                    plt.scatter(object_data['x'], object_data['y'], c=".3")
-                    plt.xlabel("Dates")
-                    plt.ylabel("Temperature")
-                    plt.show()
-                    """
-                    
 
                 elif math_process.correlation_coefficient(object_data) == 0:
-                    print("[*] covariance is Zero")
-                    print("Behavior %s  and year %s..."%(x,y))
-                    print("Covariance: ", math_process.check_covariance(object_data))
-                    print("Correlation coefficent %s "%math_process.correlation_coefficient(object_data))
-                    # print("[0] Covariance is Zero")
-                    # pass
+                    pass
                     
                 else:
                     coefficient_negative.append({'cloud_type': x,str(y): len(object_data), 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
-                    # print("[*] the sequence of the fata with the coefficient correlation negative are: %s %s"%(x,y))
                     """
-                    print("[*] covariance is lesser than 0")
-                    print("Behavior %s  and year %s..."%(x,y))
-                    print("Covariance: ", math_process.check_covariance(object_data))
-                    print("Correlation coefficent %s "%math_process.correlation_coefficient(object_data))
                     plt.scatter(object_data['x'], object_data['y'])
                     plt.xlabel("Dates")
                     plt.ylabel("Temperature")
                     plt.show()
-                    # print("[x] Covariance is negative")
-                    # pass
                     """
 
 
@@ -248,40 +206,7 @@ def test_function_with_parameters():
         This function, only will be read the instancies, from the main Class
     """
     test_init = Init_test()
-
-    # print(test_init.readdataframe_using_seaborn())
-    # print(test_init.readdataframe_using_seaborn().info())
-    # print(test_init.readdataframe_using_seaborn()[test_init.readdataframe_using_seaborn()['temperature'] > 0].corr())
-    
-
-    # sns.pairplot(test_init.readdataframe_using_seaborn())
-    # sns.displot(test_init.readdataframe_using_seaborn()['clouds'])
-
-    # always when i want to show my chart using another library, first i must to use 'plt.show()'
-    # to draw the chart
-    # plt.show()
-    # pprint(test_init._comparative_between_three_years())
-    # pprint(test_init._comparative_between_three_years())
-
-    '''for x in test_init._comparative_between_three_years():
-        print(x)
-
-    for i in test_init._comparative_between_three_years():
-        for j in i:
-            if j == "cloud_type":
-                print(i[j])'''
-
-
     positive, negative = test_init._comparative_between_three_years()
-
-    #print("positive")
-    #print(positive[0]['2017'])
-    #pprint(positive)
-    #print(len(positive))
-    #pprint(positive[1])
-
-    #print(positive[0]['2017']['x'])
-    # print(positive[0]['2017']['y'])
 
     objects_data = {
         'x':positive[0]['2017']['x'],
