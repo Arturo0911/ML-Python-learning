@@ -351,9 +351,10 @@ class Math_process:
 
         # Define the intercept 'b' as None value
         # in the gradient descent prove the real value
-
+        # initialize in None to avoid unnecessary numbers
         b = None
-        percent_difference = 0
+        percent_difference = None
+        count_cases = 1 # the position of each loop
         # validator = None
 
         math_model = self.Generate_parameters_from_regression(objects_data)
@@ -366,28 +367,32 @@ class Math_process:
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
                 
                 if validator  == y:
-
                     print("[*] Test case Passed!")
                 else:
-                    percent_difference = float("{0:.3f}".format((y/validator)*100))
-                    print("[x] Percent difference is %s"%percent_difference)
-                        
-                    
+                    # print("The values mencioned %s    %s"%(validator, y))
+                    percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+
+                    if percent_difference <=  float(1) and percent_difference >= float(-1) :
+                        print("[x] CASE %s Percent difference is %s"%(count_cases,percent_difference))
+                    else:
+
+                        pass
+                count_cases += 1
+
         except Exception as e:
             print("exception by: "+str(e))
         else:
-            pass
+            print(" Else condition is running.")
+            print("total cases %s"%count_cases)
         finally:
-            pass
-        #print(math_model)
-        #return math_model
+            print(" Test cases finished.")
 
     def print_linear_equation(self, beta_0, beta_1):
 
 
         print("Y = %s + (%s)X"%(beta_0, beta_1))
 
-    def y_prediction(beta_0, beta_1, x_value):
+    def y_prediction(self, beta_0, beta_1, x_value):
 
         y = float("{0:.3f}".format(beta_0 + (x_value * beta_1)))
 
