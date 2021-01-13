@@ -338,10 +338,7 @@ class Math_process:
         years
         
         Resuming above, after three days, i gonna prove that algorithm
-        
-
-        
-
+    
         '''
 
         #----------------------------------------------#
@@ -356,6 +353,8 @@ class Math_process:
         # in the gradient descent prove the real value
 
         b = None
+        percent_difference = 0
+        # validator = None
 
         math_model = self.Generate_parameters_from_regression(objects_data)
         self.print_linear_equation(math_model['β0'], math_model['β1'])
@@ -363,13 +362,17 @@ class Math_process:
         try:
 
             for x, y in zip(x_data_model, y_data_model):
+
+                validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
                 
-                if self.y_prediction(math_model['β0'], math_model['β1'], x) == y:
+                if validator  == y:
 
                     print("[*] Test case Passed!")
                 else:
-                    print("[x] Test case Failed!")
-                
+                    percent_difference = float("{0:.3f}".format((y/validator)*100))
+                    print("[x] Percent difference is %s"%percent_difference)
+                        
+                    
         except Exception as e:
             print("exception by: "+str(e))
         else:
