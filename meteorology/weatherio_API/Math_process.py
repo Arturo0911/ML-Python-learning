@@ -336,7 +336,11 @@ class Math_process:
         in some words, if the model was created with the object with the year 2017
         then x_data_model and y_data_model will be the x's and y's values from 2018 or 2019 
         years
+        
+        Resuming above, after three days, i gonna prove that algorithm
+        
 
+        
 
         '''
 
@@ -349,6 +353,7 @@ class Math_process:
 
 
         # Define the intercept 'b' as None value
+        # in the gradient descent prove the real value
 
         b = None
 
