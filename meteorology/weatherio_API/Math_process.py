@@ -4,6 +4,7 @@
 """ MATH PROCESS  """
 import math
 from pprint import pprint
+import random
 
 
 class Math_process:
@@ -354,16 +355,22 @@ class Math_process:
         # initialize in None to avoid unnecessary numbers
         b = None
         percent_difference = None
-        count_cases = 1 # the position of each loop
+        count_cases = 0 # the position of each loop
         # validator = None
 
         math_model = self.Generate_parameters_from_regression(objects_data)
         self.print_linear_equation(math_model['β0'], math_model['β1'])
 
+
+        print("Beggining into the list of cases")
+        print("The size of x_data_model %s"%len(x_data_model))
+        print("The size of y_data_model %s"%len(y_data_model))
+
         try:
 
             for x, y in zip(x_data_model, y_data_model):
-
+                
+                count_cases += 1
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
                 
                 if validator  == y:
@@ -377,7 +384,6 @@ class Math_process:
                     else:
 
                         pass
-                count_cases += 1
 
         except Exception as e:
             print("exception by: "+str(e))
@@ -385,6 +391,7 @@ class Math_process:
             print(" Else condition is running.")
             print("total cases %s"%count_cases)
         finally:
+            print("Status final by the bias: %s"%b)
             print(" Test cases finished.")
 
     def print_linear_equation(self, beta_0, beta_1):
