@@ -5,10 +5,17 @@
 import math
 from pprint import pprint
 import random
-from future import 
+from concurrent.futures import ThreadPoolExecutor
+from types import new_class 
 
 
 class Math_process:
+
+
+    def __init__(self):
+        # initialize a executor with 2 threads
+        self.executor = ThreadPoolExecutor(max_workers=2)
+
 
     def Generate_average_from_list(self, list_values):
         # This one, gonna be util, whenever we want to get average
@@ -357,6 +364,7 @@ class Math_process:
         b = None
         percent_difference = None
         count_cases = 0 # the position of each loop
+        values_near_to_goal = list()
         # validator = None
 
         math_model = self.Generate_parameters_from_regression(objects_data)
@@ -380,11 +388,17 @@ class Math_process:
                     # print("The values mencioned %s    %s"%(validator, y))
                     percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
 
-                    if percent_difference <=  float(1) and percent_difference >= float(-1) :
-                        print("[x] CASE %s Percent difference is %s"%(count_cases,percent_difference))
-                    else:
+                    while True:
 
-                        pass
+                        if percent_difference <=  float(1) and percent_difference >= float(-1) :
+
+                            b = random.randint(0,9)
+
+                            if (percent_difference + b) == 0:
+                                break 
+
+                            #print("[x] CASE %s Percent difference is %s"%(count_cases,percent_difference))
+                        
 
         except Exception as e:
             print("exception by: "+str(e))
@@ -406,6 +420,13 @@ class Math_process:
 
 
         return y
+
+    def retesting_list_values(self, data_stored):
+        
+        # Specially set as None this variable,
+        new_bias  = None
+
+        return new_bias
 
 
 
