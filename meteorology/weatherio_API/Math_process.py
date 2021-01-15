@@ -368,7 +368,7 @@ class Math_process:
         # validator = None
 
         math_model = self.Generate_parameters_from_regression(objects_data)
-        self.print_linear_equation(math_model['β0'], math_model['β1'])
+        # self.print_linear_equation(math_model['β0'], math_model['β1'])
 
 
         print("Beggining into the list of cases")
@@ -391,12 +391,12 @@ class Math_process:
                     while True:
 
                         if percent_difference <=  float(1) and percent_difference >= float(-1) :
-
                             b = random.randint(0,9)
-
                             if (percent_difference + b) == 0:
-                                break 
-
+                                print(self.print_linear_equation(math_model['β0'], math_model['β1']) + " "+str(b)) 
+                                break
+                            else:
+                                pass
                             #print("[x] CASE %s Percent difference is %s"%(count_cases,percent_difference))
                         
 
@@ -412,7 +412,7 @@ class Math_process:
     def print_linear_equation(self, beta_0, beta_1):
 
 
-        print("Y = %s + (%s)X"%(beta_0, beta_1))
+        return "Y = %s + (%s)X"%(beta_0, beta_1)
 
     def y_prediction(self, beta_0, beta_1, x_value):
 
@@ -421,12 +421,22 @@ class Math_process:
 
         return y
 
-    def retesting_list_values(self, data_stored):
-        
-        # Specially set as None this variable,
-        new_bias  = None
+    def cost_function(self,x_data, y_data, value_prediction):
 
-        return new_bias
+        LIMITER_RANGE = len(x_data)
+        mean_squared_error = 0.0
+        # value prediction we will have to get using the math model
+        # representing above; it's not neccessary to use the 
+        # 
+        for x in range(LIMITER_RANGE):
+
+            mean_squared_error += (y_data[x] - value_prediction)**2
+
+        return float(mean_squared_error/LIMITER_RANGE)
+
+
+
+        
 
 
 
