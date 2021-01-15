@@ -370,11 +370,6 @@ class Math_process:
         math_model = self.Generate_parameters_from_regression(objects_data)
         # self.print_linear_equation(math_model['β0'], math_model['β1'])
 
-
-        print("Beggining into the list of cases")
-        print("The size of x_data_model %s"%len(x_data_model))
-        print("The size of y_data_model %s"%len(y_data_model))
-
         try:
 
             for x, y in zip(x_data_model, y_data_model):
@@ -388,25 +383,33 @@ class Math_process:
                     # print("The values mencioned %s    %s"%(validator, y))
                     percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
 
-                    while True:
+                    if percent_difference <=  float(1) and percent_difference >= float(-1):
+                        values_near_to_goal.append(percent_difference)
 
-                        if percent_difference <=  float(1) and percent_difference >= float(-1) :
-                            b = random.randint(0,9)
-                            if (percent_difference + b) == 0:
-                                print(self.print_linear_equation(math_model['β0'], math_model['β1']) + " "+str(b)) 
-                                break
-                            else:
-                                pass
-                            #print("[x] CASE %s Percent difference is %s"%(count_cases,percent_difference))
                         
 
+
+                    else:
+                        while True:
+                            b = random.uniform(0,9)
+                            print("b: ",b)
+                            print("prediction: ",validator)
+                            print("y:",y)
+                            
+                            # print(b)
+                            if (validator + b) == y:
+                                print(self.print_linear_equation(math_model['β0'], math_model['β1']) + " "+str(b))
+                                print(b)
+                                break
+
+
         except Exception as e:
-            print("exception by: "+str(e))
+            print(" exception by: "+str(e))
         else:
             print(" Else condition is running.")
-            print("total cases %s"%count_cases)
+            print(" Total cases %s"%count_cases)
         finally:
-            print("Status final by the bias: %s"%b)
+            print(" Status final by the bias: %s"%b)
             print(" Test cases finished.")
 
     def print_linear_equation(self, beta_0, beta_1):
