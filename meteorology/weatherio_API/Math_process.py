@@ -362,6 +362,7 @@ class Math_process:
         
 
         math_model = self.Generate_parameters_from_regression(objects_data)
+        #self.testing_simplify()
         
         try:
             for x, y in zip(x_data_model, y_data_model):
@@ -380,6 +381,10 @@ class Math_process:
                         
                     else:
                         while True:
+                            # in this loop i try to prove that generated random number 
+                            # between -4  and 4, including floating numbers.
+                            # i gonna to balanced the math model, only to avoid 
+                            # generated a big MSE, practically is i'm proving the errors
                             b = random.uniform(-4,4)
                             validator += b
                             percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
@@ -452,19 +457,62 @@ class Math_process:
 
     # simplify the model to be iterated
 
-    def testing_simplify(self):
+    '''def testing_simplify(self,objects_data, x_data_model, y_data_model, year_tested):
+
+        # variables to use
+        b = None # the bias value
+        percent_difference = None # the difference between prediction and the desired value
+        validator = None # checl if the value instantiated from         
+        count_cases = 0 # the position of each loop
+        values_near_to_goal = list() # the values accepteds
+        total_error = 0.0 # this one gonna to get all the values without prediction
+        
+
 
         try:
-            pass
-        except:
-            pass
+            for x, y in zip(x_data_model, y_data_model):
+
+                count_cases += 1
+                validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
+
+                if validator  == y:
+                    print("[*] Test case Passed!")
+                else:
+                
+                    percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+
+                    if percent_difference <=  float(3) and percent_difference >= float(-3):
+                        values_near_to_goal.append(percent_difference)
+                        
+                    else:
+                        while True:
+                            b = random.uniform(-4,4)
+                            validator += b
+                            percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+                            self.executor(self.check_bias, ) 
+                            if percent_difference <=  float(3) and percent_difference >= float(-3):
+                                print(" [*] Enter in the conditional with the random uniform to bias different from None")
+                                values_near_to_goal.append(percent_difference)
+                                break
+                            else:
+                                continue
+
+        except Exception as e:
+            print(" exception by: "+str(e))
         else:
             pass
         finally:
-            pass
+            print(" Test cases finished.")
+            print(" Year tested %s"%year_tested)
+            print(" Status final by the bias: %s"%b)
+            print(" Total cases %s"%count_cases)
+            
+            print(self.print_linear_equation(math_model['β0'], math_model['β1']))
+            print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
+            print(" The total errores are %s "%(float(total_error / len(x_data_model))))
+        pass'''
 
 
-        pass
 
 
 
