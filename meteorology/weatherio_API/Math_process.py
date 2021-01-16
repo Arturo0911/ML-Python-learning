@@ -13,6 +13,7 @@ class Math_process:
 
 
     def __init__(self):
+
         # initialize a executor with 2 threads
         self.executor = ThreadPoolExecutor(max_workers=2)
 
@@ -365,6 +366,7 @@ class Math_process:
         percent_difference = None
         count_cases = 0 # the position of each loop
         values_near_to_goal = list()
+        total_error = 0.0 # this one gonna to get all the values without prediction
         # validator = None
 
         math_model = self.Generate_parameters_from_regression(objects_data)
@@ -376,21 +378,21 @@ class Math_process:
                 
                 count_cases += 1
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
-                
+                # print("the validator %s and %s value required"%(validator, y)) 
                 if validator  == y:
                     print("[*] Test case Passed!")
                 else:
                     # print("The values mencioned %s    %s"%(validator, y))
                     percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
 
-                    if percent_difference <=  float(1) and percent_difference >= float(-1):
+                    if percent_difference <=  float(3) and percent_difference >= float(-3):
                         values_near_to_goal.append(percent_difference)
 
-                        
-
-
                     else:
-                        while True:
+                        
+                        total_error += (validator - y)**2
+
+                        '''while True:
                             b = random.uniform(0,9)
                             print("b: ",b)
                             print("prediction: ",validator)
@@ -400,7 +402,10 @@ class Math_process:
                             if (validator + b) == y:
                                 print(self.print_linear_equation(math_model['β0'], math_model['β1']) + " "+str(b))
                                 print(b)
-                                break
+                                break'''
+
+            # print("%s values are in the range of values wished -1 to 1"%len(values_near_to_goal))
+            # print("%s percent to rifht prediction "%float((len(values_near_to_goal)/len(x_data_model))))
 
 
         except Exception as e:
@@ -411,6 +416,8 @@ class Math_process:
         finally:
             print(" Status final by the bias: %s"%b)
             print(" Test cases finished.")
+            print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
+            print("The total errores are %s "%(float(total_error / len(x_data_model))))
 
     def print_linear_equation(self, beta_0, beta_1):
 

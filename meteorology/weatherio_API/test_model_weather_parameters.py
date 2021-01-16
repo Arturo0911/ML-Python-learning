@@ -216,14 +216,32 @@ def test_function_with_parameters():
     # print(positive[0]['2017'])
     # print(positive[1]['2018']['x'])
     # print(positive[1]['2018']['y'])
-
+    
+    executors= ThreadPoolExecutor(max_workers = 2)
+    
+    '''Math_process().testing_mathematician_model(positive[0]['2017'], 
+            positive[0]['2017']['x'], positive[0]['2017']['y'])
+    
+    Math_process().testing_mathematician_model(positive[0]['2017'],
+            positive[0]['2017']['x'], positive[0]['2017']['y'])
     
     Math_process().testing_mathematician_model(positive[0]['2017'], 
+            positive[0]['2017']['x'], positive[0]['2017']['y'])
+
+    '''
+
+    executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+            positive[0]['2017']['x'], positive[0]['2017']['y'])
+    
+    executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
             positive[1]['2018']['x'], positive[1]['2018']['y'])
 
-    
+    Math_process().testing_mathematician_model(positive[0]['2017'], 
+            positive[2]['2019']['x'], positive[2]['2019']['y'])
 
-    
+
+
+
 
     '''model_prediction_1 = Math_process().testing_mathematician_model(positive[0]['2017'])
     model_prediction_2 = Math_process().testing_mathematician_model(positive[1]['2018'])
