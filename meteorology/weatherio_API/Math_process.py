@@ -371,42 +371,49 @@ class Math_process:
                 if validator  == y:
                     print("[*] Test case Passed!")
                 else:
-                
-                    percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
 
-                    if percent_difference <=  float(3) and percent_difference >= float(-3):
-                        values_near_to_goal.append(percent_difference)
-                        
+                    if b is None:
+                        pass
                     else:
-                        while True:
-                            # in this loop i try to prove that generated random number 
-                            # between -4  and 4, including floating numbers.
-                            # i gonna to balanced the math model, only to avoid 
-                            # generated a big MSE, practically is i'm proving the errors
-                            b = random.uniform(-4,4)
-                            validator += b
-                            percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-                            self.executor(self.check_bias, ) 
-                            if percent_difference <=  float(3) and percent_difference >= float(-3):
-                                print(" [*] Enter in the conditional with the random uniform to bias different from None")
-                                values_near_to_goal.append(percent_difference)
-                                break
-                            else:
-                                continue
+
+                        percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+
+                        # in the case that the value is in the range of difference beteen -3 or 3
+                        # in this case add into the append the new value
+                        if percent_difference <=  float(3) and percent_difference >= float(-3):
+                            values_near_to_goal.append(percent_difference)
+                            
+                        else:
+                            while True:
+                                # in this loop i try to prove that generated random number 
+                                # between -4  and 4, including floating numbers.
+                                # i gonna to balanced the math model, only to avoid 
+                                # generated a big MSE, practically is i'm avoiding the errors
+                            
+                                b = random.uniform(-4,4)
+                                validator += b
+                                percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+                                self.executor(self.check_bias, ) 
+                                if percent_difference <=  float(3) and percent_difference >= float(-3):
+                                    print(" [*] Enter in the conditional with the random uniform to bias different from None")
+                                    values_near_to_goal.append(percent_difference)
+                                    break
+                                else:
+                                    continue
 
         except Exception as e:
             print(" exception by: "+str(e))
         else:
             pass
         finally:
-            print(" Test cases finished.")
+            # print(" Test cases finished.")
             print(" Year tested %s"%year_tested)
             print(" Status final by the bias: %s"%b)
-            print(" Total cases %s"%count_cases)
+            # print(" Total cases %s"%count_cases)
             
             print(self.print_linear_equation(math_model['β0'], math_model['β1']))
             print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
-            print(" The total errores are %s "%(float(total_error / len(x_data_model))))
+            print(" The total errores are %s percent "%(float(total_error / len(x_data_model))))
 
 
 
