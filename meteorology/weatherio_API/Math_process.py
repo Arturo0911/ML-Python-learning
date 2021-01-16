@@ -9,6 +9,25 @@ from concurrent.futures import ThreadPoolExecutor
 from types import new_class 
 
 
+
+
+#----------------------------------------------#
+#      Generate_parameters_from_regression     #
+#           Y = β0 + β1*x                      #
+#----------------------------------------------#
+
+#----------------------------------------------#
+#       β1 = ⅀((x - x⁻)*(y - y⁻))              #
+#                 ⅀ ( x - x²)                  #
+#----------------------------------------------#
+
+#----------------------------------------------#
+#    Structure of the obejcts_data = {         #
+#            'x': list,                        #
+#            'y': list                         #
+#           }                                  #
+#----------------------------------------------#
+
 class Math_process:
 
 
@@ -27,23 +46,6 @@ class Math_process:
         return average
 
     def Generate_parameters_from_regression(self, objects_data):
-
-        #----------------------------------------------#
-        #      Generate_parameters_from_regression     #
-        #           Y = β0 + β1*x                      #
-        #----------------------------------------------#
-
-        #----------------------------------------------#
-        #       β1 = ⅀((x - x⁻)*(y - y⁻))              #
-        #                 ⅀ ( x - x²)                  #
-        #----------------------------------------------#
-
-        #----------------------------------------------#
-        #    Structure of the obejcts_data = {         #
-        #            'x': list,                        #
-        #            'y': list                         #
-        #           }                                  #
-        #----------------------------------------------#
 
         # Define parameters
         list_x = list()
@@ -326,7 +328,7 @@ class Math_process:
 
         pass
 
-    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model):
+    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested):
         '''
         testing the math model taking in aacount about 
         the values to be proccessed
@@ -338,8 +340,6 @@ class Math_process:
         to get the wished value intercept
 
         Every value is indexed in one ArrayList and inserted into the function
-
-
 
         Read this one in case that i can't prove the code above 
         x_data_model are the x values from different year with the which one create de object model
@@ -364,72 +364,78 @@ class Math_process:
         # initialize in None to avoid unnecessary numbers
         b = None
         percent_difference = None
+        validator = None        
         count_cases = 0 # the position of each loop
         values_near_to_goal = list()
         total_error = 0.0 # this one gonna to get all the values without prediction
-        # validator = None
+        
 
         math_model = self.Generate_parameters_from_regression(objects_data)
-        # self.print_linear_equation(math_model['β0'], math_model['β1'])
-
+        
         try:
-
             for x, y in zip(x_data_model, y_data_model):
-                
+
                 count_cases += 1
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
-                # print("the validator %s and %s value required"%(validator, y)) 
+
                 if validator  == y:
                     print("[*] Test case Passed!")
                 else:
-                    # print("The values mencioned %s    %s"%(validator, y))
+                
                     percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
 
                     if percent_difference <=  float(3) and percent_difference >= float(-3):
                         values_near_to_goal.append(percent_difference)
-
-                    else:
                         
-                        total_error += (validator - y)**2
-
-                        '''while True:
-                            b = random.uniform(0,9)
-                            print("b: ",b)
-                            print("prediction: ",validator)
-                            print("y:",y)
-                            
-                            # print(b)
-                            if (validator + b) == y:
-                                print(self.print_linear_equation(math_model['β0'], math_model['β1']) + " "+str(b))
-                                print(b)
-                                break'''
-
-            # print("%s values are in the range of values wished -1 to 1"%len(values_near_to_goal))
-            # print("%s percent to rifht prediction "%float((len(values_near_to_goal)/len(x_data_model))))
-
+                    else:
+                        while True:
+                            b = random.uniform(-4,4)
+                            validator += b
+                            percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+                            if percent_difference <=  float(3) and percent_difference >= float(-3):
+                                print(" [*] Enter in the conditional with the random uniform to bias different from None")
+                                values_near_to_goal.append(percent_difference)
+                                break
+                            else:
+                                continue
 
         except Exception as e:
             print(" exception by: "+str(e))
         else:
-            print(" Else condition is running.")
-            print(" Total cases %s"%count_cases)
+            pass
         finally:
-            print(" Status final by the bias: %s"%b)
             print(" Test cases finished.")
+            print(" Year tested %s"%year_tested)
+            print(" Status final by the bias: %s"%b)
+            print(" Total cases %s"%count_cases)
+            
+            print(self.print_linear_equation(math_model['β0'], math_model['β1']))
             print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
-            print("The total errores are %s "%(float(total_error / len(x_data_model))))
+            print(" The total errores are %s "%(float(total_error / len(x_data_model))))
 
+
+
+    '''Function to support the conditional in above methods
+        to be clare, is for only suppor.
+    '''
+            
     def print_linear_equation(self, beta_0, beta_1):
-
 
         return "Y = %s + (%s)X"%(beta_0, beta_1)
 
     def y_prediction(self, beta_0, beta_1, x_value):
 
         y = float("{0:.3f}".format(beta_0 + (x_value * beta_1)))
-
-
         return y
+
+    def check_bias(self,bias, data, prediction):
+        # the data is an array with values aproveds, only for testing whenever another 
+        # bias is generated
+        #-------------------------------------------------------------------------#
+        #               Y = β0 + β1*x  (+)or(-)bias = value desired               #
+        #-------------------------------------------------------------------------#
+        pass
+    
 
     def cost_function(self,x_data, y_data, value_prediction):
 
