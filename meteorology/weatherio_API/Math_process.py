@@ -9,8 +9,6 @@ from concurrent.futures import ThreadPoolExecutor
 from types import new_class 
 
 
-
-
 #----------------------------------------------#
 #      Generate_parameters_from_regression     #
 #           Y = β0 + β1*x                      #
