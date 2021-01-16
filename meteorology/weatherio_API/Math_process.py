@@ -28,6 +28,11 @@ from types import new_class
 #           }                                  #
 #----------------------------------------------#
 
+#----------------------------------------------#
+#               Y = β0 + β1*x                  #
+#----------------------------------------------#
+
+
 class Math_process:
 
 
@@ -90,11 +95,6 @@ class Math_process:
             'max_value': MAX_X,
             'min_value': MIN_X
         }
-
-        #----------------------------------------------#
-        #               Y = β0 + β1*x                  #
-        #----------------------------------------------#
-
         return prediction_model
 
     # Use the math model to test the prediction
@@ -117,12 +117,7 @@ class Math_process:
         y = 0
         print("[*] The prediction model is Y  = %s + X * %s  " %
               (object_model['β0'], object_model['β1']))
-        """print("[*] The value to be tested in the model %s" % x_data)
 
-        print("[*] The max %s and min %s value to be take in account" %
-            (object_model['max_value'], object_model['min_value']))"""
-        # print(x_data)
-        # try catch statement
         try:
             # initialized ttry catch with loop insided
             for x in x_data:
@@ -145,10 +140,6 @@ class Math_process:
             print("Error by: "+str(e))
         else:
             pass
-            # print("rejected list %s and winner list %s"%(rejected_list, winner_list))
-            '''print("\n")
-            print("[*] Total cases %s, number of passed cases %s and rejected %s" %
-                  (len(x_data), (len(x_data) - rejected_cases), (rejected_cases)))'''
             
         finally:
 
@@ -392,6 +383,7 @@ class Math_process:
                             b = random.uniform(-4,4)
                             validator += b
                             percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+                            self.executor(self.check_bias, ) 
                             if percent_difference <=  float(3) and percent_difference >= float(-3):
                                 print(" [*] Enter in the conditional with the random uniform to bias different from None")
                                 values_near_to_goal.append(percent_difference)
@@ -428,13 +420,20 @@ class Math_process:
         y = float("{0:.3f}".format(beta_0 + (x_value * beta_1)))
         return y
 
-    def check_bias(self,bias, data, prediction):
+    def check_bias(self,bias, data, beta_0, beta_1, x_value):
         # the data is an array with values aproveds, only for testing whenever another 
         # bias is generated
         #-------------------------------------------------------------------------#
         #               Y = β0 + β1*x  (+)or(-)bias = value desired               #
         #-------------------------------------------------------------------------#
-        pass
+
+        counter = 0
+        prediction = self.y_prediction(beta_0, beta_1, x_value)
+
+        for x in data:
+            if (prediction + bias) >= float(x) and (prediction + bias )<= float(x): 
+                counter += 1
+        return counter == len(data) 
     
 
     def cost_function(self,x_data, y_data, value_prediction):
@@ -449,6 +448,23 @@ class Math_process:
             mean_squared_error += (y_data[x] - value_prediction)**2
 
         return float(mean_squared_error/LIMITER_RANGE)
+
+
+    # simplify the model to be iterated
+
+    def testing_simplify(self):
+
+        try:
+            pass
+        except:
+            pass
+        else:
+            pass
+        finally:
+            pass
+
+
+        pass
 
 
 
