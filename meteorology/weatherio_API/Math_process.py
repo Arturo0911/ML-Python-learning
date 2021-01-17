@@ -372,8 +372,22 @@ class Math_process:
                     print("[*] Test case Passed!")
                 else:
 
-                    if b is None:
-                        pass
+                    if b is not None:
+                        
+                        validator += b
+                        percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+
+                        while True:
+                            if percent_difference <= float(3) and percent_difference >= float(-3) and self.check_bias():
+                                values_near_to_goal.append(y)
+                                break
+                            else:
+                                while True:
+                                    b = random.uniform(-4,4)
+                                    validator += b
+                                    continue
+                            
+                    
                     else:
 
                         percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
@@ -381,7 +395,7 @@ class Math_process:
                         # in the case that the value is in the range of difference beteen -3 or 3
                         # in this case add into the append the new value
                         if percent_difference <=  float(3) and percent_difference >= float(-3):
-                            values_near_to_goal.append(percent_difference)
+                            values_near_to_goal.append(y)
                             
                         else:
                             while True:
@@ -396,7 +410,7 @@ class Math_process:
                                 self.executor(self.check_bias, ) 
                                 if percent_difference <=  float(3) and percent_difference >= float(-3):
                                     print(" [*] Enter in the conditional with the random uniform to bias different from None")
-                                    values_near_to_goal.append(percent_difference)
+                                    values_near_to_goal.append(y)
                                     break
                                 else:
                                     continue
