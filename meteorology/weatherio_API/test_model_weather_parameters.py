@@ -213,16 +213,31 @@ def main():
     # executors= ThreadPoolExecutor(max_workers = 2)
 
     # initilize ThreadPools to use the concurrent in python
+
+
+    # print(positive)
+    
+    '''for x in positive:
+        print(x['cloud_type'])
+    print("--------------------------------")
+    for y in negative:
+        print(y['cloud_type'])
+    
+    '''
     with ThreadPoolExecutor(max_workers=2) as executors:
 
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017')
+                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'])
         
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[1]['2018']['x'], positive[1]['2018']['y'], '2018')
+                positive[1]['2018']['x'], positive[1]['2018']['y'], '2018',positive[1]['cloud_type'])
 
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[2]['2019']['x'], positive[2]['2019']['y'], '2019')
+                positive[2]['2019']['x'], positive[2]['2019']['y'], '2019',positive[2]['cloud_type'])
+    
+
+
+                
 
 
 

@@ -317,7 +317,7 @@ class Math_process:
 
         pass
 
-    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested):
+    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type):
         '''
         testing the math model taking in aacount about 
         the values to be proccessed
@@ -428,9 +428,7 @@ class Math_process:
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
 
                 if (validator - y == 0) or ((validator - y) >= -3 and (validator - y )<= 3):
-                    # print("[*] Error margin prediction is 0 or is lesser than 3 and greater than -3")
-                    # print("the validator %s and the value desired %s  and the accerts about the prediction are %s percent"%(validator, y,
-                    # float("{0:.2f}".format(100 - ((y/validator) *)))))
+
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
                 else:
@@ -444,6 +442,7 @@ class Math_process:
         finally:
             # print(" Test cases finished.")
             print(" Year tested %s"%year_tested)
+            print(cloud_type)
             # print(" Status final by the bias: %s"%b)
             # print(" Total cases %s"%count_cases)
             
