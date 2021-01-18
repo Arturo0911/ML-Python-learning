@@ -230,14 +230,17 @@ def test_function_with_parameters():
 
     '''
 
-    executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
             positive[0]['2017']['x'], positive[0]['2017']['y'], '2017')
     
-    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-            positive[1]['2018']['x'], positive[1]['2018']['y'])
+    executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+            positive[1]['2018']['x'], positive[1]['2018']['y'], '2018')'''
 
     Math_process().testing_mathematician_model(positive[0]['2017'], 
-            positive[2]['2019']['x'], positive[2]['2019']['y'])'''
+            positive[0]['2017']['x'], positive[0]['2017']['y'], '2017')
+
+    Math_process().testing_mathematician_model(positive[0]['2017'], 
+            positive[2]['2019']['x'], positive[2]['2019']['y'], '2019')
 
 
 

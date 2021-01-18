@@ -351,11 +351,12 @@ class Math_process:
         # Define the intercept 'b' as None value
         # in the gradient descent prove the real value
         # initialize in None to avoid unnecessary numbers
-        b = None
+        b = None # the bias
         percent_difference = None
         validator = None        
         count_cases = 0 # the position of each loop
         values_near_to_goal = list()
+        values_tested = list()
         total_error = 0.0 # this one gonna to get all the values without prediction
         
 
@@ -363,7 +364,8 @@ class Math_process:
         #self.testing_simplify()
         
         try:
-            for x, y in zip(x_data_model, y_data_model):
+            
+            '''for x, y in zip(x_data_model, y_data_model):
 
                 count_cases += 1
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
@@ -374,20 +376,28 @@ class Math_process:
 
                     if b is not None:
                         
+                        print("bias isn't None ")
                         validator += b
                         percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
 
                         while True:
-                            if percent_difference <= float(3) and percent_difference >= float(-3) and self.check_bias():
+                            # bias, data, beta_0, beta_1, x_value
+                            if (percent_difference <= float(3) and percent_difference >= float(-3) and 
+                            self.check_bias(b, values_near_to_goal,math_model['β0'], math_model['β1'],x)):
                                 values_near_to_goal.append(y)
                                 break
                             else:
                                 while True:
                                     b = random.uniform(-4,4)
                                     validator += b
-                                    continue
-                            
-                    
+                                    percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
+                                    # self.executor(self.check_bias, ) 
+                                    if percent_difference <=  float(3) and percent_difference >= float(-3):
+                                        print(" [*] Enter in the conditional with the random uniform to bias different from None")
+                                        values_near_to_goal.append(y)
+                                        break
+                                    else:
+                                        continue
                     else:
 
                         percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
@@ -407,13 +417,23 @@ class Math_process:
                                 b = random.uniform(-4,4)
                                 validator += b
                                 percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-                                self.executor(self.check_bias, ) 
+                                # self.executor(self.check_bias, ) 
                                 if percent_difference <=  float(3) and percent_difference >= float(-3):
                                     print(" [*] Enter in the conditional with the random uniform to bias different from None")
                                     values_near_to_goal.append(y)
                                     break
                                 else:
-                                    continue
+                                    continue'''
+            for x,y in zip(x_data_model, y_data_model):
+                validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
+
+                if validator - y == 0 or ((validator - y) >= -3 and (validator - y )<= 3):
+                    # print("[*] Error margin prediction is 0 or is lesser than 3 and greater than -3")
+                    values_near_to_goal.append(y)
+                    values_tested.append(validator)
+                else:
+                    pass
+                    
 
         except Exception as e:
             print(" exception by: "+str(e))
@@ -422,14 +442,16 @@ class Math_process:
         finally:
             # print(" Test cases finished.")
             print(" Year tested %s"%year_tested)
-            print(" Status final by the bias: %s"%b)
+            # print(" Status final by the bias: %s"%b)
             # print(" Total cases %s"%count_cases)
             
-            print(self.print_linear_equation(math_model['β0'], math_model['β1']))
+            # print(self.print_linear_equation(math_model['β0'], math_model['β1']))
             print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
-            print(" The total errores are %s percent "%(float(total_error / len(x_data_model))))
+            # print(values_near_to_goal)
+            # print(" The total errores are %s percent "%(float(total_error / len(x_data_model))))
 
-
+        for a,b in zip(values_tested, values_near_to_goal):
+            print(a,b)
 
     '''Function to support the conditional in above methods
         to be clare, is for only suppor.
