@@ -432,7 +432,7 @@ class Math_process:
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
                 else:
-                    pass
+                    continue
                     
 
         except Exception as e:
