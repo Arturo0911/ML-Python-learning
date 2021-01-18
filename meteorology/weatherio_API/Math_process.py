@@ -427,8 +427,10 @@ class Math_process:
             for x,y in zip(x_data_model, y_data_model):
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
 
-                if validator - y == 0 or ((validator - y) >= -3 and (validator - y )<= 3):
+                if (validator - y == 0) or ((validator - y) >= -3 and (validator - y )<= 3):
                     # print("[*] Error margin prediction is 0 or is lesser than 3 and greater than -3")
+                    # print("the validator %s and the value desired %s  and the accerts about the prediction are %s percent"%(validator, y,
+                    # float("{0:.2f}".format(100 - ((y/validator) *)))))
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
                 else:
@@ -450,8 +452,9 @@ class Math_process:
             # print(values_near_to_goal)
             # print(" The total errores are %s percent "%(float(total_error / len(x_data_model))))
 
-        for a,b in zip(values_tested, values_near_to_goal):
-            print(a,b)
+        # for a,b in zip(values_tested, values_near_to_goal):
+        #     print(a,b)
+
 
     '''Function to support the conditional in above methods
         to be clare, is for only suppor.
@@ -496,62 +499,7 @@ class Math_process:
         return float(mean_squared_error/LIMITER_RANGE)
 
 
-    # simplify the model to be iterated
-
-    '''def testing_simplify(self,objects_data, x_data_model, y_data_model, year_tested):
-
-        # variables to use
-        b = None # the bias value
-        percent_difference = None # the difference between prediction and the desired value
-        validator = None # checl if the value instantiated from         
-        count_cases = 0 # the position of each loop
-        values_near_to_goal = list() # the values accepteds
-        total_error = 0.0 # this one gonna to get all the values without prediction
-        
-
-
-        try:
-            for x, y in zip(x_data_model, y_data_model):
-
-                count_cases += 1
-                validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
-
-                if validator  == y:
-                    print("[*] Test case Passed!")
-                else:
-                
-                    percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-
-                    if percent_difference <=  float(3) and percent_difference >= float(-3):
-                        values_near_to_goal.append(percent_difference)
-                        
-                    else:
-                        while True:
-                            b = random.uniform(-4,4)
-                            validator += b
-                            percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-                            self.executor(self.check_bias, ) 
-                            if percent_difference <=  float(3) and percent_difference >= float(-3):
-                                print(" [*] Enter in the conditional with the random uniform to bias different from None")
-                                values_near_to_goal.append(percent_difference)
-                                break
-                            else:
-                                continue
-
-        except Exception as e:
-            print(" exception by: "+str(e))
-        else:
-            pass
-        finally:
-            print(" Test cases finished.")
-            print(" Year tested %s"%year_tested)
-            print(" Status final by the bias: %s"%b)
-            print(" Total cases %s"%count_cases)
-            
-            print(self.print_linear_equation(math_model['β0'], math_model['β1']))
-            print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
-            print(" The total errores are %s "%(float(total_error / len(x_data_model))))
-        pass'''
+    
 
 
 

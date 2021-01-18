@@ -196,15 +196,8 @@ class Init_test:
         
 
 
-    def define_math_model(self):
 
-        """
-        This method, will test the first math model
-        """
-        pass
-
-
-def test_function_with_parameters():
+def main():
     """
         This function, only will be read the instancies, from the main Class
         humidity relative is the X variable and the temperature is Y
@@ -217,44 +210,26 @@ def test_function_with_parameters():
     # print(positive[1]['2018']['x'])
     # print(positive[1]['2018']['y'])
     
-    executors= ThreadPoolExecutor(max_workers = 2)
-    
-    '''Math_process().testing_mathematician_model(positive[0]['2017'], 
-            positive[0]['2017']['x'], positive[0]['2017']['y'])
-    
-    Math_process().testing_mathematician_model(positive[0]['2017'],
-            positive[0]['2017']['x'], positive[0]['2017']['y'])
-    
-    Math_process().testing_mathematician_model(positive[0]['2017'], 
-            positive[0]['2017']['x'], positive[0]['2017']['y'])
+    # executors= ThreadPoolExecutor(max_workers = 2)
 
-    '''
+    # initilize ThreadPools to use the concurrent in python
+    with ThreadPoolExecutor(max_workers=2) as executors:
 
-    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-            positive[0]['2017']['x'], positive[0]['2017']['y'], '2017')
-    
-    executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-            positive[1]['2018']['x'], positive[1]['2018']['y'], '2018')'''
+        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017')
+        
+        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+                positive[1]['2018']['x'], positive[1]['2018']['y'], '2018')
 
-    Math_process().testing_mathematician_model(positive[0]['2017'], 
-            positive[0]['2017']['x'], positive[0]['2017']['y'], '2017')
-
-    Math_process().testing_mathematician_model(positive[0]['2017'], 
-            positive[2]['2019']['x'], positive[2]['2019']['y'], '2019')
+        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+                positive[2]['2019']['x'], positive[2]['2019']['y'], '2019')
 
 
 
 
 
-    '''model_prediction_1 = Math_process().testing_mathematician_model(positive[0]['2017'])
-    model_prediction_2 = Math_process().testing_mathematician_model(positive[1]['2018'])
-    model_prediction_3 = Math_process().testing_mathematician_model(positive[2]['2019'])
-
-
-    Math_process().print_linear_equation(model_prediction_1['β0'], model_prediction_1['β1'])
-    Math_process().print_linear_equation(model_prediction_2['β0'], model_prediction_2['β1'])'''
 
 # Load the algorithm and execute 
-test_function_with_parameters()
+main()
 
 
