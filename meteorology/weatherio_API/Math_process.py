@@ -336,26 +336,42 @@ class Math_process:
         Resuming above, after three days, i gonna prove that algorithm
     
         '''
-
-        #----------------------------------------------#
-        #    Structure of the obejcts_data = {         #
-        #            'x': list,                        #
-        #            'y': list                         #
-        #           }                                  #
-        #----------------------------------------------#
-
-
         # Define the intercept 'b' as None value
         # in the gradient descent prove the real value
         # initialize in None to avoid unnecessary numbers
         b = None # the bias
         percent_difference = None
-        validator = None        
+        validator = None
+        percent_accuracy = None
+        _description = None
         count_cases = 0 # the position of each loop
         values_near_to_goal = list()
         values_tested = list()
         values_percent = list()
         total_error = 0.0 # this one gonna to get all the values without prediction
+        # object_prediction = {} # setting the object prediction to append the values including the accuracy
+        dates_matched = list() # the days whenever matched betwen prediction and values from the data training
+
+
+                            #-------------------------------------------------------#
+                            #   object_prediction = {                               #
+                            #                                                       #
+                            #       'days_tested': list_days_tested,                #
+                            #       'dates_matched': list_days_matched,             #
+                            #       'accuracy': accuracy,                           #
+                            #       'cost_function': cost_function,                 #
+                            #       'precission':precission,                        #
+                            #       'info': {
+                            #           'cloud_type': cloud_type                    #
+                            #           'values_accepted':values_near_to_goal,      #
+                            #           'values_tested': values_tested,             #
+                            #           'description': ''                           #
+                            #       }                                               #
+                            #                                                       #
+                            #   }                                                   #
+                            #-------------------------------------------------------#
+
+
         
 
         math_model = self.Generate_parameters_from_regression(objects_data)
@@ -365,30 +381,57 @@ class Math_process:
             
             for x,y in zip(x_data_model, y_data_model):
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
+                percent_accuracy = float("{0:.3f}".format(((validator*100)/y)))
                 percent_difference = float("{0:.3f}".format( 100 -((validator*100)/y)))
-                if percent_difference >= -float(15) and percent_difference <= float(15) :#(validator - y == 0) or ((validator - y) >= -3 and (validator - y )<= 3):#(100 - percent_difference) >=-float(5) and (100 - percent_difference) <= float(5): 
+                if percent_difference >= -float(10) and percent_difference <= float(10) :
 
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
-                    values_percent.append(percent_difference)
+                    values_percent.append(percent_accuracy)
                 else:
                     continue
-                    
+            
 
+            average_values_accerted = float((sum(values_percent) / (len(values_percent))))
+            print("average of values accepted : ",average_values_accerted)
+
+            if average_values_accerted >= float(85):
+                pass
+            else:
+                pass
+
+
+
+            '''object_prediction = {
+                'days_tested': ,
+                'dates_matched':,
+                'accuracy': ,
+                'cost_function':,
+                'average_values_accerted': average_values_acecerted,
+                'info':{
+                    'cloud_type':,
+                    'values_acepted':,
+                    'valueS_tested':,
+                    'description': ''
+                }
+            }'''
         except Exception as e:
-            print(" exception by: "+str(e))
+            print("exception by: "+str(e))
         else:
             pass
         finally:
             
-            print(" Year tested %s"%year_tested)
+            print("Year tested %s"%year_tested)
             print(cloud_type)
             # print(" Status final by the bias: %s"%b)
             # print(" Total cases %s"%count_cases)
             
             # print(self.print_linear_equation(math_model['β0'], math_model['β1']))
-            print(" Quantity values accerted %s"%len(values_near_to_goal))
-            print(" Test cases percent accuracy by the conditional %s"%float((len(values_near_to_goal)/len(x_data_model))*100))
+            #
+            #
+            # 
+            print("Quantity values accerted %s"%len(values_near_to_goal))
+            # print(" Test cases percent accuracy by the conditional %s"%float((len(values_near_to_goal)/len(x_data_model))*100))
         
 
         '''
@@ -398,11 +441,14 @@ class Math_process:
         purpose yourself
 
         '''
-        try:
+        '''try:
             for a,b in zip(time_base,time_prediction):
+                
 
-                if a == b:
+                print(a[5:10])
+                if a[5:10] == b[5:10]:
                     print("Matched!!")
+                    print(a[5:10],"-",b[5:10])
                 else:
                     print(a,b)
                     print("Dismatched")
@@ -412,7 +458,7 @@ class Math_process:
         else:
             pass
         finally:
-            pass
+            pass'''
             
     def print_linear_equation(self, beta_0, beta_1):
 

@@ -230,11 +230,15 @@ def main():
         
         #print(y['cloud_type'],y['coefficient_correlation'])
     with ThreadPoolExecutor(max_workers=2) as executors:
+
+        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'],
+                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])
         
         # the prediction whenever the cloud type is the same
-        executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+        '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
                 negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'],
-                negative[0]['2017']['time_prediction'],negative[1]['2018']['time_prediction'])
+                negative[0]['2017']['time_prediction'],negative[1]['2018']['time_prediction'])'''
 
 
 
