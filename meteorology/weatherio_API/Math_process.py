@@ -7,7 +7,10 @@ from pprint import pprint
 import random
 from concurrent.futures import ThreadPoolExecutor
 from types import new_class 
-
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sckitlearn.
 
 #----------------------------------------------#
 #      Generate_parameters_from_regression     #
@@ -152,13 +155,6 @@ class Math_process:
             }
             print("\n")
             pprint(prediction)
-
-    def learning_supervised(self):
-        #--------------------------------------------------#
-        # This method will evaluate the value of percents  #
-        # of the test in the self method test_math_model   #
-        #--------------------------------------------------#
-        pass
 
     def _define_average(self, number, length):
 
