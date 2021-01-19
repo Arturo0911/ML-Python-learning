@@ -380,58 +380,55 @@ class Math_process:
         try:
             
             for x,y in zip(x_data_model, y_data_model):
+
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
-                percent_accuracy = float("{0:.3f}".format(((validator*100)/y)))
+                # percent_accuracy = float("{0:.3f}".format(((validator*100)/y)))
                 percent_difference = float("{0:.3f}".format( 100 -((validator*100)/y)))
-                if percent_difference >= -float(10) and percent_difference <= float(10) :
+
+                if percent_difference >= -float(15) and percent_difference <= float(15) :
 
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
-                    values_percent.append(percent_accuracy)
+                    # values_percent.append(percent_accuracy)
                 else:
                     continue
             
 
             average_values_accerted = float((sum(values_percent) / (len(values_percent))))
-            print("average of values accepted : ",average_values_accerted)
-
-            if average_values_accerted >= float(85):
+            percent_accuracy = float((len(values_near_to_goal)/len(x_data_model))*100)
+            
+            if percent_accuracy >= float(70):
+                _description = """in the case that the days has matched and the percent of accuracy is greater than 70% then the """
+            elif (percent_accuracy < float(70)):
+                _description = ""
                 pass
-            else:
-                pass
+            
+            for a,b in zip(time_base,time_prediction):
+                if a[5:10] == b[5:10]:
+                    dates_matched.append(b[5:10])
+                else:
+                    pass
 
 
-
-            '''object_prediction = {
-                'days_tested': ,
-                'dates_matched':,
-                'accuracy': ,
-                'cost_function':,
-                'average_values_accerted': average_values_acecerted,
+            object_prediction = {
+                'days_tested': len(time_prediction),
+                'dates_matched':dates_matched,
+                'accuracy':percent_accuracy ,
+                'cost_function':self.cost_function(),
+                'average_values_accerted': average_values_accerted,
                 'info':{
-                    'cloud_type':,
-                    'values_acepted':,
-                    'valueS_tested':,
-                    'description': ''
+                    'cloud_type':cloud_type,
+                    'values_acepted':values_near_to_goal,
+                    'values_tested':y_data_model,
+                    'description': _description
                 }
-            }'''
+            }
+
+            return object_prediction
         except Exception as e:
-            print("exception by: "+str(e))
-        else:
-            pass
-        finally:
-            
-            print("Year tested %s"%year_tested)
-            print(cloud_type)
-            # print(" Status final by the bias: %s"%b)
-            # print(" Total cases %s"%count_cases)
-            
-            # print(self.print_linear_equation(math_model['β0'], math_model['β1']))
-            #
-            #
-            # 
-            print("Quantity values accerted %s"%len(values_near_to_goal))
-            # print(" Test cases percent accuracy by the conditional %s"%float((len(values_near_to_goal)/len(x_data_model))*100))
+            return {'error': str(e)}          
+        
+
         
 
         '''
@@ -441,24 +438,6 @@ class Math_process:
         purpose yourself
 
         '''
-        '''try:
-            for a,b in zip(time_base,time_prediction):
-                
-
-                print(a[5:10])
-                if a[5:10] == b[5:10]:
-                    print("Matched!!")
-                    print(a[5:10],"-",b[5:10])
-                else:
-                    print(a,b)
-                    print("Dismatched")
-
-        except Exception as e:
-            print(e)
-        else:
-            pass
-        finally:
-            pass'''
             
     def print_linear_equation(self, beta_0, beta_1):
 
