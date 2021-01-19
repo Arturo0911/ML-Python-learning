@@ -136,7 +136,7 @@ class Init_test:
 
                 list_humidity = list()
                 list_temperature = list()
-                list_time_start = list()
+                list_time_prediction = list()
                 list_time_end = list()
                 
                 # get the list of clouds parameters and year activity
@@ -147,12 +147,8 @@ class Init_test:
                     }
                 }
                 
-
                 # set the subset, temperature, is the best parameter to filter by.
-                
                 dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
-
-
                 # LOOPS FOR APPENDS
                 for i in dataframe_filtered['relative_humidity']:
                     list_humidity.append(i)
@@ -160,19 +156,19 @@ class Init_test:
                 for j in dataframe_filtered['temperature']:
                     list_temperature.append(j)
 
-                for k in dataframe_filtered['time_start']:
-                    list_time_start.append(k)
+                for k,l in zip(dataframe_filtered['time_start'],dataframe_filtered['time_end']):
+                    list_time_prediction.append(k+" - "+l)
 
-                for l in dataframe_filtered['time_end']:
-                    list_time_end.append(l)
+                #for l in dataframe_filtered['time_end']:
+                #    list_time_end.append(l)
 
                 # set the object_data with the values.  
                 
                 object_data = {
                     'x': list_humidity,
                     'y': list_temperature,
-                    'time_start': list_time_start,
-                    'time_end':list_time_end
+                    'time_prediction': list_time_prediction,
+                    #'time_end':list_time_end
                 }
 
                 # use correlation_coefficient() instead of check_covariance()
@@ -194,14 +190,6 @@ class Init_test:
                     plt.ylabel("Temperature")
                     plt.show()
                     """
-
-
-        # invoke the instance from the Math_process file
-        # pprint(prediction_object)
-        #math_process.test_math_model(coefficient_positive[1]['2018'], coefficient_positive[2]['2019']['x'])
-        # math_process.test_math_model(coefficient_positive[0]['2018'])
-        #print(coefficient_positive[0]['2017'])
-        #math_process.testing_mathematician_model(coefficient_positive[0]['2017'])
         return coefficient_positive, coefficient_negative
         
 
@@ -235,21 +223,22 @@ def main():
         print(y['cloud_type'])
     
     '''
-    print(len(negative[0]['2017']['x']))
-    print(len(negative[0]['2017']['y']))
-    print(len(negative[0]['2017']['time_start']))
-    print(len(negative[0]['2017']['time_end']))
+    # print(len(negative[0]['2017']['x']))
+    # print(len(negative[0]['2017']['y']))
+    # print(negative[0]['2017']['time_prediction'])
+    #print(len(negative[0]['2017']['time_end']))
         
         #print(y['cloud_type'],y['coefficient_correlation'])
-    '''with ThreadPoolExecutor(max_workers=2) as executors:
+    with ThreadPoolExecutor(max_workers=2) as executors:
         
         # the prediction whenever the cloud type is the same
         executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
-                negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'])
+                negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'],
+                negative[0]['2017']['time_prediction'],negative[1]['2018']['time_prediction'])
 
 
 
-        executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+        '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
                 negative[1]['2018']['x'], negative[1]['2018']['y'], '2018', negative[1]['cloud_type'])'''
                 
     

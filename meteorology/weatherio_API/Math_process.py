@@ -313,7 +313,8 @@ class Math_process:
 
         pass
 
-    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type):
+    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
+    time_base, time_prediction):
         '''
         testing the math model taking in aacount about 
         the values to be proccessed
@@ -397,6 +398,21 @@ class Math_process:
         purpose yourself
 
         '''
+        try:
+            for a,b in zip(time_base,time_prediction):
+
+                if a == b:
+                    print("Matched!!")
+                else:
+                    print(a,b)
+                    print("Dismatched")
+
+        except Exception as e:
+            print(e)
+        else:
+            pass
+        finally:
+            pass
             
     def print_linear_equation(self, beta_0, beta_1):
 
