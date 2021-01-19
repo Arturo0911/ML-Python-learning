@@ -202,47 +202,31 @@ def main():
     """
     test_init = Init_test()
     positive, negative = test_init._comparative_between_three_years()
-    
-    # print(positive[0].keys())
-    # print(positive[0]['2017'])
-    # print(positive[1]['2018']['x'])
-    # print(positive[1]['2018']['y'])
-    
-    # executors= ThreadPoolExecutor(max_workers = 2)
-
-    # initilize ThreadPools to use the concurrent in python
 
 
-    # print(positive)
-    
-    
-    '''for x in positive:
-        print(x['cloud_type'])
-    print("--------------------------------")
-    for y in negative:
-        print(y['cloud_type'])
-    
-    '''
-    # print(len(negative[0]['2017']['x']))
-    # print(len(negative[0]['2017']['y']))
-    # print(negative[0]['2017']['time_prediction'])
-    #print(len(negative[0]['2017']['time_end']))
-        
-        #print(y['cloud_type'],y['coefficient_correlation'])
-    with ThreadPoolExecutor(max_workers=2) as executors:
-
-        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'],
+    prediction_2017 = Math_process().testing_mathematician_model(positive[0]['2017'], 
+                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
                 positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])
+    
+    pprint(prediction_2017)
+
+
+    '''with ThreadPoolExecutor(max_workers=2) as executors:
+
+         executors.submit(print(prediction_2017))'''
+
+    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'],
+                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])'''
         
         # the prediction whenever the cloud type is the same
-        '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+    '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
                 negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'],
                 negative[0]['2017']['time_prediction'],negative[1]['2018']['time_prediction'])'''
 
 
 
-        '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+    '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
                 negative[1]['2018']['x'], negative[1]['2018']['y'], '2018', negative[1]['cloud_type'])'''
                 
     
@@ -257,8 +241,6 @@ def main():
 
 
 
-
-# Load the algorithm and execute 
 main()
 
 

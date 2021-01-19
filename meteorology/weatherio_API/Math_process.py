@@ -316,7 +316,7 @@ class Math_process:
     def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
     time_base, time_prediction):
         '''
-        testing the math model taking in aacount about 
+        testing the math model taking in account about 
         the values to be proccessed
         the another goal in this method is take how many variables 
         (speaking in percent) aren't matching with the parameters, 
@@ -394,8 +394,8 @@ class Math_process:
                     continue
             
 
-            average_values_accerted = float((sum(values_percent) / (len(values_percent))))
-            percent_accuracy = float((len(values_near_to_goal)/len(x_data_model))*100)
+            # average_values_accerted = float((sum(values_percent) / (len(values_percent))))
+            percent_accuracy = float("{0:.2f}".format((len(values_near_to_goal)/len(x_data_model))*100))
             
             if percent_accuracy >= float(70):
                 _description = """in the case that the days has matched and the percent of accuracy is greater than 70% then the """
@@ -414,12 +414,12 @@ class Math_process:
                 'days_tested': len(time_prediction),
                 'dates_matched':dates_matched,
                 'accuracy':percent_accuracy ,
-                'cost_function':self.cost_function(),
-                'average_values_accerted': average_values_accerted,
+                #'cost_function':self.cost_function(),
+                # 'average_values_accerted': average_values_accerted,
                 'info':{
                     'cloud_type':cloud_type,
-                    'values_acepted':values_near_to_goal,
-                    'values_tested':y_data_model,
+                    'values_acepted':len(values_near_to_goal),
+                    'values_tested':len(y_data_model),
                     'description': _description
                 }
             }
