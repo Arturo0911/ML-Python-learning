@@ -136,6 +136,8 @@ class Init_test:
 
                 list_humidity = list()
                 list_temperature = list()
+                list_time_start = list()
+                list_time_end = list()
                 
                 # get the list of clouds parameters and year activity
                 objects_ = {
@@ -158,11 +160,19 @@ class Init_test:
                 for j in dataframe_filtered['temperature']:
                     list_temperature.append(j)
 
+                for k in dataframe_filtered['time_start']:
+                    list_time_start.append(k)
+
+                for l in dataframe_filtered['time_end']:
+                    list_time_end.append(l)
+
                 # set the object_data with the values.  
                 
                 object_data = {
                     'x': list_humidity,
-                    'y': list_temperature
+                    'y': list_temperature,
+                    'time_start': list_time_start,
+                    'time_end':list_time_end
                 }
 
                 # use correlation_coefficient() instead of check_covariance()
@@ -175,7 +185,7 @@ class Init_test:
                     pass
                     
                 else:
-                    coefficient_negative.append({'cloud_type': x,str(y): len(object_data), 
+                    coefficient_negative.append({'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
                     """
@@ -217,6 +227,7 @@ def main():
 
     # print(positive)
     
+    
     '''for x in positive:
         print(x['cloud_type'])
     print("--------------------------------")
@@ -224,22 +235,32 @@ def main():
         print(y['cloud_type'])
     
     '''
-    with ThreadPoolExecutor(max_workers=2) as executors:
+    print(len(negative[0]['2017']['x']))
+    print(len(negative[0]['2017']['y']))
+    print(len(negative[0]['2017']['time_start']))
+    print(len(negative[0]['2017']['time_end']))
+        
+        #print(y['cloud_type'],y['coefficient_correlation'])
+    '''with ThreadPoolExecutor(max_workers=2) as executors:
+        
+        # the prediction whenever the cloud type is the same
+        executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+                negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'])
 
-        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+
+
+        executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+                negative[1]['2018']['x'], negative[1]['2018']['y'], '2018', negative[1]['cloud_type'])'''
+                
+    
+    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
                 positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'])
         
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
                 positive[1]['2018']['x'], positive[1]['2018']['y'], '2018',positive[1]['cloud_type'])
 
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[2]['2019']['x'], positive[2]['2019']['y'], '2019',positive[2]['cloud_type'])
-    
-
-
-                
-
-
+                positive[2]['2019']['x'], positive[2]['2019']['y'], '2019',positive[2]['cloud_type'])'''
 
 
 

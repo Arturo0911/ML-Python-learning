@@ -10,7 +10,7 @@ from types import new_class
 import pandas as pd
 import numpy as np
 import seaborn as sns
-from sckitlearn.
+
 
 #----------------------------------------------#
 #      Generate_parameters_from_regression     #
@@ -353,6 +353,7 @@ class Math_process:
         count_cases = 0 # the position of each loop
         values_near_to_goal = list()
         values_tested = list()
+        values_percent = list()
         total_error = 0.0 # this one gonna to get all the values without prediction
         
 
@@ -361,72 +362,14 @@ class Math_process:
         
         try:
             
-            '''for x, y in zip(x_data_model, y_data_model):
-
-                count_cases += 1
-                validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
-
-                if validator  == y:
-                    print("[*] Test case Passed!")
-                else:
-
-                    if b is not None:
-                        
-                        print("bias isn't None ")
-                        validator += b
-                        percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-
-                        while True:
-                            # bias, data, beta_0, beta_1, x_value
-                            if (percent_difference <= float(3) and percent_difference >= float(-3) and 
-                            self.check_bias(b, values_near_to_goal,math_model['β0'], math_model['β1'],x)):
-                                values_near_to_goal.append(y)
-                                break
-                            else:
-                                while True:
-                                    b = random.uniform(-4,4)
-                                    validator += b
-                                    percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-                                    # self.executor(self.check_bias, ) 
-                                    if percent_difference <=  float(3) and percent_difference >= float(-3):
-                                        print(" [*] Enter in the conditional with the random uniform to bias different from None")
-                                        values_near_to_goal.append(y)
-                                        break
-                                    else:
-                                        continue
-                    else:
-
-                        percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-
-                        # in the case that the value is in the range of difference beteen -3 or 3
-                        # in this case add into the append the new value
-                        if percent_difference <=  float(3) and percent_difference >= float(-3):
-                            values_near_to_goal.append(y)
-                            
-                        else:
-                            while True:
-                                # in this loop i try to prove that generated random number 
-                                # between -4  and 4, including floating numbers.
-                                # i gonna to balanced the math model, only to avoid 
-                                # generated a big MSE, practically is i'm avoiding the errors
-                            
-                                b = random.uniform(-4,4)
-                                validator += b
-                                percent_difference = float("{0:.3f}".format( 100 -((y/validator)*100)))
-                                # self.executor(self.check_bias, ) 
-                                if percent_difference <=  float(3) and percent_difference >= float(-3):
-                                    print(" [*] Enter in the conditional with the random uniform to bias different from None")
-                                    values_near_to_goal.append(y)
-                                    break
-                                else:
-                                    continue'''
             for x,y in zip(x_data_model, y_data_model):
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
-
-                if (validator - y == 0) or ((validator - y) >= -3 and (validator - y )<= 3):
+                percent_difference = float("{0:.3f}".format( 100 -((validator*100)/y)))
+                if percent_difference >= -float(15) and percent_difference <= float(15) :#(validator - y == 0) or ((validator - y) >= -3 and (validator - y )<= 3):#(100 - percent_difference) >=-float(5) and (100 - percent_difference) <= float(5): 
 
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
+                    values_percent.append(percent_difference)
                 else:
                     continue
                     
@@ -436,24 +379,24 @@ class Math_process:
         else:
             pass
         finally:
-            # print(" Test cases finished.")
+            
             print(" Year tested %s"%year_tested)
             print(cloud_type)
             # print(" Status final by the bias: %s"%b)
             # print(" Total cases %s"%count_cases)
             
             # print(self.print_linear_equation(math_model['β0'], math_model['β1']))
-            print(" Test cases aproved by the conditional %s"%len(values_near_to_goal))
-            # print(values_near_to_goal)
-            # print(" The total errores are %s percent "%(float(total_error / len(x_data_model))))
+            print(" Quantity values accerted %s"%len(values_near_to_goal))
+            print(" Test cases percent accuracy by the conditional %s"%float((len(values_near_to_goal)/len(x_data_model))*100))
+        
 
-        # for a,b in zip(values_tested, values_near_to_goal):
-        #     print(a,b)
+        '''
+        Generate another interator to index the dates whenver the phenom metorology happend,
+        and append into the another array and make the prediction between the days whenever happen, e.i, 
+        the match with the dates, when dates makes match <3 I love you Arturo, You can anything that you 
+        purpose yourself
 
-
-    '''Function to support the conditional in above methods
-        to be clare, is for only suppor.
-    '''
+        '''
             
     def print_linear_equation(self, beta_0, beta_1):
 
