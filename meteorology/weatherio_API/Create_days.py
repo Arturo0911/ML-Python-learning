@@ -13,6 +13,7 @@ class Create_days:
         self.year_2017 = list()
         self.year_2018 = list()
         self.year_2019 = list()
+        self.year_2020 = list()
 
         self.october_2016 = date(2016, 10, 1)
         self.january_2017 = date(2017, 1, 31)
@@ -24,6 +25,9 @@ class Create_days:
         self.january_2019 = date(2019,1,31)
 
 
+        self.october_2019 = date(2019,10,1)
+        self.january_2020 = date(2020,1,31)
+
         self.objects = {}
 
     def generate_appends(self):
@@ -31,12 +35,12 @@ class Create_days:
         delta_2017 = self.january_2017 - self.october_2016
         delta_2018 = self.january_2018 - self.october_2017
         delta_2019 = self.january_2019 - self.october_2018
+        delta_2020 = self.january_2020 - self.october_2019
 
 
         for x in range(delta_2017.days + 1):
             days = self.october_2016 + timedelta(days=x)
             self.year_2017.append(str(days))
-
         self.objects[2017] = self.year_2017
 
         for x in range(delta_2018.days + 1):
@@ -49,6 +53,12 @@ class Create_days:
             days = self.october_2018 + timedelta(days= x)
             self.year_2019.append(str(days))
         self.objects[2019] = self.year_2019
+
+
+        for x in range(delta_2020.days +1):
+            days = self.october_2019 + timedelta(days= x)
+            self.year_2020.append(str(days))
+        self.objects[2020] = self.year_2020
 
 
     def json_generate(self):

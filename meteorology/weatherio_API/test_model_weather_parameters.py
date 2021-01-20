@@ -49,12 +49,6 @@ class Init_test:
             cloud_param, year_param, year_param))
         return data_frame
 
-
-    def readdataframe_using_seaborn(self):
-
-        new_data_frame = pd.read_csv(self._path.format('Overcast_clouds', 2017,2017))
-        return new_data_frame
-
     def make_subset(self, object_parameters):
         """
             get the parameters with the object parameters
@@ -74,20 +68,12 @@ class Init_test:
 
         first_param_cloud = object_parameters['values']['cloud_parameter']
         first_param_year = object_parameters['values']['year_activity']
-        first_param_filter = object_parameters['values']['filter']
 
         dataframe = pd.read_csv(self._path.format(
             first_param_cloud, first_param_year, first_param_year))
 
         # taking the first_data_parameter, put the parameter to be filtered
-
-        # subset_first = self.read_dataframe()[first_param_filter]
-
-        # return first_data_frame_subset , second_data_frame_subset
-
         # this one gonna return the subset with the filter
-        # return subset_first
-
         return dataframe
 
     def set_parameters(self, object_parameters, range):
@@ -123,9 +109,8 @@ class Init_test:
         coefficient_negative = list()
         
 
-        # for x in create_days.get_objects():
         for x in make_list():
-            # Loop in each year stored 2017 2018 2019; comming soon 2020.
+            # Loop in each year stored 2017 2018 2019 2020.
             # Now we can get the antoher parameters of the sky such overcastered
             # from the make_list() function
 
@@ -137,7 +122,6 @@ class Init_test:
                 list_humidity = list()
                 list_temperature = list()
                 list_time_prediction = list()
-                list_time_end = list()
                 
                 # get the list of clouds parameters and year activity
                 objects_ = {
@@ -159,29 +143,25 @@ class Init_test:
                 for k,l in zip(dataframe_filtered['time_start'],dataframe_filtered['time_end']):
                     list_time_prediction.append(k+" - "+l)
 
-                #for l in dataframe_filtered['time_end']:
-                #    list_time_end.append(l)
-
                 # set the object_data with the values.  
                 
                 object_data = {
                     'x': list_humidity,
                     'y': list_temperature,
                     'time_prediction': list_time_prediction,
-                    #'time_end':list_time_end
                 }
 
                 # use correlation_coefficient() instead of check_covariance()
                 if math_process.correlation_coefficient(object_data) > 0:
                     # here prove that the coefficient is greater than 0
-                    coefficient_positive.append({'cloud_type': x,str(y): object_data, 
+                    coefficient_positive.append({'cloud_type': x,str(y): len(object_data), 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
                 elif math_process.correlation_coefficient(object_data) == 0:
                     pass
                     
                 else:
-                    coefficient_negative.append({'cloud_type': x,str(y): object_data, 
+                    coefficient_negative.append({'cloud_type': x,str(y): len(object_data), 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
                     """
@@ -190,8 +170,13 @@ class Init_test:
                     plt.ylabel("Temperature")
                     plt.show()
                     """
-        return coefficient_positive, coefficient_negative
-        
+
+        coefficients = {
+            'positive':coefficient_positive,
+            'negative': coefficient_negative
+        }
+        # return coefficient_positive, coefficient_negative
+        return coefficients
 
 
 
@@ -201,14 +186,67 @@ def main():
         humidity relative is the X variable and the temperature is Y
     """
     test_init = Init_test()
-    positive, negative = test_init._comparative_between_three_years()
+    # positive, negative = test_init._comparative_between_three_years()
+
+    coefficients = test_init._comparative_between_three_years()
+
+    # print(positive[0].keys())
+    for x in coefficients:
+
+        for y in coefficients[x]:
+            
+            if y['cloud_type'] == "Overcast_clouds":
+                print(y)
+
+        # pprint(coefficients[x])
 
 
-    prediction_2017 = Math_process().testing_mathematician_model(positive[0]['2017'], 
-                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
-                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])
     
-    pprint(prediction_2017)
+
+    """
+            {'cloud_type': 'Overcast_clouds', '2017': 3, 'coefficient_correlation': 0.615}
+            {'cloud_type': 'Overcast_clouds', '2018': 3, 'coefficient_correlation': 0.411}
+            {'cloud_type': 'Overcast_clouds', '2019': 3, 'coefficient_correlation': 0.176}
+            {'cloud_type': 'Broken_clouds', '2019': 3, 'coefficient_correlation': 0.089}
+            {'cloud_type': 'Scattered_clouds', '2019': 3, 'coefficient_correlation': 0.018}
+
+
+            {'cloud_type': 'Overcast_clouds', '2020': 3, 'coefficient_correlation': -0.763}
+            {'cloud_type': 'Broken_clouds', '2017': 3, 'coefficient_correlation': -0.157}
+            {'cloud_type': 'Broken_clouds', '2018': 3, 'coefficient_correlation': -0.386}
+            {'cloud_type': 'Broken_clouds', '2020': 3, 'coefficient_correlation': -0.873}
+            {'cloud_type': 'Few_clouds', '2017': 3, 'coefficient_correlation': -0.723}
+            {'cloud_type': 'Few_clouds', '2018': 3, 'coefficient_correlation': -0.768}
+            {'cloud_type': 'Few_clouds', '2019': 3, 'coefficient_correlation': -0.035}
+            {'cloud_type': 'Few_clouds', '2020': 3, 'coefficient_correlation': -0.828}
+            {'cloud_type': 'Clear_Sky', '2017': 3, 'coefficient_correlation': -0.956}
+            {'cloud_type': 'Clear_Sky', '2018': 3, 'coefficient_correlation': -0.9}
+            {'cloud_type': 'Clear_Sky', '2019': 3, 'coefficient_correlation': -0.12}
+            {'cloud_type': 'Clear_Sky', '2020': 3, 'coefficient_correlation': -0.795}
+            {'cloud_type': 'Light_rain', '2017': 3, 'coefficient_correlation': -0.148}
+            {'cloud_type': 'Light_rain', '2018': 3, 'coefficient_correlation': -0.724}
+            {'cloud_type': 'Light_rain', '2019': 3, 'coefficient_correlation': -0.869}
+            {'cloud_type': 'Light_rain', '2020': 3, 'coefficient_correlation': -0.282}
+            {'cloud_type': 'Scattered_clouds', '2017': 3, 'coefficient_correlation': -0.534}
+            {'cloud_type': 'Scattered_clouds', '2018': 3, 'coefficient_correlation': -0.633}
+            {'cloud_type': 'Scattered_clouds', '2020': 3, 'coefficient_correlation': -0.903}
+    """
+
+
+
+
+
+
+
+
+
+
+    #print(negative)
+    """prediction_2017 = Math_process().testing_mathematician_model(positive[0]['2017'], 
+                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
+                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])"""
+    
+    #pprint(prediction_2017)
 
 
     '''with ThreadPoolExecutor(max_workers=2) as executors:

@@ -411,13 +411,13 @@ class Math_process:
 
 
             object_prediction = {
+                'cloud_type':cloud_type,
                 'days_tested': len(time_prediction),
                 'dates_matched':dates_matched,
                 'accuracy':percent_accuracy ,
                 #'cost_function':self.cost_function(),
                 # 'average_values_accerted': average_values_accerted,
                 'info':{
-                    'cloud_type':cloud_type,
                     'values_acepted':len(values_near_to_goal),
                     'values_tested':len(y_data_model),
                     'description': _description
