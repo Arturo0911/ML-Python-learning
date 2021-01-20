@@ -164,7 +164,7 @@ class Init_test:
 
                 
 
-                # agrupate by cloud type and append their properties
+                # group by cloud type and add their properties
                 if x == "Overcast_clouds":
                     overcast_clouds.append({x:{'cloud_type': x,str(y): len(object_data), 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
@@ -226,7 +226,12 @@ def main():
 
     # print(positive[0].keys())
 
-    pprint(coefficients)
+    # pprint(coefficients)
+
+
+    for x in coefficients:
+        for y in coefficients[x]:
+            print(y)
 
         # pprint(coefficients[x])
 
@@ -263,7 +268,81 @@ def main():
     """
 
 
+    """
+    {'Broken_clouds': [{'Broken_clouds': {'2017': 3,
+                                      'cloud_type': 'Broken_clouds',
+                                      'coefficient_correlation': -0.157}},
+                   {'Broken_clouds': {'2018': 3,
+                                      'cloud_type': 'Broken_clouds',
+                                      'coefficient_correlation': -0.386}},
+                   {'Broken_clouds': {'2019': 3,
+                                      'cloud_type': 'Broken_clouds',
+                                      'coefficient_correlation': 0.089}},
+                   {'Broken_clouds': {'2020': 3,
+                                      'cloud_type': 'Broken_clouds',
+                                      'coefficient_correlation': -0.873}}],
+ 'Clear_Sky': [{'Clear_Sky': {'2017': 3,
+                              'cloud_type': 'Clear_Sky',
+                              'coefficient_correlation': -0.956}},
+               {'Clear_Sky': {'2018': 3,
+                              'cloud_type': 'Clear_Sky',
+                              'coefficient_correlation': -0.9}},
+               {'Clear_Sky': {'2019': 3,
+                              'cloud_type': 'Clear_Sky',
+                              'coefficient_correlation': -0.12}},
+               {'Clear_Sky': {'2020': 3,
+                              'cloud_type': 'Clear_Sky',
+                              'coefficient_correlation': -0.795}}],
+ 'Few_clouds': [{'Few_clouds': {'2017': 3,
+                                'cloud_type': 'Few_clouds',
+                                'coefficient_correlation': -0.723}},
+                {'Few_clouds': {'2018': 3,
+                                'cloud_type': 'Few_clouds',
+                                'coefficient_correlation': -0.768}},
+                {'Few_clouds': {'2019': 3,
+                                'cloud_type': 'Few_clouds',
+                                'coefficient_correlation': -0.035}},
+                {'Few_clouds': {'2020': 3,
+                                'cloud_type': 'Few_clouds',
+                                'coefficient_correlation': -0.828}}],
+ 'Light_rain': [{'Light_rain': {'2017': 3,
+                                'cloud_type': 'Light_rain',
+                                'coefficient_correlation': -0.148}},
+                {'Light_rain': {'2018': 3,
+                                'cloud_type': 'Light_rain',
+                                'coefficient_correlation': -0.724}},
+                {'Light_rain': {'2019': 3,
+                                'cloud_type': 'Light_rain',
+                                'coefficient_correlation': -0.869}},
+                {'Light_rain': {'2020': 3,
+                                'cloud_type': 'Light_rain',
+                                'coefficient_correlation': -0.282}}],
+ 'Overcast_clouds': [{'Overcast_clouds': {'2017': 3,
+                                          'cloud_type': 'Overcast_clouds',
+                                          'coefficient_correlation': 0.615}},
+                     {'Overcast_clouds': {'2018': 3,
+                                          'cloud_type': 'Overcast_clouds',
+                                          'coefficient_correlation': 0.411}},
+                     {'Overcast_clouds': {'2019': 3,
+                                          'cloud_type': 'Overcast_clouds',
+                                          'coefficient_correlation': 0.176}},
+                     {'Overcast_clouds': {'2020': 3,
+                                          'cloud_type': 'Overcast_clouds',
+                                          'coefficient_correlation': -0.763}}],
+ 'Scattered_clouds': [{'Scattered_clouds': {'2017': 3,
+                                            'cloud_type': 'Scattered_clouds',
+                                            'coefficient_correlation': -0.534}},
+                      {'Scattered_clouds': {'2018': 3,
+                                            'cloud_type': 'Scattered_clouds',
+                                            'coefficient_correlation': -0.633}},
+                      {'Scattered_clouds': {'2019': 3,
+                                            'cloud_type': 'Scattered_clouds',
+                                            'coefficient_correlation': 0.018}},
+                      {'Scattered_clouds': {'2020': 3,
+                                            'cloud_type': 'Scattered_clouds',
+                                            'coefficient_correlation': -0.903}}]}
 
+    """
 
 
 
