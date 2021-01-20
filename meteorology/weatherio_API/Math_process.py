@@ -337,10 +337,6 @@ class Math_process:
         bias = None
         iterations = 0
         bias_lists_accepteds_accuracy = list()
-        which_max = list()
-        which_min_cost = list()
-        
-        # for x in range(iterations):
         
         while True:
             iterations += 1
@@ -349,7 +345,7 @@ class Math_process:
                 y_data_model,year_train, year_tested, cloud_type, time_base, 
                     time_prediction,bias)
 
-            if iterations <= 10000:    
+            if iterations <= 14000:    
 
                 if math_model['accuracy'] >= float(80) and math_model['cost_function'] <= float(13.40):
                     bias_lists_accepteds_accuracy.append({'accuracy':math_model['accuracy'], 
@@ -357,28 +353,15 @@ class Math_process:
                     break
             else:
                 break
-            
-
-            # print("accuracy: ",math_model['accuracy'],"          cost function: ",math_model['cost_function'], "  bias: ", bias)
-        # new_list = sorted(bias_lists_accepteds_accuracy, key = itemgetter('accuracy'))
-        '''final_object = {
-            
-            'year': math_model['year_train'],
-            'cloud_type': cloud_type,
-            'accuracy': math_model['accuracy'],
-            'cost_function': math_model['cost_function'],
-            'year_tested':math_model['year_tested']
-
-        }'''
-
+        
         final_object = {"accuracy":math_model['accuracy'],
             'cloud_type': cloud_type,
+            'bias':bias,
+            'iterations':iterations,
             "year_model": math_model['year_train'], 
             "cost_function": math_model['cost_function'],
             'year_tested': math_model['year_tested']}
         return final_object
-
-        # return final_object
 
 
 

@@ -211,23 +211,44 @@ def main(cloud_type='Overcast_clouds' ):
         humidity relative is the X variable and the temperature is Y
     """
     test_init = Init_test()
+    list_coefficients = list()
     coefficients, positive, negative = test_init._comparative_between_three_years()
 
-    # optimization('Overcast_clouds', '2017','2017')
-    # print("\n")
-    optimization(cloud_type,'2017',['2018','2019','2020'])
-    print('\n')
-    optimization(cloud_type,'2018',['2017','2019','2020'])
-    print('\n')
-    optimization(cloud_type,'2019',['2017','2018','2020'])
-    print('\n')
-    optimization(cloud_type,'2020',['2017','2018','2019'])
+    model_2017 = optimization(cloud_type,'2017',['2018','2019','2020'])
+    model_2018 = optimization(cloud_type,'2018',['2017','2019','2020'])
+    model_2019 = optimization(cloud_type,'2019',['2017','2018','2020'])
+    model_2020 = optimization(cloud_type,'2020',['2017','2018','2019'])
 
+    print(model_2017)
+    print(model_2018)
+    print(model_2019)
+    print(model_2020)
+
+    list_coefficients.append(model_2017['2017']['average_accuracy_total'])
+    list_coefficients.append(model_2018['2018']['average_accuracy_total'])
+    list_coefficients.append(model_2019['2019']['average_accuracy_total'])
+    list_coefficients.append(model_2020['2020']['average_accuracy_total'])
+
+
+    optimized_value = max(list_coefficients)
+
+    # still how to pass the final bias to the another function
+
+    if model_2017['2017']['average_accuracy_total'] == optimized_value:
+        return
+    elif model_2018['2018']['average_accuracy_total'] == optimized_value:
+        pass
+    elif model_2019['2019']['average_accuracy_total'] == optimized_value:
+        pass
+    elif model_2020['2020']['average_accuracy_total'] == optimized_value:
+        pass
+    else:
+        return {'error': 'Error in modeling'}
+        
+    return
 
 
 def optimization(cloud_type,year_model,years):#cloud_type,year_model):
-
-    list_years = ['2017','2018','2019','2020']
     '''
     Years parameters would be: 
         years = ['2017','2018','2019'] is the year model is 2020
@@ -245,11 +266,6 @@ def optimization(cloud_type,year_model,years):#cloud_type,year_model):
     model_2 = testing_models(cloud_type, year_model, years[1])
     model_3 = testing_models(cloud_type, year_model, years[2])
 
-    print(model_1)
-    print(model_2)
-    print(model_3)
-
-
     average = [model_1['accuracy'],
     model_2['accuracy'],
     model_3['accuracy']]
@@ -266,40 +282,9 @@ def optimization(cloud_type,year_model,years):#cloud_type,year_model):
     }
 
 
-
-    print(which_model_choose)
-
-    
-
-    
+    return which_model_choose
 
 
-    '''print(testing_models('Overcast_clouds', '2017', '2018'))
-    testing_models('Overcast_clouds', '2017', '2019')
-    testing_models('Overcast_clouds', '2017', '2020')'''
-
-    
-    # print("\n")
-    # print("\n")
-    '''testing_models('Overcast_clouds', '2018', '2017')
-    testing_models('Overcast_clouds', '2018', '2019')
-    testing_models('Overcast_clouds', '2018', '2020')
-
-     # pprint(testing_models('Overcast_clouds', '2017', '2020'))
-    print("\n")
-    print("\n")
-    testing_models('Overcast_clouds', '2019', '2017')
-    testing_models('Overcast_clouds', '2019', '2018')
-    testing_models('Overcast_clouds', '2019', '2020')
-
-     # pprint(testing_models('Overcast_clouds', '2017', '2020'))
-    print("\n")
-    print("\n")
-    testing_models('Overcast_clouds', '2020', '2017')
-    testing_models('Overcast_clouds', '2020', '2018')
-    testing_models('Overcast_clouds', '2020', '2019')'''
-
-    
 
 def testing_models(cloud_type, year_init, year_to_predict):
 
@@ -349,6 +334,54 @@ def testing_models(cloud_type, year_init, year_to_predict):
         Model_test['time_prediction']
     )
 
+def establishing_final_model(cloud_type, year_init, year_to_predict):
+    init_test = Init_test()
+    coefficients, positive, negative = init_test._comparative_between_three_years()
+    Model_train = None
+    Model_test = None
+
+    try:
+        if year_init == '2017':
+            Model_train = coefficients[cloud_type][0][cloud_type][year_init]
+        elif year_init == '2018':
+            Model_train = coefficients[cloud_type][1][cloud_type][year_init]
+        elif year_init == '2019':
+            Model_train = coefficients[cloud_type][2][cloud_type][year_init]
+        elif year_init == '2020':
+            Model_train = coefficients[cloud_type][3][cloud_type][year_init]
+        else:
+            pass
+    except Exception as e:
+        print(str(e))
+
+    try:
+        if year_to_predict == '2017':
+            Model_test = coefficients[cloud_type][0][cloud_type]['2017']
+        elif year_to_predict == '2018':
+            Model_test = coefficients[cloud_type][1][cloud_type]['2018']
+        elif year_to_predict == '2019':
+            Model_test = coefficients[cloud_type][2][cloud_type]['2019']
+        elif year_to_predict == '2020':
+            Model_test = coefficients[cloud_type][3][cloud_type]['2020']
+        else:
+            pass
+    except Exception as e:
+        print(str(e))
+
+    # print(test_model_2017[cloud_type]['2017'])
+
+    math_optimization = Math_process().optimization_gradient_descent(
+        Model_train,
+        Model_test['x'],
+        Model_test['y'],
+        year_init,
+        year_to_predict,
+        cloud_type,
+        Model_train['time_prediction'],
+        Model_test['time_prediction']
+    )
+
+    return Math_process().testing_mathematician_model()
 
 main()
 
