@@ -166,22 +166,22 @@ class Init_test:
 
                 # group by cloud type and add their properties
                 if x == "Overcast_clouds":
-                    overcast_clouds.append({x:{'cloud_type': x,str(y): len(object_data), 
+                    overcast_clouds.append({x:{'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x == "Broken_clouds":
-                    broken_cloud.append({x:{'cloud_type': x,str(y): len(object_data), 
+                    broken_cloud.append({x:{'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x  == "Scattered_clouds":
-                    scattered_cloud.append({x:{'cloud_type': x,str(y): len(object_data), 
+                    scattered_cloud.append({x:{'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x == "Few_clouds":
-                    few_clouds.append({x:{'cloud_type': x,str(y): len(object_data), 
+                    few_clouds.append({x:{'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x  == "Clear_Sky":
-                    clear_sky.append({x:{'cloud_type': x,str(y): len(object_data), 
+                    clear_sky.append({x:{'cloud_type': x,str(y): object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x == "Light_rain":
-                    light_rain.append({x:{'cloud_type': x,str(y): len(object_data), 
+                    light_rain.append({x:{'cloud_type': x,str(y):object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 else:
                     pass
@@ -190,14 +190,14 @@ class Init_test:
                 # use correlation_coefficient() instead of check_covariance()
                 if math_process.correlation_coefficient(object_data) > 0:
                     # here prove that the coefficient is greater than 0
-                    coefficient_positive.append({'cloud_type': x,str(y): len(object_data), 
+                    coefficient_positive.append({'cloud_type': x,str(y):object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
                 elif math_process.correlation_coefficient(object_data) == 0:
                     pass
                     
                 else:
-                    coefficient_negative.append({'cloud_type': x,str(y): len(object_data), 
+                    coefficient_negative.append({'cloud_type': x,str(y):object_data, 
                     'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
 
@@ -227,16 +227,45 @@ def main():
     # print(positive[0].keys())
 
     # pprint(coefficients)
-
-
-    for x in coefficients:
-        for y in coefficients[x]:
-            print(y)
+    # print(positive[0]['2017'])
+    pprint(Math_process().testing_mathematician_model(positive[0]['2017'], 
+                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
+                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction']))
+    print("\n")
+    optimization('Overcast_clouds')
 
         # pprint(coefficients[x])
 
+def optimization(cloud_type):
 
-    
+    init_test = Init_test()
+    coefficients,positive, negative = init_test._comparative_between_three_years()
+
+
+    test_model_2017 = coefficients[cloud_type][0]
+    test_model_2018 = coefficients[cloud_type][1][cloud_type]
+    test_model_2019 = coefficients[cloud_type][2][cloud_type]
+    test_model_2020 = coefficients[cloud_type][3][cloud_type]
+
+    # print(test_model_2017[cloud_type]['2017'])
+
+
+    pprint(Math_process().testing_mathematician_model(test_model_2017[cloud_type]['2017'],
+        test_model_2018['2018']['x'],test_model_2018['2018']['y'],'2017',cloud_type,test_model_2017[cloud_type]['2017']['time_prediction'],
+          test_model_2018['2018']['time_prediction'] ))
+
+
+    """Math_process().testing_mathematician_model(positive[0]['2017'], 
+                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
+                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])"""
+
+
+
+    # print(test_model_2018)
+    # print(test_model_2019)
+    # print(test_model_2020)
+
+
 
     """
             {'cloud_type': 'Overcast_clouds', '2017': 3, 'coefficient_correlation': 0.615}
