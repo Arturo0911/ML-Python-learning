@@ -5,6 +5,7 @@
 import math
 from pprint import pprint
 import random
+import statistics
 from concurrent.futures import ThreadPoolExecutor
 from types import new_class 
 import pandas as pd
@@ -339,15 +340,17 @@ class Math_process:
         # Define the intercept 'b' as None value
         # in the gradient descent prove the real value
         # initialize in None to avoid unnecessary numbers
-        b = None # the bias
+        bias = None # the bias
         percent_difference = None
         validator = None
         percent_accuracy = None
         _description = None
         count_cases = 0 # the position of each loop
         values_near_to_goal = list()
+        values_rejected = list()# to generate cost function
         values_tested = list()
         values_percent = list()
+        values_predicted = list()
         total_error = 0.0 # this one gonna to get all the values without prediction
         # object_prediction = {} # setting the object prediction to append the values including the accuracy
         dates_matched = list() # the days whenever matched betwen prediction and values from the data training
@@ -361,7 +364,7 @@ class Math_process:
                             #       'accuracy': accuracy,                           #
                             #       'cost_function': cost_function,                 #
                             #       'precission':precission,                        #
-                            #       'info': {
+                            #       'info': {                                       #
                             #           'cloud_type': cloud_type                    #
                             #           'values_accepted':values_near_to_goal,      #
                             #           'values_tested': values_tested,             #
@@ -384,14 +387,15 @@ class Math_process:
                 validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
                 # percent_accuracy = float("{0:.3f}".format(((validator*100)/y)))
                 percent_difference = float("{0:.3f}".format( 100 -((validator*100)/y)))
-
+                
                 if percent_difference >= -float(15) and percent_difference <= float(15) :
 
                     values_near_to_goal.append(y)
                     values_tested.append(validator)
                     # values_percent.append(percent_accuracy)
                 else:
-                    continue
+                    values_predicted.append(validator)
+                    values_rejected.append(y)
             
 
             # average_values_accerted = float((sum(values_percent) / (len(values_percent))))
@@ -416,8 +420,8 @@ class Math_process:
                 'dates_matched':len(dates_matched),
                 'dates_accuracy': float( (len(dates_matched)/len(time_prediction)*100)),
                 'accuracy':percent_accuracy,
+                'cost_function': self.cost_function(values_rejected, values_predicted), 
                 'year_tested':year_tested,
-                #'cost_function':self.cost_function(),
                 # 'average_values_accerted': average_values_accerted,
                 'info':{
                     'values_acepted':len(values_near_to_goal),
@@ -464,18 +468,18 @@ class Math_process:
         return counter == len(data) 
     
 
-    def cost_function(self,x_data, y_data, value_prediction):
+    def cost_function(self,values_rejecteds, values_predicteds):
 
-        LIMITER_RANGE = len(x_data)
+        LIMITER_RANGE = len(values_predicteds)
         mean_squared_error = 0.0
         # value prediction we will have to get using the math model
         # representing above; it's not neccessary to use the 
         # 
-        for x in range(LIMITER_RANGE):
+        for x,y in zip(values_rejecteds, values_predicteds):
 
-            mean_squared_error += (y_data[x] - value_prediction)**2
+            mean_squared_error += (x-y)**2
 
-        return float(mean_squared_error/LIMITER_RANGE)
+        return float("{0:.2f}".format(mean_squared_error/(LIMITER_RANGE * 2)))
 
 
     

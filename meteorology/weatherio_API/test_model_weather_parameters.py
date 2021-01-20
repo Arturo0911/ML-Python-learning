@@ -215,15 +215,18 @@ def main():
 
     # optimization('Overcast_clouds', '2017','2017')
     # print("\n")
+    optimization()
 
-    with ThreadPoolExecutor(max_workers=2) as executors:
+    '''with ThreadPoolExecutor(max_workers=2) as executors:
+
+        optimization_1 = optimization('Overcast_clouds','2017')
         
-        executors.submit(optimization, 'Overcast_clouds','2017')
+        executors.submit(optimization_1)
         executors.submit(optimization, 'Overcast_clouds','2018')
-        print("\n")
+        #print("\n")
         executors.submit(optimization, 'Overcast_clouds','2019')
         executors.submit(optimization, 'Overcast_clouds','2020')
-        print("\n")
+        #print("\n")
         # optimization('Overcast_clouds','2017')
     # print("\n")
     
@@ -231,20 +234,20 @@ def main():
     #print("\n")
     
     #optimization('Overcast_clouds','2019')
-    print("\n")
+    # print("\n")
     
     #optimization('Overcast_clouds','2020')
-    # pprint(coefficients[x])
+    # pprint(coefficients[x])'''
 
 
-def optimization(cloud_type,year_model):
+def optimization():#cloud_type,year_model):
 
     list_years = ['2017','2018','2019','2020']
     list_accuracy = list()
     list_predictions = list()
     list_dates_predictions_matched = list()
 
-    for x in range(0,len(list_years)):
+    '''for x in range(0,len(list_years)):
 
         if year_model != list_years[x]:
 
@@ -272,7 +275,7 @@ def optimization(cloud_type,year_model):
         'year_model': year_model,
         'average_accuracy': float("{0:2f}".format(sum(list_accuracy)/len(list_accuracy))),
         'average_dates': float("{0:2f}".format(sum(list_dates_predictions_matched)/len(list_dates_predictions_matched))),
-        'list_predictions':len(list_predictions)
+        # 'list_predictions':len(list_predictions)
 
     }
 
@@ -280,13 +283,14 @@ def optimization(cloud_type,year_model):
 
 
 
-    '''pprint(testing_models('Overcast_clouds', '2017', '2018'))
+    '''
+    pprint(testing_models('Overcast_clouds', '2017', '2018'))
     print("\n")
     pprint(testing_models('Overcast_clouds', '2017', '2019'))
     print("\n")
     pprint(testing_models('Overcast_clouds', '2017', '2020'))
     print("\n")
-    pprint(testing_models('Overcast_clouds', '2018', '2017'))
+    '''pprint(testing_models('Overcast_clouds', '2018', '2017'))
     print("\n")
     pprint(testing_models('Overcast_clouds', '2018', '2019'))
     print("\n")
