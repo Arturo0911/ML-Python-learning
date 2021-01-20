@@ -103,9 +103,7 @@ class Init_test:
         create_days = cd()
         create_days.generate_appends()
 
-        # Objects
-        final_object = []
-        object_with_correlassion_positive = []
+        # Lists
         coefficient_positive = list()
         coefficient_negative = list()
 
@@ -215,21 +213,78 @@ def main():
     test_init = Init_test()
     coefficients, positive, negative = test_init._comparative_between_three_years()
 
-    '''pprint(Math_process().testing_mathematician_model(positive[0]['2017'], 
-                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
-                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction']))
-    print("\n")'''
     # optimization('Overcast_clouds', '2017','2017')
+    # print("\n")
+    optimization('Overcast_clouds','2017')
     print("\n")
-    optimization('Overcast_clouds', '2017', '2018')
-    # print("\n")
-    optimization('Overcast_clouds', '2017', '2019')
-    # print("\n")
-    optimization('Overcast_clouds', '2017', '2020')
+    
+    optimization('Overcast_clouds','2018')
+    print("\n")
+    
+    optimization('Overcast_clouds','2019')
+    print("\n")
+    
+    optimization('Overcast_clouds','2020')
     # pprint(coefficients[x])
 
 
-def optimization(cloud_type, year_init, year_to_predict):
+def optimization(cloud_type,year_model):
+
+    list_years = ['2017','2018','2019','2020']
+    list_accuracy = list()
+    list_predictions = list()
+    list_dates_predictions_matched = list()
+
+    for x in range(0,len(list_years)):
+
+        if year_model != list_years[x]:
+
+            # print(year_model,"          ",list_years[x])
+            # pprint(testing_models('Overcast_clouds', year_model, list_years[x]))
+            list_predictions.append({list_years[x]:testing_models(cloud_type, year_model, list_years[x])})
+
+
+    for x in range(0,len(list_years)):
+
+        if year_model != list_years[x]:
+            list_accuracy.append(testing_models(cloud_type, year_model, list_years[x])['accuracy'])
+            # list_accuracy.append(testing_models(cloud_type, year_model,list_years[x])['accuracy'])
+            # list_accuracy.append(testing_models(cloud_type, year_model, '2020')['accuracy'])
+
+    for x in range(0,len(list_years)):
+
+        if year_model != list_years[x]:
+            list_dates_predictions_matched.append(testing_models(cloud_type, year_model, list_years[x])['dates_accuracy'])
+            # list_dates_predictions_matched.append(testing_models(cloud_type, '2017', '2019')['dates_accuracy'])
+            # list_dates_predictions_matched.append(testing_models(cloud_type, '2017', '2020')['dates_accuracy'])
+
+
+    object_optimization = {
+        'year_model': year_model,
+        'average_accuracy': float("{0:2f}".format(sum(list_accuracy)/len(list_accuracy))),
+        'average_dates': float("{0:2f}".format(sum(list_dates_predictions_matched)/len(list_dates_predictions_matched))),
+        'list_predictions':len(list_predictions)
+
+    }
+
+    print(object_optimization)
+
+
+
+    '''pprint(testing_models('Overcast_clouds', '2017', '2018'))
+    print("\n")
+    pprint(testing_models('Overcast_clouds', '2017', '2019'))
+    print("\n")
+    pprint(testing_models('Overcast_clouds', '2017', '2020'))
+    print("\n")
+    pprint(testing_models('Overcast_clouds', '2018', '2017'))
+    print("\n")
+    pprint(testing_models('Overcast_clouds', '2018', '2019'))
+    print("\n")
+    pprint(testing_models('Overcast_clouds', '2018', '2020'))'''
+
+
+def testing_models(cloud_type, year_init, year_to_predict):
 
     init_test = Init_test()
     coefficients, positive, negative = init_test._comparative_between_three_years()
@@ -266,67 +321,17 @@ def optimization(cloud_type, year_init, year_to_predict):
 
     # print(test_model_2017[cloud_type]['2017'])
 
-    pprint(Math_process().testing_mathematician_model(
+    return Math_process().testing_mathematician_model(
         Model_train,
         Model_test['x'],
         Model_test['y'],
-        year_init,
+        year_to_predict,
         cloud_type,
         Model_train['time_prediction'],
-        Model_test['time_prediction']))
+        Model_test['time_prediction'])
 
 
 main()
 
 
-'''test_model_2017 = coefficients[cloud_type][0]
-    test_model_2018 = coefficients[cloud_type][1][cloud_type]
-    test_model_2019 = coefficients[cloud_type][2][cloud_type]
-    test_model_2020 = coefficients[cloud_type][3][cloud_type]'''
-
-'''
-    pprint(Math_process().testing_mathematician_model(
-        test_model_2017[cloud_type]['2017'],
-        test_model_2018['2018']['x'],
-        test_model_2018['2018']['y'],
-        '2017',
-        cloud_type,
-        test_model_2017[cloud_type]['2017']['time_prediction'],
-          test_model_2018['2018']['time_prediction']))'''
-
-
-"""Math_process().testing_mathematician_model(positive[0]['2017'], 
-                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
-                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])"""
-
-# print(negative)
-"""prediction_2017 = Math_process().testing_mathematician_model(positive[0]['2017'], 
-                positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
-                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])"""
-
-# pprint(prediction_2017)
-
-'''with ThreadPoolExecutor(max_workers=2) as executors:
-
-         executors.submit(print(prediction_2017))'''
-
-'''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'],
-                positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])'''
-
-# the prediction whenever the cloud type is the same
-'''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
-                negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'],
-                negative[0]['2017']['time_prediction'],negative[1]['2018']['time_prediction'])'''
-
-'''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
-                negative[1]['2018']['x'], negative[1]['2018']['y'], '2018', negative[1]['cloud_type'])'''
-
-'''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'])
-        
-        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[1]['2018']['x'], positive[1]['2018']['y'], '2018',positive[1]['cloud_type'])
-
-        executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
-                positive[2]['2019']['x'], positive[2]['2019']['y'], '2019',positive[2]['cloud_type'])'''
+# with ThreadPoolExecutor(max_workers=2) as executors:

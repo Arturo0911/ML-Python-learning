@@ -397,10 +397,10 @@ class Math_process:
             # average_values_accerted = float((sum(values_percent) / (len(values_percent))))
             percent_accuracy = float("{0:.2f}".format((len(values_near_to_goal)/len(x_data_model))*100))
             
-            if percent_accuracy >= float(70):
-                _description = """in the case that the days has matched and the percent of accuracy is greater than 70% then the """
-            elif (percent_accuracy < float(70)):
-                _description = ""
+            if percent_accuracy >= float(75):
+                _description = """the values are generated a prediction with a margin error greater than 25% """
+            elif (percent_accuracy < float(75)):
+                _description = """It is difficult to make a correct prediction when the accuracy percentage does not exceed 75%"""
                 pass
             
             for a,b in zip(time_base,time_prediction):
@@ -413,7 +413,8 @@ class Math_process:
             object_prediction = {
                 'cloud_type':cloud_type,
                 'days_tested': len(time_prediction),
-                'dates_matched':dates_matched,
+                'dates_matched':len(dates_matched),
+                'dates_accuracy': float( (len(dates_matched)/len(time_prediction)*100)),
                 'accuracy':percent_accuracy,
                 'year_tested':year_tested,
                 #'cost_function':self.cost_function(),
@@ -435,9 +436,7 @@ class Math_process:
         '''
         Generate another interator to index the dates whenver the phenom metorology happend,
         and append into the another array and make the prediction between the days whenever happen, e.i, 
-        the match with the dates, when dates makes match <3 I love you Arturo, You can anything that you 
-        purpose yourself
-
+        the match with the dates, when dates makes match <3 I love you Arturo, you can do what you propose
         '''
             
     def print_linear_equation(self, beta_0, beta_1):
