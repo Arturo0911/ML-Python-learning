@@ -215,16 +215,25 @@ def main():
 
     # optimization('Overcast_clouds', '2017','2017')
     # print("\n")
-    optimization('Overcast_clouds','2017')
+
+    with ThreadPoolExecutor(max_workers=2) as executors:
+        
+        executors.submit(optimization, 'Overcast_clouds','2017')
+        executors.submit(optimization, 'Overcast_clouds','2018')
+        print("\n")
+        executors.submit(optimization, 'Overcast_clouds','2019')
+        executors.submit(optimization, 'Overcast_clouds','2020')
+        print("\n")
+        # optimization('Overcast_clouds','2017')
+    # print("\n")
+    
+    #optimization('Overcast_clouds','2018')
+    #print("\n")
+    
+    #optimization('Overcast_clouds','2019')
     print("\n")
     
-    optimization('Overcast_clouds','2018')
-    print("\n")
-    
-    optimization('Overcast_clouds','2019')
-    print("\n")
-    
-    optimization('Overcast_clouds','2020')
+    #optimization('Overcast_clouds','2020')
     # pprint(coefficients[x])
 
 
@@ -334,4 +343,4 @@ def testing_models(cloud_type, year_init, year_to_predict):
 main()
 
 
-# with ThreadPoolExecutor(max_workers=2) as executors:
+
