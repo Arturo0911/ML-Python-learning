@@ -309,10 +309,31 @@ class Math_process:
 
         return float("{0:.3f}".format((Sxy) / (Sx * Sy)))
 
-    def optimization_gradient_descent(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
+    def optimization_gradient_descent(self, objects_data, x_data_model, y_data_model, year_train,year_tested, cloud_type, 
         time_base, time_prediction ):
+
+        #-------------------------------------------------------#
+        #   object_prediction = {                               #
+        #                                                       #
+        #       'days_tested': list_days_tested,                #
+        #       'dates_matched': list_days_matched,             #
+        #       'accuracy': accuracy,                           #
+        #       'cost_function': cost_function,                 #
+        #       'precission':precission,                        #
+        #       'info': {                                       #
+        #           'cloud_type': cloud_type                    #
+        #           'values_accepted':values_near_to_goal,      #
+        #           'values_tested': values_tested,             #
+        #           'description': ''                           #
+        #       }                                               #
+        #                                                       #
+        #   }                                                   #
+        #-------------------------------------------------------#
         # this method is to verify the errors in the math model
         # bias = None # initialize as None type
+        # for personal propose, only use a 10000 of iterations, because.
+        # whenever do much more than 10000 iterations, the model loss 
+        # functionallity and the loop never end
         bias = None
         iterations = 0
         bias_lists_accepteds_accuracy = list()
@@ -324,13 +345,15 @@ class Math_process:
         while True:
             iterations += 1
             bias = random.uniform(-4,2)
-            math_model = self.testing_mathematician_model(objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
-                time_base, time_prediction,bias)
+            math_model = self.testing_mathematician_model(objects_data, x_data_model, 
+                y_data_model,year_train, year_tested, cloud_type, time_base, 
+                    time_prediction,bias)
 
             if iterations <= 10000:    
 
                 if math_model['accuracy'] >= float(80) and math_model['cost_function'] <= float(13.40):
-                    bias_lists_accepteds_accuracy.append({'accuracy':math_model['accuracy'], 'cost_function':math_model['cost_function'], 'bias':bias  })
+                    bias_lists_accepteds_accuracy.append({'accuracy':math_model['accuracy'], 
+                        'cost_function':math_model['cost_function'], 'bias':bias  })
                     break
             else:
                 break
@@ -338,12 +361,29 @@ class Math_process:
 
             # print("accuracy: ",math_model['accuracy'],"          cost function: ",math_model['cost_function'], "  bias: ", bias)
         # new_list = sorted(bias_lists_accepteds_accuracy, key = itemgetter('accuracy'))
-        pprint(math_model)
+        '''final_object = {
+            
+            'year': math_model['year_train'],
+            'cloud_type': cloud_type,
+            'accuracy': math_model['accuracy'],
+            'cost_function': math_model['cost_function'],
+            'year_tested':math_model['year_tested']
+
+        }'''
+
+        final_object = {"accuracy":math_model['accuracy'],
+            'cloud_type': cloud_type,
+            "year_model": math_model['year_train'], 
+            "cost_function": math_model['cost_function'],
+            'year_tested': math_model['year_tested']}
+        return final_object
+
+        # return final_object
 
 
 
 
-    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
+    def testing_mathematician_model(self, objects_data, x_data_model, y_data_model,year_train, year_tested, cloud_type, 
         time_base, time_prediction,bias):
         '''
         testing the math model taking in account about 
@@ -447,6 +487,7 @@ class Math_process:
                 'days_tested': len(time_prediction),
                 'dates_matched':len(dates_matched),
                 'dates_accuracy': float( (len(dates_matched)/len(time_prediction)*100)),
+                'year_train':year_train,
                 'accuracy':percent_accuracy,
                 'cost_function': self.cost_function(values_rejected, values_predicted), 
                 'year_tested':year_tested,

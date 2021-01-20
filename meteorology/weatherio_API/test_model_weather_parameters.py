@@ -205,7 +205,7 @@ class Init_test:
         return coefficients, coefficient_positive, coefficient_negative
 
 
-def main():
+def main(cloud_type='Overcast_clouds' ):
     """
         This function, only will be read the instancies, from the main Class
         humidity relative is the X variable and the temperature is Y
@@ -215,91 +215,91 @@ def main():
 
     # optimization('Overcast_clouds', '2017','2017')
     # print("\n")
-    optimization()
-
-    '''with ThreadPoolExecutor(max_workers=2) as executors:
-
-        optimization_1 = optimization('Overcast_clouds','2017')
-        
-        executors.submit(optimization_1)
-        executors.submit(optimization, 'Overcast_clouds','2018')
-        #print("\n")
-        executors.submit(optimization, 'Overcast_clouds','2019')
-        executors.submit(optimization, 'Overcast_clouds','2020')
-        #print("\n")
-        # optimization('Overcast_clouds','2017')
-    # print("\n")
-    
-    #optimization('Overcast_clouds','2018')
-    #print("\n")
-    
-    #optimization('Overcast_clouds','2019')
-    # print("\n")
-    
-    #optimization('Overcast_clouds','2020')
-    # pprint(coefficients[x])'''
+    optimization(cloud_type,'2017',['2018','2019','2020'])
+    print('\n')
+    optimization(cloud_type,'2018',['2017','2019','2020'])
+    print('\n')
+    optimization(cloud_type,'2019',['2017','2018','2020'])
+    print('\n')
+    optimization(cloud_type,'2020',['2017','2018','2019'])
 
 
-def optimization():#cloud_type,year_model):
+
+def optimization(cloud_type,year_model,years):#cloud_type,year_model):
 
     list_years = ['2017','2018','2019','2020']
-    list_accuracy = list()
-    list_predictions = list()
-    list_dates_predictions_matched = list()
-
-    '''for x in range(0,len(list_years)):
-
-        if year_model != list_years[x]:
-
-            # print(year_model,"          ",list_years[x])
-            # pprint(testing_models('Overcast_clouds', year_model, list_years[x]))
-            list_predictions.append({list_years[x]:testing_models(cloud_type, year_model, list_years[x])})
-
-
-    for x in range(0,len(list_years)):
-
-        if year_model != list_years[x]:
-            list_accuracy.append(testing_models(cloud_type, year_model, list_years[x])['accuracy'])
-            # list_accuracy.append(testing_models(cloud_type, year_model,list_years[x])['accuracy'])
-            # list_accuracy.append(testing_models(cloud_type, year_model, '2020')['accuracy'])
-
-    for x in range(0,len(list_years)):
-
-        if year_model != list_years[x]:
-            list_dates_predictions_matched.append(testing_models(cloud_type, year_model, list_years[x])['dates_accuracy'])
-            # list_dates_predictions_matched.append(testing_models(cloud_type, '2017', '2019')['dates_accuracy'])
-            # list_dates_predictions_matched.append(testing_models(cloud_type, '2017', '2020')['dates_accuracy'])
+    '''
+    Years parameters would be: 
+        years = ['2017','2018','2019'] is the year model is 2020
+        years = ['2018','2019','2020'] is the year model is 2017
+        years = ['2017','2019','2020'] is the year model is 2018
+        years = ['2017','2018','2020'] is the year model is 2019
+    '''
+    final_value = 0
+    model_1 = None
+    model_2 = None
+    model_3 = None
 
 
-    object_optimization = {
-        'year_model': year_model,
-        'average_accuracy': float("{0:2f}".format(sum(list_accuracy)/len(list_accuracy))),
-        'average_dates': float("{0:2f}".format(sum(list_dates_predictions_matched)/len(list_dates_predictions_matched))),
-        # 'list_predictions':len(list_predictions)
+    model_1 = testing_models(cloud_type, year_model, years[0])
+    model_2 = testing_models(cloud_type, year_model, years[1])
+    model_3 = testing_models(cloud_type, year_model, years[2])
 
+    print(model_1)
+    print(model_2)
+    print(model_3)
+
+
+    average = [model_1['accuracy'],
+    model_2['accuracy'],
+    model_3['accuracy']]
+
+
+    final_value = float(sum(average)/3)
+
+    which_model_choose = {
+        year_model: {
+            'year_model':year_model,
+            'average_accuracy_total': final_value,
+            'cloud_type': model_1['cloud_type']
+        }
     }
 
-    print(object_optimization)
 
 
+    print(which_model_choose)
 
-    '''
-    testing_models('Overcast_clouds', '2017', '2018')
-    print("\n")
+    
+
+    
+
+
+    '''print(testing_models('Overcast_clouds', '2017', '2018'))
     testing_models('Overcast_clouds', '2017', '2019')
-    print("\n")
-    testing_models('Overcast_clouds', '2017', '2020')
+    testing_models('Overcast_clouds', '2017', '2020')'''
 
-    # pprint(testing_models('Overcast_clouds', '2017', '2019'))
+    
     # print("\n")
-    # pprint(testing_models('Overcast_clouds', '2017', '2020'))
     # print("\n")
-    '''pprint(testing_models('Overcast_clouds', '2018', '2017'))
-    print("\n")
-    pprint(testing_models('Overcast_clouds', '2018', '2019'))
-    print("\n")
-    pprint(testing_models('Overcast_clouds', '2018', '2020'))'''
+    '''testing_models('Overcast_clouds', '2018', '2017')
+    testing_models('Overcast_clouds', '2018', '2019')
+    testing_models('Overcast_clouds', '2018', '2020')
 
+     # pprint(testing_models('Overcast_clouds', '2017', '2020'))
+    print("\n")
+    print("\n")
+    testing_models('Overcast_clouds', '2019', '2017')
+    testing_models('Overcast_clouds', '2019', '2018')
+    testing_models('Overcast_clouds', '2019', '2020')
+
+     # pprint(testing_models('Overcast_clouds', '2017', '2020'))
+    print("\n")
+    print("\n")
+    testing_models('Overcast_clouds', '2020', '2017')
+    testing_models('Overcast_clouds', '2020', '2018')
+    testing_models('Overcast_clouds', '2020', '2019')'''
+
+    
 
 def testing_models(cloud_type, year_init, year_to_predict):
 
@@ -338,19 +338,11 @@ def testing_models(cloud_type, year_init, year_to_predict):
 
     # print(test_model_2017[cloud_type]['2017'])
 
-    '''return Math_process().testing_mathematician_model(
+    return Math_process().optimization_gradient_descent(
         Model_train,
         Model_test['x'],
         Model_test['y'],
-        year_to_predict,
-        cloud_type,
-        Model_train['time_prediction'],
-        Model_test['time_prediction'])'''
-
-    Math_process().optimization_gradient_descent(
-        Model_train,
-        Model_test['x'],
-        Model_test['y'],
+        year_init,
         year_to_predict,
         cloud_type,
         Model_train['time_prediction'],
