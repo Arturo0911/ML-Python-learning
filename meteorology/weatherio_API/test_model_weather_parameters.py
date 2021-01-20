@@ -284,12 +284,16 @@ def optimization():#cloud_type,year_model):
 
 
     '''
-    pprint(testing_models('Overcast_clouds', '2017', '2018'))
+    testing_models('Overcast_clouds', '2017', '2018')
     print("\n")
-    pprint(testing_models('Overcast_clouds', '2017', '2019'))
+    testing_models('Overcast_clouds', '2017', '2019')
     print("\n")
-    pprint(testing_models('Overcast_clouds', '2017', '2020'))
-    print("\n")
+    testing_models('Overcast_clouds', '2017', '2020')
+
+    # pprint(testing_models('Overcast_clouds', '2017', '2019'))
+    # print("\n")
+    # pprint(testing_models('Overcast_clouds', '2017', '2020'))
+    # print("\n")
     '''pprint(testing_models('Overcast_clouds', '2018', '2017'))
     print("\n")
     pprint(testing_models('Overcast_clouds', '2018', '2019'))
@@ -334,14 +338,24 @@ def testing_models(cloud_type, year_init, year_to_predict):
 
     # print(test_model_2017[cloud_type]['2017'])
 
-    return Math_process().testing_mathematician_model(
+    '''return Math_process().testing_mathematician_model(
         Model_train,
         Model_test['x'],
         Model_test['y'],
         year_to_predict,
         cloud_type,
         Model_train['time_prediction'],
-        Model_test['time_prediction'])
+        Model_test['time_prediction'])'''
+
+    Math_process().optimization_gradient_descent(
+        Model_train,
+        Model_test['x'],
+        Model_test['y'],
+        year_to_predict,
+        cloud_type,
+        Model_train['time_prediction'],
+        Model_test['time_prediction']
+    )
 
 
 main()

@@ -11,6 +11,7 @@ from types import new_class
 import pandas as pd
 import numpy as np
 import seaborn as sns
+from operator import itemgetter
 
 
 #----------------------------------------------#
@@ -308,14 +309,42 @@ class Math_process:
 
         return float("{0:.3f}".format((Sxy) / (Sx * Sy)))
 
-
-    def optimization_gradient_descent(self):
+    def optimization_gradient_descent(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
+        time_base, time_prediction ):
         # this method is to verify the errors in the math model
+        # bias = None # initialize as None type
+        bias = None
+        iterations = 0
+        bias_lists_accepteds_accuracy = list()
+        which_max = list()
+        which_min_cost = list()
+        
+        # for x in range(iterations):
+        
+        while True:
+            iterations += 1
+            bias = random.uniform(-4,2)
+            math_model = self.testing_mathematician_model(objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
+                time_base, time_prediction,bias)
 
-        pass
+            if iterations <= 10000:    
+
+                if math_model['accuracy'] >= float(80) and math_model['cost_function'] <= float(13.40):
+                    bias_lists_accepteds_accuracy.append({'accuracy':math_model['accuracy'], 'cost_function':math_model['cost_function'], 'bias':bias  })
+                    break
+            else:
+                break
+            
+
+            # print("accuracy: ",math_model['accuracy'],"          cost function: ",math_model['cost_function'], "  bias: ", bias)
+        # new_list = sorted(bias_lists_accepteds_accuracy, key = itemgetter('accuracy'))
+        pprint(math_model)
+
+
+
 
     def testing_mathematician_model(self, objects_data, x_data_model, y_data_model, year_tested, cloud_type, 
-    time_base, time_prediction):
+        time_base, time_prediction,bias):
         '''
         testing the math model taking in account about 
         the values to be proccessed
@@ -340,7 +369,6 @@ class Math_process:
         # Define the intercept 'b' as None value
         # in the gradient descent prove the real value
         # initialize in None to avoid unnecessary numbers
-        bias = None # the bias
         percent_difference = None
         validator = None
         percent_accuracy = None
@@ -356,23 +384,23 @@ class Math_process:
         dates_matched = list() # the days whenever matched betwen prediction and values from the data training
 
 
-                            #-------------------------------------------------------#
-                            #   object_prediction = {                               #
-                            #                                                       #
-                            #       'days_tested': list_days_tested,                #
-                            #       'dates_matched': list_days_matched,             #
-                            #       'accuracy': accuracy,                           #
-                            #       'cost_function': cost_function,                 #
-                            #       'precission':precission,                        #
-                            #       'info': {                                       #
-                            #           'cloud_type': cloud_type                    #
-                            #           'values_accepted':values_near_to_goal,      #
-                            #           'values_tested': values_tested,             #
-                            #           'description': ''                           #
-                            #       }                                               #
-                            #                                                       #
-                            #   }                                                   #
-                            #-------------------------------------------------------#
+        #-------------------------------------------------------#
+        #   object_prediction = {                               #
+        #                                                       #
+        #       'days_tested': list_days_tested,                #
+        #       'dates_matched': list_days_matched,             #
+        #       'accuracy': accuracy,                           #
+        #       'cost_function': cost_function,                 #
+        #       'precission':precission,                        #
+        #       'info': {                                       #
+        #           'cloud_type': cloud_type                    #
+        #           'values_accepted':values_near_to_goal,      #
+        #           'values_tested': values_tested,             #
+        #           'description': ''                           #
+        #       }                                               #
+        #                                                       #
+        #   }                                                   #
+        #-------------------------------------------------------#
 
 
         
@@ -384,7 +412,7 @@ class Math_process:
             
             for x,y in zip(x_data_model, y_data_model):
 
-                validator = self.y_prediction(math_model['β0'], math_model['β1'], x)
+                validator = self.y_prediction(math_model['β0'], math_model['β1'], x) + bias
                 # percent_accuracy = float("{0:.3f}".format(((validator*100)/y)))
                 percent_difference = float("{0:.3f}".format( 100 -((validator*100)/y)))
                 
@@ -399,7 +427,7 @@ class Math_process:
             
 
             # average_values_accerted = float((sum(values_percent) / (len(values_percent))))
-            percent_accuracy = float("{0:.2f}".format((len(values_near_to_goal)/len(x_data_model))*100))
+            percent_accuracy = float("{0:.4f}".format((len(values_near_to_goal)/len(x_data_model))*100))
             
             if percent_accuracy >= float(75):
                 _description = """the values are generated a prediction with a margin error greater than 25% """
@@ -422,7 +450,7 @@ class Math_process:
                 'accuracy':percent_accuracy,
                 'cost_function': self.cost_function(values_rejected, values_predicted), 
                 'year_tested':year_tested,
-                # 'average_values_accerted': average_values_accerted,
+                'bias': bias,
                 'info':{
                     'values_acepted':len(values_near_to_goal),
                     'values_tested':len(y_data_model),
