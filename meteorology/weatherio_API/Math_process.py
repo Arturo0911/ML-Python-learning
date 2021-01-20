@@ -414,7 +414,8 @@ class Math_process:
                 'cloud_type':cloud_type,
                 'days_tested': len(time_prediction),
                 'dates_matched':dates_matched,
-                'accuracy':percent_accuracy ,
+                'accuracy':percent_accuracy,
+                'year_tested':year_tested,
                 #'cost_function':self.cost_function(),
                 # 'average_values_accerted': average_values_accerted,
                 'info':{

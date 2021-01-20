@@ -4,7 +4,7 @@ IN THIS FILE, WE GONNA TEST THE DATA, USING COMPARATIONS BETWEEN DATAS, AND PARA
 import time
 from datetime import time
 from Interface_objects import make_list
-from Math_process import Math_process 
+from Math_process import Math_process
 from os import O_TRUNC, listxattr
 from Create_days import Create_days as cd
 
@@ -21,7 +21,8 @@ from concurrent.futures import ThreadPoolExecutor
 """ Libraries of the data storage """
 
 # this one return the list o behavior to be instantiated.
-# supervised machine learning 
+# supervised machine learning
+
 
 class Init_test:
 
@@ -108,9 +109,6 @@ class Init_test:
         coefficient_positive = list()
         coefficient_negative = list()
 
-
-
-
         # =======================================
         scattered_cloud = list()
         broken_cloud = list()
@@ -118,7 +116,6 @@ class Init_test:
         few_clouds = list()
         clear_sky = list()
         overcast_clouds = list()
-        
 
         for x in make_list():
             # Loop in each year stored 2017 2018 2019 2020.
@@ -133,7 +130,7 @@ class Init_test:
                 list_humidity = list()
                 list_temperature = list()
                 list_time_prediction = list()
-                
+
                 # get the list of clouds parameters and year activity
                 objects_ = {
                     'values': {
@@ -141,9 +138,10 @@ class Init_test:
                         'year_activity': y
                     }
                 }
-                
+
                 # set the subset, temperature, is the best parameter to filter by.
-                dataframe_filtered = self.read_dataframe(objects_)[self.read_dataframe(objects_)['temperature'] > 0]
+                dataframe_filtered = self.read_dataframe(
+                    objects_)[self.read_dataframe(objects_)['temperature'] > 0]
                 # LOOPS FOR APPENDS
                 for i in dataframe_filtered['relative_humidity']:
                     list_humidity.append(i)
@@ -151,67 +149,62 @@ class Init_test:
                 for j in dataframe_filtered['temperature']:
                     list_temperature.append(j)
 
-                for k,l in zip(dataframe_filtered['time_start'],dataframe_filtered['time_end']):
+                for k, l in zip(dataframe_filtered['time_start'], dataframe_filtered['time_end']):
                     list_time_prediction.append(k+" - "+l)
 
-                # set the object_data with the values.  
-                
+                # set the object_data with the values.
+
                 object_data = {
                     'x': list_humidity,
                     'y': list_temperature,
                     'time_prediction': list_time_prediction,
                 }
 
-                
-
                 # group by cloud type and add their properties
                 if x == "Overcast_clouds":
-                    overcast_clouds.append({x:{'cloud_type': x,str(y): object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
+                    overcast_clouds.append({x: {'cloud_type': x, str(y): object_data,
+                                                'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x == "Broken_clouds":
-                    broken_cloud.append({x:{'cloud_type': x,str(y): object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
-                elif x  == "Scattered_clouds":
-                    scattered_cloud.append({x:{'cloud_type': x,str(y): object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
+                    broken_cloud.append({x: {'cloud_type': x, str(y): object_data,
+                                             'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
+                elif x == "Scattered_clouds":
+                    scattered_cloud.append({x: {'cloud_type': x, str(y): object_data,
+                                                'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x == "Few_clouds":
-                    few_clouds.append({x:{'cloud_type': x,str(y): object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
-                elif x  == "Clear_Sky":
-                    clear_sky.append({x:{'cloud_type': x,str(y): object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
+                    few_clouds.append({x: {'cloud_type': x, str(y): object_data,
+                                           'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
+                elif x == "Clear_Sky":
+                    clear_sky.append({x: {'cloud_type': x, str(y): object_data,
+                                          'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 elif x == "Light_rain":
-                    light_rain.append({x:{'cloud_type': x,str(y):object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
+                    light_rain.append({x: {'cloud_type': x, str(y): object_data,
+                                           'coefficient_correlation': math_process.correlation_coefficient(object_data)}})
                 else:
                     pass
-
 
                 # use correlation_coefficient() instead of check_covariance()
                 if math_process.correlation_coefficient(object_data) > 0:
                     # here prove that the coefficient is greater than 0
-                    coefficient_positive.append({'cloud_type': x,str(y):object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data) })
+                    coefficient_positive.append({'cloud_type': x, str(y): object_data,
+                                                 'coefficient_correlation': math_process.correlation_coefficient(object_data)})
 
                 elif math_process.correlation_coefficient(object_data) == 0:
                     pass
-                    
-                else:
-                    coefficient_negative.append({'cloud_type': x,str(y):object_data, 
-                    'coefficient_correlation': math_process.correlation_coefficient(object_data) })
 
+                else:
+                    coefficient_negative.append({'cloud_type': x, str(y): object_data,
+                                                 'coefficient_correlation': math_process.correlation_coefficient(object_data)})
 
         coefficients = {
-            'Overcast_clouds':overcast_clouds,
+            'Overcast_clouds': overcast_clouds,
             'Broken_clouds': broken_cloud,
-            'Scattered_clouds':scattered_cloud,
+            'Scattered_clouds': scattered_cloud,
             'Few_clouds': few_clouds,
-            'Clear_Sky':clear_sky,
+            'Clear_Sky': clear_sky,
             'Light_rain': light_rain
         }
         # return coefficient_positive, coefficient_negative
-        return coefficients,coefficient_positive, coefficient_negative
-
+        return coefficients, coefficient_positive, coefficient_negative
 
 
 def main():
@@ -220,193 +213,116 @@ def main():
         humidity relative is the X variable and the temperature is Y
     """
     test_init = Init_test()
-    # positive, negative = test_init._comparative_between_three_years()
+    coefficients, positive, negative = test_init._comparative_between_three_years()
 
-    coefficients,positive, negative = test_init._comparative_between_three_years()
-
-    # print(positive[0].keys())
-
-    # pprint(coefficients)
-    # print(positive[0]['2017'])
-    pprint(Math_process().testing_mathematician_model(positive[0]['2017'], 
+    '''pprint(Math_process().testing_mathematician_model(positive[0]['2017'], 
                 positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
                 positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction']))
+    print("\n")'''
+    # optimization('Overcast_clouds', '2017','2017')
     print("\n")
-    optimization('Overcast_clouds')
+    optimization('Overcast_clouds', '2017', '2018')
+    # print("\n")
+    optimization('Overcast_clouds', '2017', '2019')
+    # print("\n")
+    optimization('Overcast_clouds', '2017', '2020')
+    # pprint(coefficients[x])
 
-        # pprint(coefficients[x])
 
-def optimization(cloud_type):
+def optimization(cloud_type, year_init, year_to_predict):
 
     init_test = Init_test()
-    coefficients,positive, negative = init_test._comparative_between_three_years()
+    coefficients, positive, negative = init_test._comparative_between_three_years()
+    Model_train = None
+    Model_test = None
 
+    try:
+        if year_init == '2017':
+            Model_train = coefficients[cloud_type][0][cloud_type][year_init]
+        elif year_init == '2018':
+            Model_train = coefficients[cloud_type][1][cloud_type][year_init]
+        elif year_init == '2019':
+            Model_train = coefficients[cloud_type][2][cloud_type][year_init]
+        elif year_init == '2020':
+            Model_train = coefficients[cloud_type][3][cloud_type][year_init]
+        else:
+            pass
+    except Exception as e:
+        print(str(e))
 
-    test_model_2017 = coefficients[cloud_type][0]
-    test_model_2018 = coefficients[cloud_type][1][cloud_type]
-    test_model_2019 = coefficients[cloud_type][2][cloud_type]
-    test_model_2020 = coefficients[cloud_type][3][cloud_type]
+    try:
+        if year_to_predict == '2017':
+            Model_test = coefficients[cloud_type][0][cloud_type]['2017']
+        elif year_to_predict == '2018':
+            Model_test = coefficients[cloud_type][1][cloud_type]['2018']
+        elif year_to_predict == '2019':
+            Model_test = coefficients[cloud_type][2][cloud_type]['2019']
+        elif year_to_predict == '2020':
+            Model_test = coefficients[cloud_type][3][cloud_type]['2020']
+        else:
+            pass
+    except Exception as e:
+        print(str(e))
 
     # print(test_model_2017[cloud_type]['2017'])
 
+    pprint(Math_process().testing_mathematician_model(
+        Model_train,
+        Model_test['x'],
+        Model_test['y'],
+        year_init,
+        cloud_type,
+        Model_train['time_prediction'],
+        Model_test['time_prediction']))
 
-    pprint(Math_process().testing_mathematician_model(test_model_2017[cloud_type]['2017'],
-        test_model_2018['2018']['x'],test_model_2018['2018']['y'],'2017',cloud_type,test_model_2017[cloud_type]['2017']['time_prediction'],
-          test_model_2018['2018']['time_prediction'] ))
+
+main()
 
 
-    """Math_process().testing_mathematician_model(positive[0]['2017'], 
+'''test_model_2017 = coefficients[cloud_type][0]
+    test_model_2018 = coefficients[cloud_type][1][cloud_type]
+    test_model_2019 = coefficients[cloud_type][2][cloud_type]
+    test_model_2020 = coefficients[cloud_type][3][cloud_type]'''
+
+'''
+    pprint(Math_process().testing_mathematician_model(
+        test_model_2017[cloud_type]['2017'],
+        test_model_2018['2018']['x'],
+        test_model_2018['2018']['y'],
+        '2017',
+        cloud_type,
+        test_model_2017[cloud_type]['2017']['time_prediction'],
+          test_model_2018['2018']['time_prediction']))'''
+
+
+"""Math_process().testing_mathematician_model(positive[0]['2017'], 
                 positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
                 positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])"""
 
-
-
-    # print(test_model_2018)
-    # print(test_model_2019)
-    # print(test_model_2020)
-
-
-
-    """
-            {'cloud_type': 'Overcast_clouds', '2017': 3, 'coefficient_correlation': 0.615}
-            {'cloud_type': 'Overcast_clouds', '2018': 3, 'coefficient_correlation': 0.411}
-            {'cloud_type': 'Overcast_clouds', '2019': 3, 'coefficient_correlation': 0.176}
-            {'cloud_type': 'Broken_clouds', '2019': 3, 'coefficient_correlation': 0.089}
-            {'cloud_type': 'Scattered_clouds', '2019': 3, 'coefficient_correlation': 0.018}
-
-
-            {'cloud_type': 'Overcast_clouds', '2020': 3, 'coefficient_correlation': -0.763}
-            {'cloud_type': 'Broken_clouds', '2017': 3, 'coefficient_correlation': -0.157}
-            {'cloud_type': 'Broken_clouds', '2018': 3, 'coefficient_correlation': -0.386}
-            {'cloud_type': 'Broken_clouds', '2020': 3, 'coefficient_correlation': -0.873}
-            {'cloud_type': 'Few_clouds', '2017': 3, 'coefficient_correlation': -0.723}
-            {'cloud_type': 'Few_clouds', '2018': 3, 'coefficient_correlation': -0.768}
-            {'cloud_type': 'Few_clouds', '2019': 3, 'coefficient_correlation': -0.035}
-            {'cloud_type': 'Few_clouds', '2020': 3, 'coefficient_correlation': -0.828}
-            {'cloud_type': 'Clear_Sky', '2017': 3, 'coefficient_correlation': -0.956}
-            {'cloud_type': 'Clear_Sky', '2018': 3, 'coefficient_correlation': -0.9}
-            {'cloud_type': 'Clear_Sky', '2019': 3, 'coefficient_correlation': -0.12}
-            {'cloud_type': 'Clear_Sky', '2020': 3, 'coefficient_correlation': -0.795}
-            {'cloud_type': 'Light_rain', '2017': 3, 'coefficient_correlation': -0.148}
-            {'cloud_type': 'Light_rain', '2018': 3, 'coefficient_correlation': -0.724}
-            {'cloud_type': 'Light_rain', '2019': 3, 'coefficient_correlation': -0.869}
-            {'cloud_type': 'Light_rain', '2020': 3, 'coefficient_correlation': -0.282}
-            {'cloud_type': 'Scattered_clouds', '2017': 3, 'coefficient_correlation': -0.534}
-            {'cloud_type': 'Scattered_clouds', '2018': 3, 'coefficient_correlation': -0.633}
-            {'cloud_type': 'Scattered_clouds', '2020': 3, 'coefficient_correlation': -0.903}
-    """
-
-
-    """
-    {'Broken_clouds': [{'Broken_clouds': {'2017': 3,
-                                      'cloud_type': 'Broken_clouds',
-                                      'coefficient_correlation': -0.157}},
-                   {'Broken_clouds': {'2018': 3,
-                                      'cloud_type': 'Broken_clouds',
-                                      'coefficient_correlation': -0.386}},
-                   {'Broken_clouds': {'2019': 3,
-                                      'cloud_type': 'Broken_clouds',
-                                      'coefficient_correlation': 0.089}},
-                   {'Broken_clouds': {'2020': 3,
-                                      'cloud_type': 'Broken_clouds',
-                                      'coefficient_correlation': -0.873}}],
- 'Clear_Sky': [{'Clear_Sky': {'2017': 3,
-                              'cloud_type': 'Clear_Sky',
-                              'coefficient_correlation': -0.956}},
-               {'Clear_Sky': {'2018': 3,
-                              'cloud_type': 'Clear_Sky',
-                              'coefficient_correlation': -0.9}},
-               {'Clear_Sky': {'2019': 3,
-                              'cloud_type': 'Clear_Sky',
-                              'coefficient_correlation': -0.12}},
-               {'Clear_Sky': {'2020': 3,
-                              'cloud_type': 'Clear_Sky',
-                              'coefficient_correlation': -0.795}}],
- 'Few_clouds': [{'Few_clouds': {'2017': 3,
-                                'cloud_type': 'Few_clouds',
-                                'coefficient_correlation': -0.723}},
-                {'Few_clouds': {'2018': 3,
-                                'cloud_type': 'Few_clouds',
-                                'coefficient_correlation': -0.768}},
-                {'Few_clouds': {'2019': 3,
-                                'cloud_type': 'Few_clouds',
-                                'coefficient_correlation': -0.035}},
-                {'Few_clouds': {'2020': 3,
-                                'cloud_type': 'Few_clouds',
-                                'coefficient_correlation': -0.828}}],
- 'Light_rain': [{'Light_rain': {'2017': 3,
-                                'cloud_type': 'Light_rain',
-                                'coefficient_correlation': -0.148}},
-                {'Light_rain': {'2018': 3,
-                                'cloud_type': 'Light_rain',
-                                'coefficient_correlation': -0.724}},
-                {'Light_rain': {'2019': 3,
-                                'cloud_type': 'Light_rain',
-                                'coefficient_correlation': -0.869}},
-                {'Light_rain': {'2020': 3,
-                                'cloud_type': 'Light_rain',
-                                'coefficient_correlation': -0.282}}],
- 'Overcast_clouds': [{'Overcast_clouds': {'2017': 3,
-                                          'cloud_type': 'Overcast_clouds',
-                                          'coefficient_correlation': 0.615}},
-                     {'Overcast_clouds': {'2018': 3,
-                                          'cloud_type': 'Overcast_clouds',
-                                          'coefficient_correlation': 0.411}},
-                     {'Overcast_clouds': {'2019': 3,
-                                          'cloud_type': 'Overcast_clouds',
-                                          'coefficient_correlation': 0.176}},
-                     {'Overcast_clouds': {'2020': 3,
-                                          'cloud_type': 'Overcast_clouds',
-                                          'coefficient_correlation': -0.763}}],
- 'Scattered_clouds': [{'Scattered_clouds': {'2017': 3,
-                                            'cloud_type': 'Scattered_clouds',
-                                            'coefficient_correlation': -0.534}},
-                      {'Scattered_clouds': {'2018': 3,
-                                            'cloud_type': 'Scattered_clouds',
-                                            'coefficient_correlation': -0.633}},
-                      {'Scattered_clouds': {'2019': 3,
-                                            'cloud_type': 'Scattered_clouds',
-                                            'coefficient_correlation': 0.018}},
-                      {'Scattered_clouds': {'2020': 3,
-                                            'cloud_type': 'Scattered_clouds',
-                                            'coefficient_correlation': -0.903}}]}
-
-    """
-
-
-
-
-
-
-
-    #print(negative)
-    """prediction_2017 = Math_process().testing_mathematician_model(positive[0]['2017'], 
+# print(negative)
+"""prediction_2017 = Math_process().testing_mathematician_model(positive[0]['2017'], 
                 positive[1]['2018']['x'], positive[1]['2018']['y'], '2017', positive[0]['cloud_type'],
                 positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])"""
-    
-    #pprint(prediction_2017)
 
+# pprint(prediction_2017)
 
-    '''with ThreadPoolExecutor(max_workers=2) as executors:
+'''with ThreadPoolExecutor(max_workers=2) as executors:
 
          executors.submit(print(prediction_2017))'''
 
-    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+'''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
                 positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'],
                 positive[0]['2017']['time_prediction'],positive[1]['2018']['time_prediction'])'''
-        
-        # the prediction whenever the cloud type is the same
-    '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+
+# the prediction whenever the cloud type is the same
+'''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
                 negative[0]['2017']['x'], negative[0]['2017']['y'], '2017', negative[0]['cloud_type'],
                 negative[0]['2017']['time_prediction'],negative[1]['2018']['time_prediction'])'''
 
-
-
-    '''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
+'''executors.submit(Math_process().testing_mathematician_model, negative[0]['2017'], 
                 negative[1]['2018']['x'], negative[1]['2018']['y'], '2018', negative[1]['cloud_type'])'''
-                
-    
-    '''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
+
+'''executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
                 positive[0]['2017']['x'], positive[0]['2017']['y'], '2017', positive[0]['cloud_type'])
         
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
@@ -414,9 +330,3 @@ def optimization(cloud_type):
 
         executors.submit(Math_process().testing_mathematician_model, positive[0]['2017'], 
                 positive[2]['2019']['x'], positive[2]['2019']['y'], '2019',positive[2]['cloud_type'])'''
-
-
-
-main()
-
-
