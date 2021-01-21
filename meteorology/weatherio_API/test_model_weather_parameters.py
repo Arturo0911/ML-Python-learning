@@ -235,7 +235,8 @@ def main(cloud_type='Overcast_clouds' ):
     # still how to pass the final bias to the another function
 
     if model_2017['2017']['average_accuracy_total'] == optimized_value:
-        return
+        #return testing_models(cloud_type,'2017',  )
+        pass
     elif model_2018['2018']['average_accuracy_total'] == optimized_value:
         pass
     elif model_2019['2019']['average_accuracy_total'] == optimized_value:
@@ -334,7 +335,7 @@ def testing_models(cloud_type, year_init, year_to_predict):
         Model_test['time_prediction']
     )
 
-def establishing_final_model(cloud_type, year_init, year_to_predict):
+'''def establishing_final_model(cloud_type, year_init, year_to_predict):
     init_test = Init_test()
     coefficients, positive, negative = init_test._comparative_between_three_years()
     Model_train = None
@@ -381,7 +382,7 @@ def establishing_final_model(cloud_type, year_init, year_to_predict):
         Model_test['time_prediction']
     )
 
-    return Math_process().testing_mathematician_model()
+    return Math_process().testing_mathematician_model()'''
 
 main()
 

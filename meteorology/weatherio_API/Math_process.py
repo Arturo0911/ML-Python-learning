@@ -360,10 +360,29 @@ class Math_process:
             'iterations':iterations,
             "year_model": math_model['year_train'], 
             "cost_function": math_model['cost_function'],
-            'year_tested': math_model['year_tested']}
+            'year_tested': math_model['year_tested'],
+            'math_model': math_model
+            }
         return final_object
 
+    def presenting_model(self, bias,model_prediction,cloud_type,y_data_to_be_evaluated, x_data_to_be_tested):
 
+        proximity = None
+        
+        # generate another instance
+        math_model = self.Generate_parameters_from_regression(model_prediction)
+        try:
+            validator = self.y_prediction(math_model['β0'], math_model['β1'], x_data_to_be_tested) + bias
+            proximity = float("{0:.3f}".format( 100 -((validator*100)/y_data_to_be_evaluated)))
+            return {
+                'proximity':proximity,
+                'cloud_tyṕe':cloud_type
+            }
+        except Exception as e:
+            return {
+                'error':str(e)
+            }
+            
 
 
     def testing_mathematician_model(self, objects_data, x_data_model, y_data_model,year_train, year_tested, cloud_type, 
