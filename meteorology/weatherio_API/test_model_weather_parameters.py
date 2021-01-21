@@ -7,7 +7,7 @@ from Interface_objects import make_list
 from Math_process import Math_process
 from os import O_TRUNC, listxattr
 from Create_days import Create_days as cd
-
+import statistics
 from pandas.io import api
 import numpy as np
 import pandas as pd
@@ -205,7 +205,7 @@ class Init_test:
         return coefficients, coefficient_positive, coefficient_negative
 
 
-def main(cloud_type='Overcast_clouds' ):
+def main(cloud_type='Overcast_clouds',day_to_evaluate = 24,year_to_be_evaluated = 2021):
     """
         This function, only will be read the instancies, from the main Class
         humidity relative is the X variable and the temperature is Y
@@ -219,11 +219,6 @@ def main(cloud_type='Overcast_clouds' ):
     model_2019 = optimization(cloud_type,'2019',['2017','2018','2020'])
     model_2020 = optimization(cloud_type,'2020',['2017','2018','2019'])
 
-    print(model_2017)
-    print(model_2018)
-    print(model_2019)
-    print(model_2020)
-
     list_coefficients.append(model_2017['2017']['average_accuracy_total'])
     list_coefficients.append(model_2018['2018']['average_accuracy_total'])
     list_coefficients.append(model_2019['2019']['average_accuracy_total'])
@@ -235,19 +230,44 @@ def main(cloud_type='Overcast_clouds' ):
     # still how to pass the final bias to the another function
 
     if model_2017['2017']['average_accuracy_total'] == optimized_value:
-        #return testing_models(cloud_type,'2017',  )
-        pass
+        return {
+            'bias': model_2017['2017']['bias'],
+            'year': '2017',
+            'cloud_type':cloud_type,
+            'object_data':coefficients[cloud_type][0][cloud_type]['2017'],
+            'day_to_evaluate':day_to_evaluate,
+            'year_to_be_evaluated':year_to_be_evaluated
+        }
     elif model_2018['2018']['average_accuracy_total'] == optimized_value:
-        pass
+        return {
+            'bias': model_2018['2018']['bias'],
+            'year': '2018',
+            'cloud_type':cloud_type,
+            'object_data':coefficients[cloud_type][1][cloud_type]['2018'],
+            'day_to_evaluate':day_to_evaluate,
+            'year_to_be_evaluated':year_to_be_evaluated
+        }
     elif model_2019['2019']['average_accuracy_total'] == optimized_value:
-        pass
+        return {
+            'bias': model_2019['2019']['bias'],
+            'year': '2019',
+            'cloud_type':cloud_type,
+            'object_data':coefficients[cloud_type][2][cloud_type]['2019'],
+            'day_to_evaluate':day_to_evaluate,
+            'year_to_be_evaluated':year_to_be_evaluated
+        }
     elif model_2020['2020']['average_accuracy_total'] == optimized_value:
-        pass
+        return {
+            'bias': model_2020['2020']['bias'],
+            'year': '2020',
+            'cloud_type':cloud_type,
+            'object_data':coefficients[cloud_type][3][cloud_type]['2020'],
+            'day_to_evaluate':day_to_evaluate,
+            'year_to_be_evaluated':year_to_be_evaluated
+        }
     else:
         return {'error': 'Error in modeling'}
         
-    return
-
 
 def optimization(cloud_type,year_model,years):#cloud_type,year_model):
     '''
@@ -257,7 +277,6 @@ def optimization(cloud_type,year_model,years):#cloud_type,year_model):
         years = ['2017','2019','2020'] is the year model is 2018
         years = ['2017','2018','2020'] is the year model is 2019
     '''
-    final_value = 0
     model_1 = None
     model_2 = None
     model_3 = None
@@ -271,14 +290,18 @@ def optimization(cloud_type,year_model,years):#cloud_type,year_model):
     model_2['accuracy'],
     model_3['accuracy']]
 
-
-    final_value = float(sum(average)/3)
+    bias = [
+        model_1['bias'],
+        model_2['bias'],
+        model_3['bias']
+    ]
 
     which_model_choose = {
         year_model: {
             'year_model':year_model,
-            'average_accuracy_total': final_value,
-            'cloud_type': model_1['cloud_type']
+            'average_accuracy_total': float(statistics.mean(average)),
+            'cloud_type': model_1['cloud_type'],
+            'bias':bias
         }
     }
 
@@ -335,56 +358,26 @@ def testing_models(cloud_type, year_init, year_to_predict):
         Model_test['time_prediction']
     )
 
-'''def establishing_final_model(cloud_type, year_init, year_to_predict):
-    init_test = Init_test()
-    coefficients, positive, negative = init_test._comparative_between_three_years()
-    Model_train = None
-    Model_test = None
+def init():
+    
+    all_data = main()
 
-    try:
-        if year_init == '2017':
-            Model_train = coefficients[cloud_type][0][cloud_type][year_init]
-        elif year_init == '2018':
-            Model_train = coefficients[cloud_type][1][cloud_type][year_init]
-        elif year_init == '2019':
-            Model_train = coefficients[cloud_type][2][cloud_type][year_init]
-        elif year_init == '2020':
-            Model_train = coefficients[cloud_type][3][cloud_type][year_init]
-        else:
-            pass
-    except Exception as e:
-        print(str(e))
+    # def presenting_model(self, 
+    # bias,
+    # model_prediction,
+    # cloud_type,
+    # y_data_to_be_evaluated, 
+    # x_data_to_be_tested):
 
-    try:
-        if year_to_predict == '2017':
-            Model_test = coefficients[cloud_type][0][cloud_type]['2017']
-        elif year_to_predict == '2018':
-            Model_test = coefficients[cloud_type][1][cloud_type]['2018']
-        elif year_to_predict == '2019':
-            Model_test = coefficients[cloud_type][2][cloud_type]['2019']
-        elif year_to_predict == '2020':
-            Model_test = coefficients[cloud_type][3][cloud_type]['2020']
-        else:
-            pass
-    except Exception as e:
-        print(str(e))
+    print(Math_process().presenting_model(
+        all_data['bias'],
+        all_data['object_data'],
+        all_data['cloud_type'],
+        94,
+        24
+        ))
 
-    # print(test_model_2017[cloud_type]['2017'])
+init()
 
-    math_optimization = Math_process().optimization_gradient_descent(
-        Model_train,
-        Model_test['x'],
-        Model_test['y'],
-        year_init,
-        year_to_predict,
-        cloud_type,
-        Model_train['time_prediction'],
-        Model_test['time_prediction']
-    )
-
-    return Math_process().testing_mathematician_model()'''
-
-main()
-
-
+# 94
 

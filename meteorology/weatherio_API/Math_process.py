@@ -365,24 +365,28 @@ class Math_process:
             }
         return final_object
 
-    def presenting_model(self, bias,model_prediction,cloud_type,y_data_to_be_evaluated, x_data_to_be_tested):
+    def presenting_model(self, bias_data,model_prediction,cloud_type,y_data_to_be_evaluated, x_data_to_be_tested):
 
         proximity = None
-        
+        list_proximity = list()
         # generate another instance
         math_model = self.Generate_parameters_from_regression(model_prediction)
         try:
-            validator = self.y_prediction(math_model['β0'], math_model['β1'], x_data_to_be_tested) + bias
-            proximity = float("{0:.3f}".format( 100 -((validator*100)/y_data_to_be_evaluated)))
+            for bias in bias_data:
+                validator = self.y_prediction(math_model['β0'], math_model['β1'], x_data_to_be_tested) + bias
+                proximity = float("{0:.3f}".format( 100 -((validator*100)/y_data_to_be_evaluated)))
+                # if proximity >= -float(15) and proximity <= float(15) :
+                list_proximity.append(proximity)
             return {
-                'proximity':proximity,
+                'proximity':max(list_proximity),
+                'percent_accuracy': float(((max(list_proximity)*100)/y_data_to_be_evaluated)),
                 'cloud_tyṕe':cloud_type
             }
         except Exception as e:
             return {
-                'error':str(e)
+                'error by':str(e)
             }
-            
+
 
 
     def testing_mathematician_model(self, objects_data, x_data_model, y_data_model,year_train, year_tested, cloud_type, 
