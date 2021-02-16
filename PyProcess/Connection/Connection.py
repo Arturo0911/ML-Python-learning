@@ -50,7 +50,9 @@ class Connection:
 
 
 connection = Connection()
-connection.creation_tables("process")
+
+for x in LIST_CLOUDS:
+    connection.creation_tables(str(x))
 
 """
 cursor = connection.get_connection().cursor()
